@@ -6,22 +6,21 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
             type: sType,
             dataType: sTData,
             data: sData,
-            beforeSend: function() {
-                $("#overlay").fadeIn(300);
-            }
+            // beforeSend: function() {
+            //     $("#overlay").fadeIn(300);
+            // }
         }).done((data) => {
-            setTimeout(function() {
-                $("#overlay").fadeOut(300);
-            }, 500);
+            // setTimeout(function() {
+            //     $("#overlay").fadeOut(300);
+            // }, 500);
             resolve(data)
-
         }).fail((jqXHR, textStatus, errorThrow) => {
             reject(errorThrow);
         });
     });
 }
 //--------------------------------------------//
-//================LOAD-HEADER================//
+//================LOAD-Menu================//
 function LoadMenu() {
     var token = localStorage.getItem('token');
 
@@ -127,7 +126,7 @@ function LoadMenu() {
                     });
                     
                     $('#close_menu_button').on('click', function() {
-                        $('#profile_button').html('¡¡ <b> Liked </b>!!'); 
+                        $('#profile_button').html('¡¡ <b> Liked </b> !!'); 
                         $('#profile_button').removeAttr('disabled');
                         $('#profile_button').removeClass('liked'); 
                         
@@ -227,7 +226,9 @@ function LoadMenu() {
                 }
 
             }).catch(function() {
-                console.log("Error al cargar los datos del usuario");
+                $('<li></li>').html(
+                    '<a href="' + "http://localhost/ViviendaHomeDrop/index.php?page=RegLog" + '" id="loginBtn" class="nav_link">Register/LogIn</a>' 
+                );
             });
     }
 }
@@ -253,7 +254,6 @@ function LogOut() {
     console.log('logout');
     ajaxPromise('Module/RegisterLogIn/ControladorRegLog/ControladorRegLog.php?Option=LogOut', 'POST', 'JSON')
         .then(function(data) {
-
             //console.log(data);
 
             localStorage.removeItem('token');

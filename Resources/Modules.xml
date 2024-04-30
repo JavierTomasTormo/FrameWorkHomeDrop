@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <modules>
     <module>
-        <name>Home</name>
-        <uri>Home</uri>
+        <name>home</name>
+        <uri>home</uri>
     </module>
     <module>
-        <name>Shop</name>
-        <uri>Shop</uri>
+        <name>shop</name>
+        <uri>shop</uri>
     </module>
     <module>
-        <name>Search</name>
-        <uri>Search</uri>
+        <name>search</name>
+        <uri>search</uri>
     </module>
     <!-- <module>
         <name>crud</name>
         <uri>crud</uri>
     </module> -->
     <module>
-        <name>Contact</name>
-        <uri>Contact</uri>
+        <name>contact</name>
+        <uri>contact</uri>
     </module>
     <module>
-        <name>Errors</name>
-        <uri>Errors</uri>
+        <name>errors</name>
+        <uri>errors</uri>
     </module>
     <!-- <module>
         <name>cart</name>
         <uri>cart</uri>
     </module> -->
     <module>
-        <name>Login</name>
-        <uri>Login</uri>
-        <uri>Register</uri>
+        <name>login</name>
+        <uri>login</uri>
+        <uri>register</uri>
     </module>
 </modules>

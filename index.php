@@ -1,3 +1,3 @@
 <?php
-    require_once 'Router/Router.php';
+	require_once 'router/router.php';
 ?>
