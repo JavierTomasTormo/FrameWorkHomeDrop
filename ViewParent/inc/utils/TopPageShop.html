@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="author" content="Javier Tomás Tormo" />
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="ViewParent/IMG/Homes/Web/icons8-acrilico-wifi-hogar-gradient-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="ViewParent/IMG/Homes/Web/icons8-acrilico-wifi-hogar-gradient-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="ViewParent/IMG/Homes/Web/icons8-acrilico-wifi-hogar-gradient-96.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="ViewParent/IMG/Homes/Web/icons8-acrilico-wifi-hogar-gradient-120.png">
+    
+    <title>HomeDropShop</title>
+
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+    <!-- Bootstrap Core Style CSS -->
+    <link href="ViewParent/inc/assets/css/bootstrap.css" rel="stylesheet" />
+
+    <!-- Font Awesome Style CSS -->
+    <link href="ViewParent/inc/assets/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom Style CSS -->
+    <link href="ViewParent/inc/assets/css/styleShop.css" rel="stylesheet" />
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css" />
+    
+    <!-- librería Toastify -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootpag/1.0.7/jquery.bootpag.min.js"></script> -->
+
+    <!-- GLIDER -->
+    <link rel="stylesheet" href="ViewParent/JavaScript/glider.min.css">
+    <script src="ViewParent/JavaScript/glider.min.js"></script>
+
+    <!-- Slick Carousel -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <!-- Mapbox -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+
+    <!-- TOASTER ALERTS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <!-- Personal JavaScript -->
+    <script src="ViewParent/JavaScript/promises.js"></script>
+    <script src="Module/Shop/ModelShop/Shop.js"></script>
+    <script src="Module/Search/ModelSearch/Search.js"></script>
+    <script src="ViewParent/inc/assets/plugins/bootstrap.js"></script>
+    <script src="ViewParent/inc/assets/js/custom.js"></script>
+    <script src="ViewParent/JavaScript/Main.js"></script>
+    <script src="ViewParent/JavaScript/ActivityUser.js"></script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            window.addEventListener("scroll", function() {
+                
+                var scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+                var triggerPosition = 10;
+
+                // Selecciona el navbar
+                var navbar = document.querySelector(".navbar");
+
+                if (scrollTop > triggerPosition) {
+                    navbar.classList.remove("navbar-hidden");
+                } else {
+                    navbar.classList.add("navbar-hidden");
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+    </script>
+    
+</head>
+<body>

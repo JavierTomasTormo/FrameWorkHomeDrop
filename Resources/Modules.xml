@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modules>
+    <module>
+        <name>Home</name>
+        <uri>Home</uri>
+    </module>
+    <module>
+        <name>Shop</name>
+        <uri>Shop</uri>
+    </module>
+    <module>
+        <name>Search</name>
+        <uri>Search</uri>
+    </module>
+    <!-- <module>
+        <name>crud</name>
+        <uri>crud</uri>
+    </module> -->
+    <module>
+        <name>Contact</name>
+        <uri>Contact</uri>
+    </module>
+    <module>
+        <name>Errors</name>
+        <uri>Errors</uri>
+    </module>
+    <!-- <module>
+        <name>cart</name>
+        <uri>cart</uri>
+    </module> -->
+    <module>
+        <name>Login</name>
+        <uri>Login</uri>
+        <uri>Register</uri>
+    </module>
+</modules>
