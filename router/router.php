@@ -3,11 +3,10 @@
         //require 'autoload.php';
     /*=======================================================================*/
         $path = $_SERVER['DOCUMENT_ROOT'] . '/FrameWorkHomeDrop/'; //Ruta del root
-        
-        //include($path . "utils/common.inc.php");
-        //include($path . "utils/mail.inc.php");
-
-        //include($path . "paths.php");//Paths constantes
+    
+        include($path . "utils/common.inc.php");
+        // include($path . "utils/mail.inc.php");
+        include($path . "paths.php");//Paths constantes
     /*=======================================================================*/ 
         ob_start();
         session_start();
@@ -43,7 +42,8 @@
                 try {
                     call_user_func(array($this -> loadModule(), $this -> loadFunction()));
                 } catch (Exception $e) {
-                    common::load_error();
+                    echo "error";
+                    //common::load_error();
                 }
             }
         /*=======================================================================*/    
