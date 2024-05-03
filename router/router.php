@@ -1,12 +1,12 @@
 <?php
     /*=======================================================================*/
-        //require 'autoload.php';
+        require 'autoload.php';
     /*=======================================================================*/
-        $path = $_SERVER['DOCUMENT_ROOT'] . '/FrameWorkHomeDrop/'; //Ruta del root
+        // $path = $_SERVER['DOCUMENT_ROOT'] . '/FrameWorkHomeDrop/'; //Ruta del root
     
-        include($path . "utils/common.inc.php");
+        // include($path . "utils/common.inc.php");
         // include($path . "utils/mail.inc.php");
-        include($path . "paths.php");//Paths constantes
+        // include($path . "paths.php");//Paths constantes
     /*=======================================================================*/ 
         ob_start();
         session_start();
@@ -43,7 +43,7 @@
                     call_user_func(array($this -> loadModule(), $this -> loadFunction()));
                 } catch (Exception $e) {
                     echo "error";
-                    //common::load_error();
+                    common::load_error();
                 }
             }
         /*=======================================================================*/    
@@ -53,10 +53,13 @@
                     foreach ($modules as $row) {
                         if (in_array($this -> uriModule, (Array) $row -> uri)) {
                             $path = MODULES_PATH . $row -> name . '/controller/controller_' . (String) $row -> name . '.class.php';
+                            // echo $path,"  ";
                             if (file_exists($path)) {
                                 require_once($path);
                                 $controllerName = 'controller_' . (String) $row -> name;
                                 $this -> nameModule = (String) $row -> name;
+
+                                // echo $controllerName, "  ";
                                 return new $controllerName;
                             }
                         }
@@ -67,6 +70,8 @@
         /*=======================================================================*/    
             private function loadFunction() {
                 $path = MODULES_PATH . $this -> nameModule . '/resources/function.xml'; 
+
+                // echo $path, "   ";
                 if (file_exists($path)) {
                     $functions = simplexml_load_file($path);
                     foreach ($functions as $row) {
