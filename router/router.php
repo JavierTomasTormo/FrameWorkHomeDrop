@@ -2,12 +2,12 @@
     /*=======================================================================*/
         //require 'autoload.php';
     /*=======================================================================*/
-        $path = $_SERVER['DOCUMENT_ROOT'] . '/FrameWorkHomeDrop/';//Ruta del root
+        $path = $_SERVER['DOCUMENT_ROOT'] . '/FrameWorkHomeDrop/'; //Ruta del root
         
-        include($path . "utils/common.inc.php");
+        //include($path . "utils/common.inc.php");
         //include($path . "utils/mail.inc.php");
 
-        include($path . "paths.php");//Paths constantes
+        //include($path . "paths.php");//Paths constantes
     /*=======================================================================*/ 
         ob_start();
         session_start();
