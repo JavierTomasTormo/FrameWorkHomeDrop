@@ -258,8 +258,22 @@ function OperationCharger() {
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
 
 function showLastSelectedHouseInfo() {
+
   var lastSelectedHousesString = localStorage.getItem('lastSelectedHouses');
-  //console.log(lastSelectedHousesString);
+  // var lastSelectedHouses = {
+  //   houseName: "Baco",
+  //   houseID: 123,
+  //   houseLocation: "City X"
+  // };
+  
+  // console.log(lastSelectedHouses);
+
+  // var secondUrl = 'index.php?module=home&op=showLastSelectedHouseInfo';
+  // var queryString = 'data=' + encodeURIComponent(JSON.stringify(lastSelectedHouses));
+  // var combinedUrl = secondUrl + '&' + queryString;
+  
+  // console.log(combinedUrl);
+  
 
   if (lastSelectedHousesString) {
     var lastSelectedHouses = JSON.parse(lastSelectedHousesString);
@@ -271,7 +285,7 @@ function showLastSelectedHouseInfo() {
     var combinedUrl = secondUrl + '&' + queryString;
 
     //var url = 'Module/HomeDropModule/Controlador/Controller_HomeDrop.php?Option=LastHouse&redirect=' + encodeURIComponent(combinedUrl);
-    console.log(combinedUrl);
+    // console.log(combinedUrl);
 
 
     ajaxPromise(url, 'GET', 'JSON')
@@ -499,15 +513,15 @@ function clicks(){
 $(document).ready(function () {
     //console.log("Hola desde controller_home");
     
-    // MostVisited()//✅✅✅
+    // MostVisited()
 
     showLastSelectedHouseInfo();
 
-    // CarouselImages(); //✅✅✅
-    // CategoryCharger();//✅✅✅
-    // CityCharger();//✅✅✅
-    // OperationCharger();//✅✅✅
-    // clicks();//✅✅✅
+    // CarouselImages(); 
+    // CategoryCharger();
+    // CityCharger();
+    // OperationCharger();
+    // clicks();
 });
 
 

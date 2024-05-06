@@ -24,6 +24,9 @@
         public static function load_model($model, $function = null, $args = null) {
             $dir = explode('_', $model);
             $path = constant('MODEL_' . strtoupper($dir[0])) .  $model . '.class.singleton.php';
+
+            
+
             if (file_exists($path)) {
                 require_once ($path);
                 if (method_exists($model, $function)) {
