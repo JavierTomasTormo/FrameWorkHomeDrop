@@ -13,7 +13,7 @@
             if ((file_exists($topPage)) && (file_exists($view))) {
                 require_once ($topPage);
                 // require_once ('C:/xampp/htdocs/Ejercicios/Framework_PHP_OO_MVC/view/inc/header.html');
-                require_once (VIEW_PATH_INC . 'header.html');
+                //require_once (VIEW_PATH_INC . 'header.html');
                 require_once ($view);
                 require_once (VIEW_PATH_INC . 'footer.html');
             }else {

@@ -246,85 +246,6 @@ function OperationCharger() {
 }
 
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
-                        // Clicks Ready //
-//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
-  
-function clicks(){
-  $(document).on("click",'div.carousel__elements', function (){
-    var FiltersHome = [];
-    FiltersHome.push({"ID_Type":[this.getAttribute('id')]});
-    localStorage.removeItem('FiltersHome')
-    localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
-    setTimeout(
-      function() {
-        window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
-      },
-    100);
-  });
-
-  $(document).on("click",'div.glideritem', function (){
-    var FiltersHome = [];
-    FiltersHome.push({"ID_Category":[this.getAttribute('id')]});
-    localStorage.removeItem('FiltersHome')
-    localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
-    setTimeout(
-      function() {
-        window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
-      },
-    100);
-  });
-
-  $(document).on("click",'div.glideritem2', function (){
-    var FiltersHome = [];
-    FiltersHome.push({"Ciudad":[this.getAttribute('id')]});
-    localStorage.removeItem('FiltersHome')
-    localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
-    setTimeout(
-      function() {
-        window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
-      },
-    100);
-  });
-
-
-  $(document).on("click",'div.glideritem3', function (){
-    var FiltersHome = [];
-    FiltersHome.push({"ID_Operation":[this.getAttribute('id')]});
-    localStorage.removeItem('FiltersHome')
-    localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
-    setTimeout(
-      function() {
-        window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
-      },
-    100);
-  });
-
-
-  $(document).on("click",'div.lastSelectedHouseInfo', function (){
-    var FiltersHome = [];
-    FiltersHome.push({"ID_HomeDrop":[this.getAttribute('id')]});
-    localStorage.removeItem('FiltersHome')
-    localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
-    setTimeout(
-      function() {
-        window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
-      },
-    100);
-    $(document).on("click",'div.MostVisited', function (){
-      var FiltersHome = [];
-      FiltersHome.push({"ID_HomeDrop":[this.getAttribute('id')]});
-      localStorage.removeItem('FiltersHome')
-      localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
-      setTimeout(
-        function() {
-          window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
-        },
-      100);
-    });
-  });
-} 
-
-//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
 
 function showLastSelectedHouseInfo() {
   var lastSelectedHousesString = localStorage.getItem('lastSelectedHouses');
@@ -473,6 +394,85 @@ function MostVisited() {
       console.error("Error en la petición AJAX", error);
     });
 }
+
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+                        // Clicks Ready //
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+  
+function clicks(){
+  $(document).on("click",'div.carousel__elements', function (){
+    var FiltersHome = [];
+    FiltersHome.push({"ID_Type":[this.getAttribute('id')]});
+    localStorage.removeItem('FiltersHome')
+    localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
+    setTimeout(
+      function() {
+        window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
+      },
+    100);
+  });
+
+  $(document).on("click",'div.glideritem', function (){
+    var FiltersHome = [];
+    FiltersHome.push({"ID_Category":[this.getAttribute('id')]});
+    localStorage.removeItem('FiltersHome')
+    localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
+    setTimeout(
+      function() {
+        window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
+      },
+    100);
+  });
+
+  $(document).on("click",'div.glideritem2', function (){
+    var FiltersHome = [];
+    FiltersHome.push({"Ciudad":[this.getAttribute('id')]});
+    localStorage.removeItem('FiltersHome')
+    localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
+    setTimeout(
+      function() {
+        window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
+      },
+    100);
+  });
+
+
+  $(document).on("click",'div.glideritem3', function (){
+    var FiltersHome = [];
+    FiltersHome.push({"ID_Operation":[this.getAttribute('id')]});
+    localStorage.removeItem('FiltersHome')
+    localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
+    setTimeout(
+      function() {
+        window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
+      },
+    100);
+  });
+
+
+  $(document).on("click",'div.lastSelectedHouseInfo', function (){
+    var FiltersHome = [];
+    FiltersHome.push({"ID_HomeDrop":[this.getAttribute('id')]});
+    localStorage.removeItem('FiltersHome')
+    localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
+    setTimeout(
+      function() {
+        window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
+      },
+    100);
+    $(document).on("click",'div.MostVisited', function (){
+      var FiltersHome = [];
+      FiltersHome.push({"ID_HomeDrop":[this.getAttribute('id')]});
+      localStorage.removeItem('FiltersHome')
+      localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
+      setTimeout(
+        function() {
+          window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
+        },
+      100);
+    });
+  });
+} 
 
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
                         // Document Ready //
