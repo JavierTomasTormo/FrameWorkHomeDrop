@@ -2,11 +2,17 @@
                     //Cargar el Carrusel de Imágenes//
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
 
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+                        // Cargar las Imagenes //
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+
 function CarouselImages() {
     //console.log('LLega al carr IMG');
-    ajaxPromise('Module/HomeDropModule/Controlador/Controller_HomeDrop.php?Option=Muestra', 'GET', 'JSON')
-
+    //console.log("Hola desde controller_homeFrameWork");
+    ajaxPromise('?module=home&op=CarouselImages', 'GET', 'JSON')
         .then(function (data) {
+          console.log(data);
+          //console.log("Hola desde controller_homeFrameWork");
 
             for (let row = 0; row < data.length; row++) {
                 $('<div></div>')
@@ -47,13 +53,14 @@ function CarouselImages() {
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
 
 function CategoryCharger() {
-    //console.log('LLega al CategoryCharger');
-    ajaxPromise('Module/HomeDropModule/Controlador/Controller_HomeDrop.php?Option=Category', 'GET', 'JSON')
+  // console.log('LLega al CategoryCharger');
+
+    ajaxPromise('?module=home&op=CategoryCharger', 'GET', 'JSON')
         .then(function (data) {
-            //console.log(data);
+            console.log(data);
 
             for (let row = 0; row < data.length; row++) {
-               // console.log(data);
+               console.log(data);
 
 
                 $('<div></div>')
@@ -112,6 +119,7 @@ function CategoryCharger() {
                
 
         }).catch(function () {
+          console.log('CategoryCharger ERROR');
             //Controller exceptions
             //window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Type_Categories HOME";
         });
@@ -123,9 +131,10 @@ function CategoryCharger() {
 
 function CityCharger() {
     //console.log('LLega al Cargar_Ciudades');
-    ajaxPromise('Module/HomeDropModule/Controlador/Controller_HomeDrop.php?Option=City', 'GET', 'JSON')
+    ajaxPromise('index.php?module=home&op=CityCharger', 'GET', 'JSON')
         .then(function (data) {
-            //console.log(data);
+            console.log(data);
+
             for (let row = 0; row < data.length; row++) {
                 //  console.log(data);
                 //  console.log(data[row].Ciudad);
@@ -180,7 +189,7 @@ function CityCharger() {
                 ]
               });
         }).catch(function () {
-            //console.log('Error');
+            console.log('Error');
         });
 }
 
@@ -189,9 +198,10 @@ function CityCharger() {
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
 
 function OperationCharger() {
-  ajaxPromise('Module/HomeDropModule/Controlador/Controller_HomeDrop.php?Option=Operation', 'GET', 'JSON')
+  ajaxPromise('index.php?module=home&op=OperationCharger', 'GET', 'JSON')
   .then(function (data) {
-    //console.log(data);
+    console.log(data);
+
     for (let row = 0; row < data.length; row++) {
         // console.log(data);
          $('<div></div>')
@@ -255,11 +265,19 @@ function showLastSelectedHouseInfo() {
     var lastSelectedHouses = JSON.parse(lastSelectedHousesString);
     //console.log(lastSelectedHouses);
     
-    var url = 'Module/HomeDropModule/Controlador/Controller_HomeDrop.php?Option=LastHouse&lastSelectedHouses=' + encodeURIComponent(JSON.stringify(lastSelectedHouses));
+    //var url = 'Module/HomeDropModule/Controlador/Controller_HomeDrop.php?Option=LastHouse&lastSelectedHouses=' + encodeURIComponent(JSON.stringify(lastSelectedHouses));
+    var secondUrl = 'index.php?module=home&op=showLastSelectedHouseInfo';
+    var queryString = 'data=' + encodeURIComponent(JSON.stringify(lastSelectedHouses));
+    var combinedUrl = secondUrl + '&' + queryString;
+
+    //var url = 'Module/HomeDropModule/Controlador/Controller_HomeDrop.php?Option=LastHouse&redirect=' + encodeURIComponent(combinedUrl);
+    console.log(combinedUrl);
+
 
     ajaxPromise(url, 'GET', 'JSON')
     .then(function(data) {
-      //console.log(data);
+
+      console.log(data);
 
       for (let i = 0; i < data.length; i++) {
         $('<div></div>')
@@ -328,11 +346,12 @@ function MostVisited() {
 
   //console.log(lastSelectedHousesString);
     
-    var url = 'Module/HomeDropModule/Controlador/Controller_HomeDrop.php?Option=MostVisited';
+    var url = 'index.php?module=home&op=MostVisited';
 
     ajaxPromise(url, 'GET', 'JSON')
     .then(function(dataVisited) {
-      //console.log(dataVisited);
+
+      console.log(dataVisited);
 
       for (let j = 0; j < dataVisited.length; j++) {
         $('<div></div>')
@@ -478,15 +497,17 @@ function clicks(){
                         // Document Ready //
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
 $(document).ready(function () {
-    console.log("Hola desde controller_home");
+    //console.log("Hola desde controller_home");
     
-    // MostVisited()
-    // showLastSelectedHouseInfo();
-    // CarouselImages();
-    // CategoryCharger();
-    // CityCharger();
-    // OperationCharger();
-    // clicks();
+    // MostVisited()//✅✅✅
+
+    showLastSelectedHouseInfo();
+
+    // CarouselImages(); //✅✅✅
+    // CategoryCharger();//✅✅✅
+    // CityCharger();//✅✅✅
+    // OperationCharger();//✅✅✅
+    // clicks();//✅✅✅
 });
 
 

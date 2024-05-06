@@ -6,32 +6,32 @@
         }
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
         function CarouselImages() {
-            echo "Hola CarouselImages de controller_home";
+            //echo json_encode( "Hola CarouselImages de controller_home");//✅✅✅
             // echo json_encode(common::load_model('home_model', 'get_carrusel'));
         }
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
         function CategoryCharger() {
-            echo "Hola CategoryCharger de controller_home";
+            //echo json_encode("Hola CategoryCharger de controller_home");//✅✅✅
             // echo json_encode(common::load_model('home_model', 'get_category'));
         }
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//       
         function CityCharger() {
-            echo "Hola CityCharger de controller_home";
+            //echo json_encode("Hola CityCharger de controller_home");//✅✅✅
             // echo json_encode(common::load_model('home_model', 'get_type'));
         }
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
         function OperationCharger() {
-            echo "Hola OperationCharger de controller_home";
+           //echo json_encode("Hola OperationCharger de controller_home");//✅✅✅
             // echo json_encode(common::load_model('home_model', 'get_type'));
         }
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
         function showLastSelectedHouseInfo() {
-            echo "Hola showLastSelectedHouseInfo de controller_home";
+            echo json_encode("Hola showLastSelectedHouseInfo de controller_home");//✅✅✅
             // echo json_encode(common::load_model('home_model', 'get_type'));
         }
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
         function MostVisited() {
-            echo "Hola MostVisited de controller_home";
+            //echo json_encode("Hola MostVisited de controller_home");//✅✅✅
             // echo json_encode(common::load_model('home_model', 'get_type'));
         }
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
