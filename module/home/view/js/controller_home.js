@@ -1,6 +1,4 @@
-//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
-                    //Cargar el Carrusel de Imágenes//
-//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+
 
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
                         // Cargar las Imagenes //
@@ -11,7 +9,7 @@ function CarouselImages() {
     //console.log("Hola desde controller_homeFrameWork");
     ajaxPromise('?module=home&op=CarouselImages', 'GET', 'JSON')
         .then(function (data) {
-          console.log(data);
+          //console.log(data);
           //console.log("Hola desde controller_homeFrameWork");
 
             for (let row = 0; row < data.length; row++) {
@@ -57,10 +55,10 @@ function CategoryCharger() {
 
     ajaxPromise('?module=home&op=CategoryCharger', 'GET', 'JSON')
         .then(function (data) {
-            console.log(data);
+            //console.log(data);
 
             for (let row = 0; row < data.length; row++) {
-               console.log(data);
+               //console.log(data);
 
 
                 $('<div></div>')
@@ -133,7 +131,7 @@ function CityCharger() {
     //console.log('LLega al Cargar_Ciudades');
     ajaxPromise('index.php?module=home&op=CityCharger', 'GET', 'JSON')
         .then(function (data) {
-            console.log(data);
+            //console.log(data);
 
             for (let row = 0; row < data.length; row++) {
                 //  console.log(data);
@@ -200,7 +198,7 @@ function CityCharger() {
 function OperationCharger() {
   ajaxPromise('index.php?module=home&op=OperationCharger', 'GET', 'JSON')
   .then(function (data) {
-    console.log(data);
+    //console.log(data);
 
     for (let row = 0; row < data.length; row++) {
         // console.log(data);
@@ -260,35 +258,28 @@ function OperationCharger() {
 function showLastSelectedHouseInfo() {
 
   var lastSelectedHousesString = localStorage.getItem('lastSelectedHouses');
-  // var lastSelectedHouses = {
-  //   houseName: "Baco",
-  //   houseID: 123,
-  //   houseLocation: "City X"
-  // };
-  
-  // console.log(lastSelectedHouses);
 
-  // var secondUrl = 'index.php?module=home&op=showLastSelectedHouseInfo';
-  // var queryString = 'data=' + encodeURIComponent(JSON.stringify(lastSelectedHouses));
-  // var combinedUrl = secondUrl + '&' + queryString;
-  
-  // console.log(combinedUrl);
-  
+  var lastSelectedHousesString = [26, 25, 11, 9];
 
+  
+  
+ //*/*/*/*/*/*/*/*/*/*/*//*/*/---------------------------------------------
   if (lastSelectedHousesString) {
-    var lastSelectedHouses = JSON.parse(lastSelectedHousesString);
+    // var lastSelectedHouses = JSON.parse(lastSelectedHousesString);
+    var lastSelectedHouses = lastSelectedHousesString;
+ //*/*/*/*/*/*/*/*/*/*/*//*/*/-------------------------------------------
+ 
+    
     //console.log(lastSelectedHouses);
     
-    //var url = 'Module/HomeDropModule/Controlador/Controller_HomeDrop.php?Option=LastHouse&lastSelectedHouses=' + encodeURIComponent(JSON.stringify(lastSelectedHouses));
     var secondUrl = 'index.php?module=home&op=showLastSelectedHouseInfo';
     var queryString = 'data=' + encodeURIComponent(JSON.stringify(lastSelectedHouses));
     var combinedUrl = secondUrl + '&' + queryString;
 
-    //var url = 'Module/HomeDropModule/Controlador/Controller_HomeDrop.php?Option=LastHouse&redirect=' + encodeURIComponent(combinedUrl);
     // console.log(combinedUrl);
 
 
-    ajaxPromise(url, 'GET', 'JSON')
+    ajaxPromise(combinedUrl, 'GET', 'JSON')
     .then(function(data) {
 
       console.log(data);
@@ -351,7 +342,9 @@ function showLastSelectedHouseInfo() {
     }).catch(function(error) {
       console.error("Error en la petición AJAX", error);
     });
+   //*/*/*/*/*/*/*/*/*/*/*//*/*/------------------
   }
+   //*/*/*/*/*/*/*/*/*/*/*//*/*/-------------------
 }
 
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
@@ -365,7 +358,7 @@ function MostVisited() {
     ajaxPromise(url, 'GET', 'JSON')
     .then(function(dataVisited) {
 
-      console.log(dataVisited);
+      //console.log(dataVisited);
 
       for (let j = 0; j < dataVisited.length; j++) {
         $('<div></div>')
@@ -513,15 +506,13 @@ function clicks(){
 $(document).ready(function () {
     //console.log("Hola desde controller_home");
     
-    // MostVisited()
-
+    MostVisited()
     showLastSelectedHouseInfo();
-
-    // CarouselImages(); 
-    // CategoryCharger();
-    // CityCharger();
-    // OperationCharger();
-    // clicks();
+    CarouselImages(); 
+    CategoryCharger();
+    CityCharger();
+    OperationCharger();
+    clicks();
 });
 
 

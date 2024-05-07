@@ -7,11 +7,11 @@
         static $_instance;
 
         private function __construct() {
-            $cnfg = parse_ini_file(UTILS."db.ini");
-            $this->_userdb = $cnfg['user'];
-            $this->_passdb = $cnfg['pass'];
-            $this->_hostdb = $cnfg['host'];
-            $this->_db = $cnfg['db'];
+            $cnfg = parse_ini_file(UTILS."JWT.ini");
+            $this->_userdb = $cnfg['DB_USERNAME'];
+            $this->_passdb = $cnfg['DB_PASSWORD'];
+            $this->_hostdb = $cnfg['DB_SERVERNAME'];
+            $this->_db = $cnfg['DB_DBNAME'];
         }
 
         private function __clone() {
