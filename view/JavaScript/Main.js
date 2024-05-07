@@ -24,6 +24,36 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
 //================LOAD-HEADER================//
 function LoadMenu() {
     var token = localStorage.getItem('token');
+    var navbarContenido = `
+        <nav class="navbar navbar-inverse navbar-fixed-top navbar-hidden">
+            <ul class="inline navbar-header">    
+                <li><a href="index.php?module=home&op=view" style="text-decoration: none; " class="activate-filter-remove"><h2 class="texto-dorado-nav"> H&#920;M&#926;DR&#920;P</h2></a></li>
+                <li class="FiltrosShopFloat" style="padding: 10px;"></li>
+            </ul>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav search_container" style="float: right; margin-right: 5%; min-width: 55%;">
+                    <li><a href="index.php?module=home&op=view" id="home">HOME</a></li>
+                    <li><a href="index.php?module=shop&op=view" id="shop">SHOP</a></li>
+                    <li class="inline"><select class="search_selectCity"></select></li>
+                    <li><select class="search_selectOperation"></select></li>
+                    <li>
+                        <input type="text" id="autocom" autocomplete="off" placeholder="Buscar..." class="search-input">
+                        <button class="search-button" id="search-btn"><i class="fa fa-search"></i></button>
+                        <div id="search_auto" class="search_auto"></div>
+                    </li>
+                    <li id="userSection" style="display: none;"></li>
+                    <li class="opc_CRUD"></li>
+                    <li class="opc_exceptions"></li>
+                    <li class="log-icon"></li>
+                    <li id="des_inf_user"></li>
+                    <li><a href="index.php?module=RegLog&op=view" id="loginBtn">Register/LogIn</a></li>
+                </ul>
+            </div>
+        </nav>
+    `;
+    // Cargar el contenido en el div con id "navbarContainer"
+    document.getElementById("navbarContainer").innerHTML = navbarContenido;
+
 
     if (token) {
         ajaxPromise('Module/RegisterLogIn/ControladorRegLog/ControladorRegLog.php?Option=DataUser', 'POST', 'JSON', { 'token': token })
