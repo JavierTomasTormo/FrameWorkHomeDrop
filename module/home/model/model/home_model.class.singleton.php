@@ -36,7 +36,6 @@
         public function get_MostVisited() {
             return $this -> bll -> get_MostVisited_BLL();
         }
-
 //:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+://
         public function get_showLastSelectedHouseInfo() {
             //return "hola";
@@ -55,7 +54,6 @@
             }
             
         }
-
 // //:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+://
 
     }

@@ -66,7 +66,11 @@
         }
 //##########################################################################//
         public function SelectLastHouse($db, $lastSelectedHouses) {
-            return $lastSelectedHouses;//(4) [26, 25, 11, 9]
+            
+
+            $idsString = implode(',', $lastSelectedHouses);
+
+            // return $idsString;//(4) [26, 25, 11, 9]
 
             $sql = "SELECT vh.ID_HomeDrop, vh.Precio, vh.Superficie, ch.Ciudad, vh.Calle, th.Type, oh.Operation, ih.ID_Imagen, ih.Img, chd.Category
              					FROM viviendashomedrop vh 
@@ -78,9 +82,10 @@
              					LEFT JOIN imageneshomedrop ih ON ih.ID_HomeDrop = vh.ID_HomeDrop 
              					LEFT JOIN viviendascategory vc ON vc.ID_HomeDrop = vh.ID_HomeDrop 
              					LEFT JOIN categoryhomedrop chd ON chd.ID_Category = vc.ID_Category 
-             					WHERE vh.ID_HomeDrop = $lastSelectedHouses";
+             					WHERE vh.ID_HomeDrop IN ($idsString)
+                                GROUP BY vh.ID_HomeDrop";
 
-            return $sql;
+            //return $sql;
 
             $stmt = $db -> ejecutar($sql);
             return $db -> listar($stmt);

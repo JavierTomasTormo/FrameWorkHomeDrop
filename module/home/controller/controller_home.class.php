@@ -23,19 +23,23 @@
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
+
         function OperationCharger() {
             echo json_encode(common::load_model('home_model', 'get_OperationCharger'));//✅✅✅
         }
+
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
+
         function showLastSelectedHouseInfo() {
-            // echo json_encode("Hola showLastSelectedHouseInfo de controller_home"); 
-            //echo json_encode($_GET['data']);
             echo json_encode(common::load_model('home_model', 'get_showLastSelectedHouseInfo', $_GET['data'])); //✅✅✅
         }
+
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
+
         function MostVisited() {
             echo json_encode(common::load_model('home_model', 'get_MostVisited'));//✅✅✅
         }
+        
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
     }
 ?>

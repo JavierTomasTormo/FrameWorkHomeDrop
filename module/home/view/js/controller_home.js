@@ -1,5 +1,3 @@
-
-
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
                         // Cargar las Imagenes //
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
@@ -259,14 +257,15 @@ function showLastSelectedHouseInfo() {
 
   var lastSelectedHousesString = localStorage.getItem('lastSelectedHouses');
 
-  var lastSelectedHousesString = [26, 25, 11, 9];
-
+  if (!lastSelectedHousesString){localStorage.setItem("lastSelectedHouses", JSON.stringify([26, 5, 4, 2]))}
+  
+  //console.log(lastSelectedHousesString);
   
   
  //*/*/*/*/*/*/*/*/*/*/*//*/*/---------------------------------------------
   if (lastSelectedHousesString) {
-    // var lastSelectedHouses = JSON.parse(lastSelectedHousesString);
-    var lastSelectedHouses = lastSelectedHousesString;
+    var lastSelectedHouses = JSON.parse(lastSelectedHousesString);
+    //var lastSelectedHouses = lastSelectedHousesString;
  //*/*/*/*/*/*/*/*/*/*/*//*/*/-------------------------------------------
  
     
@@ -282,7 +281,7 @@ function showLastSelectedHouseInfo() {
     ajaxPromise(combinedUrl, 'GET', 'JSON')
     .then(function(data) {
 
-      console.log(data);
+      //console.log(data);
 
       for (let i = 0; i < data.length; i++) {
         $('<div></div>')
