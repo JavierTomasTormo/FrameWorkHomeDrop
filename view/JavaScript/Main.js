@@ -21,19 +21,37 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
     });
 }
 //--------------------------------------------//
+//================Friendly-URL================//
+function friendlyURL(url) {
+    var link = "";
+    url = url.replace("?", "");
+    url = url.split("&");
+    cont = 0;
+    for (var i = 0; i < url.length; i++) {
+    	cont++;
+        var aux = url[i].split("=");
+        if (cont == 2) {
+        	link += "/" + aux[1] + "/";	
+        }else{
+        	link += "/" + aux[1];
+        }
+    }
+    return "http://localhost/FrameWorkHomeDrop" + link;
+}
+//--------------------------------------------//
 //================LOAD-HEADER================//
 function LoadMenu() {
     var token = localStorage.getItem('token');
     var navbarContenido = `
         <nav class="navbar navbar-inverse navbar-fixed-top navbar-hidden">
             <ul class="inline navbar-header">    
-                <li><a href="index.php?module=home&op=view" style="text-decoration: none; " class="activate-filter-remove"><h2 class="texto-dorado-nav"> H&#920;M&#926;DR&#920;P</h2></a></li>
+                <li><a href="` + friendlyURL('index.php?module=home&op=view') + `" style="text-decoration: none; " class="activate-filter-remove"><h2 class="texto-dorado-nav"> H&#920;M&#926;DR&#920;P</h2></a></li>
                 <li class="FiltrosShopFloat" style="padding: 10px;"></li>
             </ul>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav search_container" style="float: right; margin-right: 5%; min-width: 55%;">
-                    <li><a href="index.php?module=home&op=view" id="home">HOME</a></li>
-                    <li><a href="index.php?module=shop&op=view" id="shop">SHOP</a></li>
+                    <li><a href="` + friendlyURL('index.php?module=home&op=view') + `" id="home">HOME</a></li>
+                    <li><a href="` + friendlyURL('index.php?module=shop&op=view') + `" id="shop">SHOP</a></li>
                     <li class="inline"><select class="search_selectCity"></select></li>
                     <li><select class="search_selectOperation"></select></li>
                     <li>
@@ -46,7 +64,7 @@ function LoadMenu() {
                     <li class="opc_exceptions"></li>
                     <li class="log-icon"></li>
                     <li id="des_inf_user"></li>
-                    <li><a href="index.php?module=RegLog&op=view" id="loginBtn">Register/LogIn</a></li>
+                    <li><a href="` + friendlyURL('index.php?module=RegLog&op=view') +`" id="loginBtn">Register/LogIn</a></li>
                 </ul>
             </div>
         </nav>

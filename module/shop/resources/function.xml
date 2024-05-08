@@ -42,13 +42,28 @@
         </function>
     <!----> 
         <function>
-            <name>LoadJump</name>
-            <uri>LoadJump</uri>
+            <name>CountLikes</name>
+            <uri>CountLikes</uri>
         </function>
     <!----> 
         <function>
-            <name>LoadJump</name>
-            <uri>LoadJump</uri>
+            <name>loadDetails</name>
+            <uri>loadDetails</uri>
+        </function>
+    <!----> 
+        <function>
+            <name>Pagination</name>
+            <uri>Pagination</uri>
+        </function>
+    <!----> 
+        <function>
+            <name>MasCasasRelacionadas</name>
+            <uri>MasCasasRelacionadas</uri>
+        </function>
+    <!----> 
+        <function>
+            <name>ViviendasRelacionadas</name>
+            <uri>ViviendasRelacionadas</uri>
         </function>
     <!----> 
 </functions>
