@@ -5,7 +5,7 @@
 function CarouselImages() {
     //console.log('LLega al carr IMG');
     //console.log("Hola desde controller_homeFrameWork");
-    ajaxPromise('?module=home&op=CarouselImages', 'GET', 'JSON')
+    ajaxPromise(friendlyURL('?module=home&op=CarouselImages'), 'GET', 'JSON')
         .then(function (data) {
           //console.log(data);
           //console.log("Hola desde controller_homeFrameWork");
@@ -51,7 +51,7 @@ function CarouselImages() {
 function CategoryCharger() {
   // console.log('LLega al CategoryCharger');
 
-    ajaxPromise('?module=home&op=CategoryCharger', 'GET', 'JSON')
+    ajaxPromise(friendlyURL('?module=home&op=CategoryCharger'), 'GET', 'JSON')
         .then(function (data) {
             //console.log(data);
 
@@ -127,7 +127,7 @@ function CategoryCharger() {
 
 function CityCharger() {
     //console.log('LLega al Cargar_Ciudades');
-    ajaxPromise('index.php?module=home&op=CityCharger', 'GET', 'JSON')
+    ajaxPromise(friendlyURL('index.php?module=home&op=CityCharger'), 'GET', 'JSON')
         .then(function (data) {
             //console.log(data);
 
@@ -194,7 +194,7 @@ function CityCharger() {
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
 
 function OperationCharger() {
-  ajaxPromise('index.php?module=home&op=OperationCharger', 'GET', 'JSON')
+  ajaxPromise(friendlyURL('index.php?module=home&op=OperationCharger'), 'GET', 'JSON')
   .then(function (data) {
     //console.log(data);
 
@@ -354,7 +354,7 @@ function MostVisited() {
     
     var url = 'index.php?module=home&op=MostVisited';
 
-    ajaxPromise(url, 'GET', 'JSON')
+    ajaxPromise(friendlyURL(url), 'GET', 'JSON')
     .then(function(dataVisited) {
 
       //console.log(dataVisited);
@@ -432,7 +432,7 @@ function clicks(){
     localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
     setTimeout(
       function() {
-        window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
+        window.location.href = friendlyURL('index.php?module=shop&op=view');
       },
     100);
   });
@@ -444,7 +444,7 @@ function clicks(){
     localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
     setTimeout(
       function() {
-        window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
+        window.location.href = friendlyURL('index.php?module=shop&op=view');
       },
     100);
   });
@@ -456,7 +456,7 @@ function clicks(){
     localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
     setTimeout(
       function() {
-        window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
+        window.location.href = friendlyURL('index.php?module=shop&op=view');
       },
     100);
   });
@@ -469,7 +469,7 @@ function clicks(){
     localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
     setTimeout(
       function() {
-        window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
+        window.location.href = friendlyURL('index.php?module=shop&op=view');
       },
     100);
   });
@@ -482,7 +482,7 @@ function clicks(){
     localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
     setTimeout(
       function() {
-        window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
+        window.location.href = friendlyURL('index.php?module=shop&op=view');
       },
     100);
     $(document).on("click",'div.MostVisited', function (){
@@ -492,7 +492,7 @@ function clicks(){
       localStorage.setItem('FiltersHome', JSON.stringify(FiltersHome)); 
       setTimeout(
         function() {
-          window.location.href = 'index.php?page=ControllerShop&Option=ListShop';
+          window.location.href = friendlyURL('index.php?module=shop&op=view');
         },
       100);
     });

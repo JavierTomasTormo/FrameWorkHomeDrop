@@ -1,8 +1,8 @@
 <?php
     class controller_shop {
         function view() {
-            echo "Hola VIEW de controller Shop !!";
-            //common::load_view('top_page_shop.html', VIEW_PATH_SHOP . 'shop.html');
+            // echo "Hola VIEW de controller Shop !!";
+            common::load_view('top_page_shop.html', VIEW_PATH_SHOP . 'shop.html');
         }
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 

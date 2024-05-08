@@ -1,29 +1,29 @@
  
 $(document).ready(function() {
-
-    updateResultsCount();
-    // CountLikes();
-    //console.log('DocumentReady');
-    /*************************************************************************************/
-    let FiltrosAplicados = localStorage.getItem('FiltrosApplied');
-    if (FiltrosAplicados !== null ) {
-        console.log('¡Filtros Aplicados!', FiltrosAplicados);
-        //alert('Tienes Filtros Aplicados, Eliminalos para ver todas las opciones');
-    }else{
-        console.log('No se encontraron Filtros. Se Procederá a cargar toda la página: "Shop"'); 
-        //alert('¡No Hay Filtros Proporcionados!');
-    }
-    /*************************************************************************************/
-    //No Tocar, El orden de los Factores Si altera el Producto 
+console.log('controllershop doc reay charged');
+    // updateResultsCount();
+    // // CountLikes();
+    // //console.log('DocumentReady');
+    // /*************************************************************************************/
+    // let FiltrosAplicados = localStorage.getItem('FiltrosApplied');
+    // if (FiltrosAplicados !== null ) {
+    //     console.log('¡Filtros Aplicados!', FiltrosAplicados);
+    //     //alert('Tienes Filtros Aplicados, Eliminalos para ver todas las opciones');
+    // }else{
+    //     console.log('No se encontraron Filtros. Se Procederá a cargar toda la página: "Shop"'); 
+    //     //alert('¡No Hay Filtros Proporcionados!');
+    // }
+    // /*************************************************************************************/
+    // //No Tocar, El orden de los Factores Si altera el Producto 
            
-            MostrarFiltrosShop();
+    //         MostrarFiltrosShop();
 
-        ButtonFilterShop();
+    //     ButtonFilterShop();
         
-    LoadHomeDropShop();
-    ShopAllHome();
-    clicks();
-    Pagination();
+    // LoadHomeDropShop();
+    // ShopAllHome();
+    // clicks();
+    // Pagination();
     
 });
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#   EMERGENCY BUTTON   #·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
