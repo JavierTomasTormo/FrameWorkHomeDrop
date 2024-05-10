@@ -7,8 +7,8 @@
         </function>
     <!---->
         <function>
-            <name>ButtonFilterShop</name>
-            <uri>ButtonFilterShop</uri>
+            <name>ajaxForSearch</name>
+            <uri>ajaxForSearch</uri>
         </function>
     <!---->    
         <function>
@@ -35,11 +35,6 @@
             <name>LoadJump</name>
             <uri>LoadJump</uri>
         </function>
-    <!---->  
-        <function>
-            <name>LoadHomeDropShop</name>
-            <uri>LoadHomeDropShop</uri>
-        </function>
     <!----> 
         <function>
             <name>CountLikes</name>
@@ -64,6 +59,11 @@
         <function>
             <name>ViviendasRelacionadas</name>
             <uri>ViviendasRelacionadas</uri>
+        </function>
+    <!----> 
+        <function>
+            <name>clicks</name>
+            <uri>clicks</uri>
         </function>
     <!----> 
 </functions>
