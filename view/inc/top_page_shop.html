@@ -30,6 +30,9 @@
     <!-- jQuery UI -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
+    <!-- SCRIPT_TEST -->
+    <!-- <script>console.log('topage');</script> -->
+
     <!-- jQuery UI CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css" />
     
@@ -56,51 +59,13 @@
 
     <!-- Personal JavaScript -->
     <script src="<?php echo SITE_PATH ?>view/JavaScript/promises.js"></script>
-    <script src="<?php echo SITE_PATH ?>view\js\controller_shop.js"></script>
+    
     <!-- <script src="Module/Search/ModelSearch/Search.js"></script> -->
     <script src="<?php echo SITE_PATH ?>view/inc/assets/plugins/bootstrap.js"></script>
     <script src="<?php echo SITE_PATH ?>view/inc/assets/js/custom.js"></script>
     <script src="<?php echo SITE_PATH ?>view/JavaScript/Main.js"></script>
     <!-- <script src="view/JavaScript/ActivityUser.js"></script> -->
-
-
-    <!-- <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            window.addEventListener("scroll", function() {
-                
-                var scrollTop = window.scrollY || document.documentElement.scrollTop;
-
-                var triggerPosition = 10;
-
-                // Selecciona el navbar
-                var navbar = document.querySelector(".navbar");
-
-                if (scrollTop > triggerPosition) {
-                    navbar.classList.remove("navbar-hidden");
-                } else {
-                    navbar.classList.add("navbar-hidden");
-                }
-            });
-        });
-    </script>
-
-    <script>
-        function myFunction() {
-          document.getElementById("myDropdown").classList.toggle("show");
-        }
-        window.onclick = function(event) {
-          if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-              var openDropdown = dropdowns[i];
-              if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-              }
-            }
-          }
-        }
-    </script> -->
+    <script src="\FrameWorkHomeDrop\module\shop\view\js\controller_shop.js"></script>
     
 </head>
 <body>

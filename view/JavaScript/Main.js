@@ -45,13 +45,13 @@ function LoadMenu() {
     var navbarContenido = `
         <nav class="navbar navbar-inverse navbar-fixed-top navbar-hidden">
             <ul class="inline navbar-header">    
-                <li><a href="` + friendlyURL('index.php?module=home') + `" style="text-decoration: none; " class="activate-filter-remove"><h2 class="texto-dorado-nav"> H&#920;M&#926;DR&#920;P</h2></a></li>
+                <li><a href="` + friendlyURL('index.php?module=home&op=view') + `" style="text-decoration: none; " class="activate-filter-remove"><h2 class="texto-dorado-nav"> H&#920;M&#926;DR&#920;P</h2></a></li>
                 <li class="FiltrosShopFloat" style="padding: 10px;"></li>
             </ul>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav search_container" style="float: right; margin-right: 5%; min-width: 55%;">
-                    <li><a href="` + friendlyURL('index.php?module=home') + `" id="home">HOME</a></li>
-                    <li><a href="` + friendlyURL('index.php?module=shop') + `" id="shop">SHOP</a></li>
+                    <li><a href="` + friendlyURL('index.php?module=home&op=view') + `" id="home">HOME</a></li>
+                    <li><a href="` + friendlyURL('index.php?module=shop&op=view') + `" id="shop">SHOP</a></li>
                     <li class="inline"><select class="search_selectCity"></select></li>
                     <li><select class="search_selectOperation"></select></li>
                     <li>

@@ -9,14 +9,21 @@
         }
         
         public static function load_view($topPage, $view) {
+
+            // echo "Load View";
             $topPage = VIEW_PATH_INC . $topPage;
+            //echo "$topPage";
+            // echo $view;
             if ((file_exists($topPage)) && (file_exists($view))) {
+                //echo "los dos archivos existen";
                 require_once ($topPage);
                 // require_once ('C:/xampp/htdocs/Ejercicios/Framework_PHP_OO_MVC/view/inc/header.html');
                 //require_once (VIEW_PATH_INC . 'header.html');
                 require_once ($view);
                 require_once (VIEW_PATH_INC . 'footer.html');
+                // echo $view;
             }else {
+                echo "error de cargar vistas";
                 self::load_error();
             }
         }

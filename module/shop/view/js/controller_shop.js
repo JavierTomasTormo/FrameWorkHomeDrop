@@ -1,9 +1,10 @@
- 
-$(document).ready(function() {
-console.log('controllershop doc reay charged');
+ $(document).ready(function() {
+    // <?php echo"hola";?>
+    console.log('controllershop doc reay charged');
+
     // updateResultsCount();
-    // // CountLikes();
-    // //console.log('DocumentReady');
+    // CountLikes();
+
     // /*************************************************************************************/
     // let FiltrosAplicados = localStorage.getItem('FiltrosApplied');
     // if (FiltrosAplicados !== null ) {
@@ -13,14 +14,10 @@ console.log('controllershop doc reay charged');
     //     console.log('No se encontraron Filtros. Se Procederá a cargar toda la página: "Shop"'); 
     //     //alert('¡No Hay Filtros Proporcionados!');
     // }
-    // /*************************************************************************************/
-    // //No Tocar, El orden de los Factores Si altera el Producto 
-           
-    //         MostrarFiltrosShop();
-
+    // /*************************************************************************************/           
+    //     MostrarFiltrosShop();
     //     ButtonFilterShop();
-        
-    // LoadHomeDropShop();
+    //         LoadHomeDropShop();
     // ShopAllHome();
     // clicks();
     // Pagination();
