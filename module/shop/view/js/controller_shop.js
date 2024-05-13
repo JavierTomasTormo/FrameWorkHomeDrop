@@ -1066,7 +1066,7 @@ function clicks() {
             success: function(response) {
                 //console.log(response);
 
-                console.log('+1 Visita a la vivienda');
+                console.log('+1 Visita a la vivienda  '+ID_HomeDrop);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log('Error en la solicitud AJAX:', textStatus, errorThrown);
@@ -1101,7 +1101,7 @@ function loadDetails(ID_HomeDrop) {
     ajaxPromise(friendlyURL('?module=shop&op=loadDetails'), 'POST', 'JSON', {id : ID_HomeDrop})//DetailsHome
     .then(function(data) {
                 //console.log("Hola, ya llego a pasar las Promises");
-                console.log(data);
+                // console.log(data);
 
         $('#ListViviendasHomeDrop').empty();
         $('.Data_Home').empty();
@@ -1416,10 +1416,15 @@ function MasCasasRelacionadas(Category, Ciudad, ID_HomeDrop) {
     var items = 0;
     var ID_HomeDrop = ID_HomeDrop;
 
-    ajaxPromise(friendlyURL('?module=shop&op=MasCasasRelacionadas'), 'POST', 'JSON', { 'Category': Category, 'Ciudad': Ciudad, 'ID_HomeDrop': ID_HomeDrop })//CountRelatedHomes
+    ajaxPromise(friendlyURL('?module=shop&op=MasCasasRelacionadas'),
+                    'POST',
+                    'JSON',
+                    { 'Category': Category, 'Ciudad': Ciudad, 'ID_HomeDrop': ID_HomeDrop }
+                )//CountRelatedHomes
+
         .then(function(data) {
 
-            console.log(data);
+            // console.log(data);
 
             var TotalCountItems = data;
             ViviendasRelacionadas(0, Category, Ciudad, TotalCountItems, ID_HomeDrop);
@@ -1438,7 +1443,9 @@ function ViviendasRelacionadas(loadeds = 0, Category, Ciudad, TotalCountItems, I
     let loaded = loadeds;
     let CiudadVivRel = Ciudad;
     let CategoryVivRel = Category;
-    let TotalCountItemsVivRel = TotalCountItems;
+    let TotalCountItemsVivRel = TotalCountItems[0]['contador'];
+
+    // console.log(items, "\n", loaded, "\n",CiudadVivRel, "\n",TotalCountItemsVivRel, "\n");
 
     ajaxPromise(
         friendlyURL('?module=shop&op=ViviendasRelacionadas'),// ViviendasRelacionadas
@@ -1448,7 +1455,7 @@ function ViviendasRelacionadas(loadeds = 0, Category, Ciudad, TotalCountItems, I
     )
     .then(function(data) {
 
-        console.log(data);
+        // console.log(data);
 
         if (loaded == 0) {
             $('<div></div>').attr({ 'id': 'title_content', class: 'title_content' }).appendTo('.results');
@@ -1520,10 +1527,17 @@ function ViviendasRelacionadas(loadeds = 0, Category, Ciudad, TotalCountItems, I
             setTimeout(function() {
                 //console.log(data);
                 //console.log(ID_HomeDrop);
+                // clicks();
                 loadDetails(ID_HomeDrop);
             }, 200);
         });
 
+        // if (loaded > TotalCountItemsVivRel[0]['contador']){
+        //     $('#load_more_button').hide();
+            
+        // }
+        // console.log(loaded);
+        // console.log(TotalCountItemsVivRel[0]['contador']);
 
     }).catch(function() {
         console.error("error ViviendasRelacionadas");

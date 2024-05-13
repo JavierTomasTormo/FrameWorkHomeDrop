@@ -34,13 +34,15 @@
             return $this -> bll -> get_loadDetails_BLL($id);
         }
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-        // public function get_most_visit($args) {
-        //     return $this -> bll -> get_most_visit_BLL($args);
-        // }
+        public function get_MasCasasRelacionadas($args) {
+            // return $args;
+            return $this -> bll -> get_MasCasasRelacionadas_BLL($args);
+        }
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-        // public function get_count() {
-        //     return $this -> bll -> get_count_BLL();
-        // }
+        public function get_ViviendasRelacionadas($args) {
+            // return $args;
+            return $this -> bll -> get_ViviendasRelacionadas_BLL($args);
+        }
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
         // public function get_count_filters($args) {
         //     return $this -> bll -> get_count_filters_BLL($args);

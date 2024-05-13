@@ -72,15 +72,15 @@
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
         function MasCasasRelacionadas() {
-            echo json_encode("✅ MasCasasRelacionadas ✅");
-            // echo json_encode(common::load_model('shop_model', 'get_MasCasasRelacionadas',[$_POST['Category'], $_POST['Ciudad'], $_POST['ID_HomeDrop']]));
+            // echo json_encode("✅ MasCasasRelacionadas ✅");
+            echo json_encode(common::load_model('shop_model', 'get_MasCasasRelacionadas',[$_POST['Category'], $_POST['Ciudad'], $_POST['ID_HomeDrop']]));
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
         function ViviendasRelacionadas() {
-            echo json_encode("✅ ViviendasRelacionadas ✅");
-            // echo json_encode(common::load_model('shop_model', 'get_ViviendasRelacionadas',[$_POST['CategoryVivRel'], $_POST['CiudadVivRel'], $_POST['ID_HomeDrop'], $_POST['loaded'], $_POST['items']]));
+            // echo json_encode("✅ ViviendasRelacionadas ✅");
+            echo json_encode(common::load_model('shop_model', 'get_ViviendasRelacionadas',[$_POST['CategoryVivRel'], $_POST['CiudadVivRel'], $_POST['ID_HomeDrop'], $_POST['loaded'], $_POST['items']]));
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//

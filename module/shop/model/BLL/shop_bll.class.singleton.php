@@ -62,13 +62,13 @@
 			return $this -> dao -> SelectImagesHomes($this->db, $id);
 		}
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-		// public function get_most_visit_BLL($args) {
-		// 	return $this -> dao -> update_view($this->db, $args[0]);
-		// }
+		public function get_MasCasasRelacionadas_BLL($args) {
+			return $this -> dao -> CountRelatedHomes($this->db, $args[0], $args[1], $args[2]);
+		}
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//		
-		// public function get_count_BLL() {
-		// 	return $this -> dao -> select_count($this->db);
-		// }
+		public function get_ViviendasRelacionadas_BLL($args) {
+			return $this -> dao -> ViviendasRelacionadas($this->db, $args[0], $args[1], $args[2], $args[3], $args[4]);
+		}
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
 		// public function get_count_filters_BLL($args) {
 		// 	return $this -> dao -> select_count_filters($this->db, json_decode($args));

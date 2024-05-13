@@ -94,7 +94,47 @@
         }
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
 
-        // public function select_filters($db) {
+        public function CountRelatedHomes($db, $Category, $Ciudad, $ID_HomeDrop) {
+
+            $sql = "SELECT COUNT(DISTINCT vh.ID_HomeDrop) AS contador
+                    FROM viviendashomedrop vh
+                    LEFT JOIN cityhomedrop ch ON vh.ID_City = ch.ID_City
+                    LEFT JOIN viviendastype vht ON vh.ID_HomeDrop = vht.ID_HomeDrop
+                    LEFT JOIN typehomedrop th ON vht.ID_Type = th.ID_Type
+                    LEFT JOIN viviendasoperation vho ON vh.ID_HomeDrop = vho.ID_HomeDrop
+                    LEFT JOIN operationhomedrop oh ON vho.ID_Operation = oh.ID_Operation
+                    LEFT JOIN imageneshomedrop ih ON ih.ID_HomeDrop = vh.ID_HomeDrop
+                    LEFT JOIN viviendascategory vc ON vc.ID_HomeDrop = vh.ID_HomeDrop 
+                    LEFT JOIN categoryhomedrop chd ON chd.ID_Category = vc.ID_Category 
+                    WHERE (chd.Category = '$Category' OR ch.Ciudad = '$Ciudad') AND vh.ID_HomeDrop != $ID_HomeDrop";
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+
+        public function ViviendasRelacionadas($db, $Category, $Ciudad, $ID_HomeDrop, $loaded, $items) {
+
+            $sql = "SELECT vh.ID_HomeDrop, vh.Precio, vh.Superficie, ch.Ciudad, vh.Calle, th.Type, oh.Operation, ih.ID_Imagen, ih.ID_HomeDrop, ih.Img, chd.Category, vh.lat, vh.lon
+                    FROM viviendashomedrop vh
+                    LEFT JOIN cityhomedrop ch ON vh.ID_City = ch.ID_City
+                    LEFT JOIN viviendastype vht ON vh.ID_HomeDrop = vht.ID_HomeDrop
+                    LEFT JOIN typehomedrop th ON vht.ID_Type = th.ID_Type
+                    LEFT JOIN viviendasoperation vho ON vh.ID_HomeDrop = vho.ID_HomeDrop
+                    LEFT JOIN operationhomedrop oh ON vho.ID_Operation = oh.ID_Operation
+                    LEFT JOIN imageneshomedrop ih ON ih.ID_HomeDrop = vh.ID_HomeDrop
+                    LEFT JOIN viviendascategory vc ON vc.ID_HomeDrop = vh.ID_HomeDrop 
+                    LEFT JOIN categoryhomedrop chd ON chd.ID_Category = vc.ID_Category 
+                    WHERE (chd.Category = '$Category' OR ch.Ciudad = '$Ciudad') AND vh.ID_HomeDrop != $ID_HomeDrop 
+                    GROUP BY vh.ID_HomeDrop 
+                    LIMIT $loaded, $items";
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+
+        // public function CountRelatedHomes($db, $Category, $Ciudad, $ID_HomeDrop) {
 
         //     $array_filters = array('type_name', 'category_name', 'color', 'extras', 'doors');  // 'brand_name', 
         //     $array_return = array();
