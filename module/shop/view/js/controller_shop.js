@@ -1,8 +1,8 @@
  $(document).ready(function() {
-    // <?php echo"hola";?>
-    // console.log('controllershop doc reay charged');
 
-    updateResultsCount();//✅
+    //LoadJump//✅
+
+    updateResultsCount();
     // CountLikes();
     MostrarFiltrosShop();
     ButtonFilterShop();
@@ -827,7 +827,7 @@ function LoadJump() {
         .then(function(shop) {
             $("#ListViviendasHomeDrop").empty();
 
-            console.log(shop);
+            //console.log(shop);
 
             for (row in shop) {
                 $('<div></div>').attr({ 'id': shop[row].ID_HomeDrop, 'class': 'list_content_shop' }).appendTo('#ListViviendasHomeDrop')
@@ -882,6 +882,8 @@ function ajaxForSearch(durl, type , dataType , sData = undefined, total_prod = 0
     var url2 = durl;
     var filter = sData;
     var token = localStorage.getItem('token');
+
+    //console.log(url2, type, dataType, filter);
 
     ajaxPromise(url2, type, dataType, filter)
     .then(function(data) {
@@ -1054,15 +1056,16 @@ function clicks() {
     $(document).on("click", ".button.buy", function() {
         var ID_HomeDrop = this.getAttribute('id');
         //console.log(this.getAttribute('id'));
-        var url = friendlyURL('?module=shop&op=clicks&id=' + ID_HomeDrop)//Visitas
+        var url = friendlyURL('?module=shop&op=clicks')//Visitas
 
         $.ajax({
             url: url,
             type: 'POST',
             dataType: 'JSON',
-            data: {},
+            data: {id: ID_HomeDrop},
             success: function(response) {
                 //console.log(response);
+
                 console.log('+1 Visita a la vivienda');
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -1070,6 +1073,7 @@ function clicks() {
             }
         });
         
+        // return false;
 
         var lastSelectedHousesString = localStorage.getItem('lastSelectedHouses');
         var lastSelectedHouses = [];
@@ -1094,10 +1098,11 @@ function loadDetails(ID_HomeDrop) {
 
     //console.log("La ID llega Intacta");
     //return false;
-    ajaxPromise(friendlyURL('?module=shop&op=loadDetails&id=' + ID_HomeDrop), 'POST', 'JSON', {})//DetailsHome
+    ajaxPromise(friendlyURL('?module=shop&op=loadDetails'), 'POST', 'JSON', {id : ID_HomeDrop})//DetailsHome
     .then(function(data) {
                 //console.log("Hola, ya llego a pasar las Promises");
-                //console.log(data);
+                console.log(data);
+
         $('#ListViviendasHomeDrop').empty();
         $('.Data_Home').empty();
         $('.Data_Img').empty();
@@ -1133,7 +1138,7 @@ function loadDetails(ID_HomeDrop) {
                             .html(`<span>${data[0].Precio}<i class='fa-solid fa-euro-sign'></i></span>`))
                             .append($('<a>').addClass('button add').attr('href', '#').html('Add to Cart'))
                             .append($('<a>').addClass('button buy2').attr('href', '#').html('Buy'))
-                            .append($('<a>').addClass('button buy2').attr('href', 'index.php?page=Shop').html('Volver'))
+                            .append($('<a>').addClass('button buy2').attr('href', friendlyURL('?module=shop')).html('Volver'))
                             .append($('<a>').addClass('details__heart').attr('id', data[0].ID_HomeDrop)
                             .append($('<i>').attr('id', data[0].ID_HomeDrop).addClass('fa-solid fa-heart fa-lg')))
                     )
@@ -1414,7 +1419,7 @@ function MasCasasRelacionadas(Category, Ciudad, ID_HomeDrop) {
     ajaxPromise(friendlyURL('?module=shop&op=MasCasasRelacionadas'), 'POST', 'JSON', { 'Category': Category, 'Ciudad': Ciudad, 'ID_HomeDrop': ID_HomeDrop })//CountRelatedHomes
         .then(function(data) {
 
-            //console.log(data);
+            console.log(data);
 
             var TotalCountItems = data;
             ViviendasRelacionadas(0, Category, Ciudad, TotalCountItems, ID_HomeDrop);
@@ -1442,6 +1447,9 @@ function ViviendasRelacionadas(loadeds = 0, Category, Ciudad, TotalCountItems, I
         { 'CategoryVivRel': CategoryVivRel, 'CiudadVivRel': CiudadVivRel, 'ID_HomeDrop': ID_HomeDrop, 'loaded': loaded, 'items': items }
     )
     .then(function(data) {
+
+        console.log(data);
+
         if (loaded == 0) {
             $('<div></div>').attr({ 'id': 'title_content', class: 'title_content' }).appendTo('.results');
 

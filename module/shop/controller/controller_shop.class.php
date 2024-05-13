@@ -7,8 +7,9 @@
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
         function ajaxForSearch() {
-            echo json_encode("✅ ajaxForSearch ✅");
+            // echo json_encode("✅ ajaxForSearch ✅");
             // echo json_encode(common::load_model('shop_model', 'get_ajaxForSearch',[$_POST['url2'], $_POST['type'], $_POST['dataType'], $_POST['filter']]));
+            echo json_encode(common::load_model('shop_model', 'get_ajaxForSearch',[$_POST['url2'], $_POST['type'], $_POST['dataType'], $_POST['filter']]));  
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
@@ -27,13 +28,6 @@
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
-        function clicks() {
-            echo json_encode("✅ clicks ✅");
-            // echo json_encode(common::load_model('shop_model', 'get_clicks', $_GET['id']));
-        }
-
-//.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
-
         function LoadSearch() {
             echo json_encode("✅ LoadSearch ✅");
             // echo json_encode(common::load_model('shop_model', 'get_LoadSearch', [$_POST['FiltersSearch']]));
@@ -42,8 +36,8 @@
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
         function LoadJump() {
-            echo json_encode("✅ LoadJump ✅");
-            // echo json_encode(common::load_model('shop_model', 'get_LoadJump',[$_POST['FiltersHome'], $_POST['start'], $_POST['limit']]));
+            // echo json_encode("✅ LoadJump ✅");
+            echo json_encode(common::load_model('shop_model', 'get_LoadJump',[$_POST['FiltersHome'], $_POST['start'], $_POST['limit']]));
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
@@ -55,9 +49,17 @@
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
+        function clicks() {
+            // echo json_encode("✅ clicks ✅");
+            // echo json_encode($_POST['id']);
+            echo json_encode(common::load_model('shop_model', 'get_clicks', $_POST['id']));
+        }
+
+//.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
+
         function loadDetails() {
-            echo json_encode("✅ loadDetails ✅");
-            // echo json_encode(common::load_model('shop_model', 'get_loadDetails', $_GET['id']));
+            // echo json_encode("✅ loadDetails ✅");
+            echo json_encode(common::load_model('shop_model', 'get_loadDetails', $_POST['id']));
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
