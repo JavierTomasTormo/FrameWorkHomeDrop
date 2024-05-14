@@ -54,34 +54,4 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más 
 
 ## ¡Explora, Descubre, y Encuentra tu Hogar Ideal con HomeDrop! 🏠✨
 
-<!--h1 without bottom border-->
-<div id="user-content-toc">
-  <ul align="center">
-    <summary><h2 style="display: inline-block">Technologies That I Know👨🏻‍💻</h2></summary>
-  </ul>
-</div>
-<!--tech stack icons-->
-<p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=git,aws,css,discord,docker,github,html,java,js,linux,md,mongodb,mysql,vscode&perline=14" />
-  </a>
-</p>
-
-<!-- Connect with me -->
-<!--h2 without bottom border-->
-<div id="user-content-toc">
-  <ul align="center">
-    <a href="https://github.com/JavierTomasTormo" target="_blank" ><summary><h2 style="display: inline-block">Connect With Me🤝</h2></summary></a>
-  </ul>
-</div>
-
-<!--profile visit count-->
-<div align="center">
-  [![](https://visitcount.itsvg.in/api?id=JavierTomasTormo&icon=3&color=6)](https://visitcount.itsvg.in)
-</div>
-
-<!--horizontal divider(gradiant)-->
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
-</div>
 
