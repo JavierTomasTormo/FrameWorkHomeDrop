@@ -20,7 +20,7 @@
         }
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
         public function get_ajaxForSearch($args) {
-            return $args;
+            // return $args;
             return $this -> bll -> get_ajaxForSearch_BLL($args);
         }
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
@@ -44,20 +44,23 @@
             return $this -> bll -> get_ViviendasRelacionadas_BLL($args);
         }
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-        // public function get_count_filters($args) {
-        //     return $this -> bll -> get_count_filters_BLL($args);
-        // }
+        public function get_updateResultsCount($FiltersShopCount) {
+            // return $FiltersShopCount;
+            return $this -> bll -> get_updateResultsCount_BLL($FiltersShopCount);
+        }
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-        // public function get_cars($args) {
-        //     return $this -> bll -> get_cars_BLL($args);
-        // }
+        public function get_cargarFiltrosShop($data) {
+            // return $data;
+            return $this -> bll -> get_cargarFiltrosShop_BLL($data);
+        }
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-        // public function get_load_likes($args) {
-        //     return $this -> bll -> get_load_likes_BLL($args);
-        // }
+        public function get_LoadSearch($FiltersSearch) {
+            return $this -> bll -> get_LoadSearch_BLL($FiltersSearch);
+        }
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-        // public function get_control_likes($args) {
-        //     return $this -> bll -> get_control_likes_BLL($args);
-        // }
+        public function get_Pagination($args) {
+            // return $args;
+            return $this -> bll -> get_Pagination_BLL($args);
+        }
     }
 ?>

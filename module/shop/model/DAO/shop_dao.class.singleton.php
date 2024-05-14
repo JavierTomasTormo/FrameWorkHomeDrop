@@ -134,6 +134,233 @@
         }
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
 
+        public function CountFilteredQueryShop($db,$consulta) {
+
+            $sql = "SELECT COUNT(DISTINCT vh.ID_HomeDrop) AS total
+                    FROM viviendashomedrop vh
+                        LEFT JOIN cityhomedrop ch ON vh.ID_City = ch.ID_City
+                        LEFT JOIN viviendastype vht ON vh.ID_HomeDrop = vht.ID_HomeDrop
+                        LEFT JOIN typehomedrop th ON vht.ID_Type = th.ID_Type
+                        LEFT JOIN viviendasoperation vho ON vh.ID_HomeDrop = vho.ID_HomeDrop
+                        LEFT JOIN operationhomedrop oh ON vho.ID_Operation = oh.ID_Operation
+                        LEFT JOIN imageneshomedrop ih ON ih.ID_HomeDrop = vh.ID_HomeDrop
+                        LEFT JOIN viviendascategory vc ON vc.ID_HomeDrop = vh.ID_HomeDrop 
+                        LEFT JOIN categoryhomedrop chd ON chd.ID_Category = vc.ID_Category 
+                        WHERE vh.ID_HomeDrop IS NOT NULL";
+
+            $sql .= $consulta;
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+
+        public function SelectCategory($db) {
+
+            $sql = "SELECT * FROM `categoryhomedrop` ORDER BY ID_Category ASC ;";
+
+            $stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+
+        public function SelectCity($db) {
+
+            $sql = "SELECT ch.ID_City, ch.Ciudad, vh.Calle, ch.Img FROM cityhomedrop ch 
+                        INNER JOIN viviendashomedrop vh ON vh.ID_City = ch.ID_City 
+                        GROUP BY Ciudad ORDER BY ID_City ASC;";
+
+            $stmt = $db -> ejecutar($sql);
+            return $db -> listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+       
+        public function RedirectSearchDAO($db,$consulta) {
+
+            $sql = "SELECT vh.ID_HomeDrop, vh.Precio, vh.Superficie, ch.ID_City ,ch.Ciudad, vh.Calle, th.ID_Type ,th.Type, oh.ID_Operation ,oh.Operation, 
+            ih.ID_Imagen, ih.ID_HomeDrop, ih.Img, chd.Category, chd.ID_Category, vh.lat, vh.lon
+                    FROM viviendashomedrop vh
+                    LEFT JOIN cityhomedrop ch ON vh.ID_City = ch.ID_City
+                    LEFT JOIN viviendastype vht ON vh.ID_HomeDrop = vht.ID_HomeDrop
+                    LEFT JOIN typehomedrop th ON vht.ID_Type = th.ID_Type
+                    LEFT JOIN viviendasoperation vho ON vh.ID_HomeDrop = vho.ID_HomeDrop
+                    LEFT JOIN operationhomedrop oh ON vho.ID_Operation = oh.ID_Operation
+                    LEFT JOIN imageneshomedrop ih ON ih.ID_HomeDrop = vh.ID_HomeDrop
+                    LEFT JOIN viviendascategory vc ON vc.ID_HomeDrop = vh.ID_HomeDrop 
+                    LEFT JOIN categoryhomedrop chd ON chd.ID_Category = vc.ID_Category 
+                    WHERE vh.ID_HomeDrop IS NOT NULL";
+
+            $sql .= $consulta;
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+
+        public function SelectAllHomes($db,$OrderBy, $start, $limit) {
+
+            $sql = "SELECT vh.ID_HomeDrop, vh.Precio, vh.Superficie, ch.Ciudad, vh.Calle, th.Type, oh.Operation, ih.ID_Imagen, ih.ID_HomeDrop, ih.Img, chd.Category, vh.lat, vh.lon
+                    FROM viviendashomedrop vh 
+                        LEFT JOIN cityhomedrop ch ON vh.ID_City = ch.ID_City 
+                        LEFT JOIN viviendastype vht ON vh.ID_HomeDrop = vht.ID_HomeDrop 
+                        LEFT JOIN typehomedrop th ON vht.ID_Type = th.ID_Type 
+                        LEFT JOIN viviendasoperation vho ON vh.ID_HomeDrop = vho.ID_HomeDrop 
+                        LEFT JOIN operationhomedrop oh ON vho.ID_Operation = oh.ID_Operation 
+                        LEFT JOIN imageneshomedrop ih ON ih.ID_HomeDrop = vh.ID_HomeDrop 
+                        LEFT JOIN viviendascategory vc ON vc.ID_HomeDrop = vh.ID_HomeDrop 
+                        LEFT JOIN categoryhomedrop chd ON chd.ID_Category = vc.ID_Category 
+                    GROUP BY vh.ID_HomeDrop";
+
+            if ($OrderBy != null) {
+                $sql .= " ORDER BY vh.Precio $OrderBy";
+            }
+
+            $sql .= " LIMIT $start, $limit";
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+        public function Filters_Home($db, $consulta) {
+
+            $sql = "SELECT vh.ID_HomeDrop, vh.Precio, vh.Superficie, ch.Ciudad, vh.Calle, th.Type, oh.Operation, ih.ID_Imagen, ih.ID_HomeDrop, ih.Img, vh.lat, vh.lon
+                    FROM viviendashomedrop vh
+                    LEFT JOIN cityhomedrop ch ON vh.ID_City = ch.ID_City
+                    LEFT JOIN viviendastype vht ON vh.ID_HomeDrop = vht.ID_HomeDrop
+                    LEFT JOIN typehomedrop th ON vht.ID_Type = th.ID_Type
+                    LEFT JOIN viviendasoperation vho ON vh.ID_HomeDrop = vho.ID_HomeDrop
+                    LEFT JOIN operationhomedrop oh ON vho.ID_Operation = oh.ID_Operation
+                    LEFT JOIN imageneshomedrop ih ON ih.ID_HomeDrop = vh.ID_HomeDrop
+                    LEFT JOIN viviendascategory vc ON vc.ID_HomeDrop = vh.ID_HomeDrop 
+                    LEFT JOIN categoryhomedrop chd ON chd.ID_Category = vc.ID_Category 
+                    WHERE vh.ID_HomeDrop IS NOT NULL";
+
+            $sql .= $consulta;
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+        public function Filters_Shop($db,$consulta) {
+
+            $sql = "SELECT vh.ID_HomeDrop, vh.Precio, vh.Superficie, ch.ID_City ,ch.Ciudad, vh.Calle, th.ID_Type ,vh.lat, vh.lon,
+            th.Type, oh.ID_Operation ,oh.Operation, ih.ID_Imagen, ih.ID_HomeDrop, ih.Img, chd.Category, chd.ID_Category
+                    FROM viviendashomedrop vh
+                    LEFT JOIN cityhomedrop ch ON vh.ID_City = ch.ID_City
+                    LEFT JOIN viviendastype vht ON vh.ID_HomeDrop = vht.ID_HomeDrop
+                    LEFT JOIN typehomedrop th ON vht.ID_Type = th.ID_Type
+                    LEFT JOIN viviendasoperation vho ON vh.ID_HomeDrop = vho.ID_HomeDrop
+                    LEFT JOIN operationhomedrop oh ON vho.ID_Operation = oh.ID_Operation
+                    LEFT JOIN imageneshomedrop ih ON ih.ID_HomeDrop = vh.ID_HomeDrop
+                    LEFT JOIN viviendascategory vc ON vc.ID_HomeDrop = vh.ID_HomeDrop 
+                    LEFT JOIN categoryhomedrop chd ON chd.ID_Category = vc.ID_Category 
+                    WHERE vh.ID_HomeDrop IS NOT NULL";
+
+            $sql .= $consulta;
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+        public function RedirectSearch($db,$consulta) {
+
+            $sql = "SELECT vh.ID_HomeDrop, vh.Precio, vh.Superficie, ch.ID_City ,ch.Ciudad, vh.Calle, th.ID_Type ,th.Type, oh.ID_Operation ,oh.Operation, 
+            ih.ID_Imagen, ih.ID_HomeDrop, ih.Img, chd.Category, chd.ID_Category, vh.lat, vh.lon
+                    FROM viviendashomedrop vh
+                    LEFT JOIN cityhomedrop ch ON vh.ID_City = ch.ID_City
+                    LEFT JOIN viviendastype vht ON vh.ID_HomeDrop = vht.ID_HomeDrop
+                    LEFT JOIN typehomedrop th ON vht.ID_Type = th.ID_Type
+                    LEFT JOIN viviendasoperation vho ON vh.ID_HomeDrop = vho.ID_HomeDrop
+                    LEFT JOIN operationhomedrop oh ON vho.ID_Operation = oh.ID_Operation
+                    LEFT JOIN imageneshomedrop ih ON ih.ID_HomeDrop = vh.ID_HomeDrop
+                    LEFT JOIN viviendascategory vc ON vc.ID_HomeDrop = vh.ID_HomeDrop 
+                    LEFT JOIN categoryhomedrop chd ON chd.ID_Category = vc.ID_Category 
+                    WHERE vh.ID_HomeDrop IS NOT NULL";
+
+            $sql .= $consulta;
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+        public function CountFiltShop($db, $consulta) {
+
+            $sql = "SELECT COUNT(DISTINCT vh.ID_HomeDrop) AS total
+                        FROM viviendashomedrop vh
+                        LEFT JOIN cityhomedrop ch ON vh.ID_City = ch.ID_City
+                        LEFT JOIN viviendastype vht ON vh.ID_HomeDrop = vht.ID_HomeDrop
+                        LEFT JOIN typehomedrop th ON vht.ID_Type = th.ID_Type
+                        LEFT JOIN viviendasoperation vho ON vh.ID_HomeDrop = vho.ID_HomeDrop
+                        LEFT JOIN operationhomedrop oh ON vho.ID_Operation = oh.ID_Operation
+                        LEFT JOIN imageneshomedrop ih ON ih.ID_HomeDrop = vh.ID_HomeDrop
+                        LEFT JOIN viviendascategory vc ON vc.ID_HomeDrop = vh.ID_HomeDrop 
+                        LEFT JOIN categoryhomedrop chd ON chd.ID_Category = vc.ID_Category 
+                        WHERE vh.ID_HomeDrop IS NOT NULL";
+
+            $sql .= $consulta;
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+        public function CountHomeFilt($db, $consulta) {
+
+            $sql = "SELECT COUNT(DISTINCT vh.ID_HomeDrop) AS total
+                    FROM viviendashomedrop vh
+                    LEFT JOIN cityhomedrop ch ON vh.ID_City = ch.ID_City
+                    LEFT JOIN viviendastype vht ON vh.ID_HomeDrop = vht.ID_HomeDrop
+                    LEFT JOIN typehomedrop th ON vht.ID_Type = th.ID_Type
+                    LEFT JOIN viviendasoperation vho ON vh.ID_HomeDrop = vho.ID_HomeDrop
+                    LEFT JOIN operationhomedrop oh ON vho.ID_Operation = oh.ID_Operation
+                    LEFT JOIN imageneshomedrop ih ON ih.ID_HomeDrop = vh.ID_HomeDrop
+                    LEFT JOIN viviendascategory vc ON vc.ID_HomeDrop = vh.ID_HomeDrop 
+                    LEFT JOIN categoryhomedrop chd ON chd.ID_Category = vc.ID_Category 
+                    WHERE vh.ID_HomeDrop IS NOT NULL";
+
+            $sql .= $consulta;
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+        public function CountSearchFilt($db, $consulta) {
+
+            $sql = "SELECT COUNT(DISTINCT vh.ID_HomeDrop) AS total
+                    FROM viviendashomedrop vh
+                    LEFT JOIN cityhomedrop ch ON vh.ID_City = ch.ID_City
+                    LEFT JOIN viviendastype vht ON vh.ID_HomeDrop = vht.ID_HomeDrop
+                    LEFT JOIN typehomedrop th ON vht.ID_Type = th.ID_Type
+                    LEFT JOIN viviendasoperation vho ON vh.ID_HomeDrop = vho.ID_HomeDrop
+                    LEFT JOIN operationhomedrop oh ON vho.ID_Operation = oh.ID_Operation
+                    LEFT JOIN imageneshomedrop ih ON ih.ID_HomeDrop = vh.ID_HomeDrop
+                    LEFT JOIN viviendascategory vc ON vc.ID_HomeDrop = vh.ID_HomeDrop 
+                    LEFT JOIN categoryhomedrop chd ON chd.ID_Category = vc.ID_Category 
+                    WHERE vh.ID_HomeDrop IS NOT NULL";
+
+            $sql .= $consulta;
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+        public function CountGeneral($db) {
+
+            $sql = "SELECT COUNT(DISTINCT vh.ID_HomeDrop) AS total
+            FROM viviendashomedrop vh
+                LEFT JOIN cityhomedrop ch ON vh.ID_City = ch.ID_City
+                LEFT JOIN viviendastype vht ON vh.ID_HomeDrop = vht.ID_HomeDrop
+                LEFT JOIN typehomedrop th ON vht.ID_Type = th.ID_Type
+                LEFT JOIN viviendasoperation vho ON vh.ID_HomeDrop = vho.ID_HomeDrop
+                LEFT JOIN operationhomedrop oh ON vho.ID_Operation = oh.ID_Operation
+                LEFT JOIN imageneshomedrop ih ON ih.ID_HomeDrop = vh.ID_HomeDrop
+                LEFT JOIN viviendascategory vc ON vc.ID_HomeDrop = vh.ID_HomeDrop 
+                LEFT JOIN categoryhomedrop chd ON chd.ID_Category = vc.ID_Category";
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+
         // public function CountRelatedHomes($db, $Category, $Ciudad, $ID_HomeDrop) {
 
         //     $array_filters = array('type_name', 'category_name', 'color', 'extras', 'doors');  // 'brand_name', 

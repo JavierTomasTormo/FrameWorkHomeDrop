@@ -216,7 +216,7 @@ function ButtonFilterShop() {
             //console.log(FiltersShop);
 
             setTimeout(function() {
-                ajaxForSearch(friendlyURL('?module=shop&op=ajaxForSearch'), 'POST', 'JSON', {'FiltersShop': FiltersShop});//FiltersShop
+                ajaxForSearch(friendlyURL('?module=shop&op=ajaxForSearch'), 'POST', 'JSON', {'FiltersShop': FiltersShop, 'DAORed' : "FiltersShop"});//
             }, 200); 
 
             //console.log(FiltersShop);
@@ -248,23 +248,6 @@ function updateResultsCount() {
         Pricemin: minValue,
         Pricemax: maxValue 
     };
-
-
-    // var minValue = ...; // Obtener el valor mínimo del rango de precios
-    // var maxValue = ...; // Obtener el valor máximo del rango de precios
-
-    // // Establecer los nuevos valores del rango en el slider
-    // $("#slider-range").slider("option", "min", minValue);
-    // $("#slider-range").slider("option", "max", maxValue);
-
-
-
-    //console.log(localStorage.getItem('FiltersShop_City'), 'BeforeRemove');
-    //localStorage.removeItem('FiltersShop_City');
-    //console.log(localStorage.getItem('FiltersShop_City'), 'AfterRemove');
-
-    //console.log(FiltersShopCount);
-    //return;
     
 
     localStorage.setItem('FiltersShopCount', JSON.stringify(FiltersShopCount));
@@ -281,10 +264,10 @@ function updateResultsCount() {
                 FiltersShopCount: FiltersShopCount
             },
             success: function(response) {
-                console.log(response);
+                // console.log(response[0]["total"]);
         
                 if (!response.error) {
-                    $('#resultsCount').text(response.count + " resultados encontrados");
+                    $('#resultsCount').text(response[0]["total"] + " resultados encontrados");
 
                     //console.log(response.count);
 
@@ -473,10 +456,7 @@ function MostrarFiltrosShop() {
 function cargarFiltrosShop() {
     CitySeleccted = localStorage.getItem('CitySeleccted') || 0;
     CategorySeleccted = localStorage.getItem('CategorySeleccted') || 0;
-    //localStorage.setItem('CategorySeleccted', Category);
     var chequiado = '';
-    //console.log(CategorySeleccted);
-    //console.log(CitySeleccted);
 
     // Control de Filtros Nulos
     if (CitySeleccted === 0 || CategorySeleccted === 0) {
@@ -484,26 +464,23 @@ function cargarFiltrosShop() {
     }
 
     $.ajax({
-        url: 'Module/HomeDropModule/Controlador/Controller_HomeDrop.php?Option=City',
-        type: 'GET',
+        url: friendlyURL('?module=shop&op=cargarFiltrosShop'),//City
+        type: 'POST',
         dataType: 'JSON',
+        data: { data : "City" },
         success: function(response) {
+            // console.log(response);
+            // return;
             var $radios = $('#select_City'); 
             //$radios.empty(); 
             response.forEach(function(city) {
                 if (CitySeleccted === city.ID_City){
                     chequiado = 'checked';
-                    //localStorage.removeItem('CitySeleccted');
-                    //location.reload();
-                    //console.log(chequiado);
-                    //console.log(CitySeleccted);
                 }else{
                     chequiado = '';
                     //localStorage.removeItem('CitySeleccted');
                 }
-                //console.log(CitySeleccted,chequiado, city.ID_City);
-                //'<input type="radio" name="city" value="2" id="madrid" class="FiltersShop_City">' +
-                //     '<label for="madrid">Madrid</label><br/>' +
+
                 $radios.append(' <input type="radio" name="select_City" value="' + city.ID_City + '" id="' + city.Ciudad + 
                                 '" class="FiltersShop_City"'+ chequiado +'>' + 
                                 '<label for="'+ city.Ciudad +'"> ' + city.Ciudad + '</label><br/>');
@@ -514,32 +491,22 @@ function cargarFiltrosShop() {
             
         },
         error: function(error) {
-            console.log(error);
+            console.error(error);
         }
     });
     //CATEGORY
     $.ajax({
-        url: 'Module/HomeDropModule/Controlador/Controller_HomeDrop.php?Option=Category',
-        type: 'GET',
+        url: friendlyURL('?module=shop&op=cargarFiltrosShop'),//Category
+        type: 'POST',
         dataType: 'JSON',
+        data: { data: "Category" },
         success: function(categorias) {
-            //console.log(responseCategory);
-            //return;
+
+            // console.log(categorias);
+
+            // return;
             var selectElement = $("#select_Category");
             selectElement.empty();
-
-            // if (CategorySeleccted === categorias.ID_Category){
-            //     chequiado = 'selected';
-            // }else{
-            //     chequiado = '';
-            //     //localStorage.removeItem('CitySeleccted');
-            // }
-
-
-
-            // '<select id="select_Category" class="FiltersShop_Category">' +
-            // '</select><br/> '+
-            // // '<option value="2">Garaje</option>' +
 
 
             // opción predeterminada
@@ -548,12 +515,6 @@ function cargarFiltrosShop() {
                 text: "Seleccione Valor a Filtrar"
             }));
 
-            // $.each(categorias, function(index, categoria) {
-            //     selectElement.append($("<option>", {
-            //         value: categoria.ID_Category,
-            //         text: categoria.Category
-            //     }));
-            // });
             $.each(categorias, function(index, categoria) {
                 var option = $("<option>", {
                     value: categoria.ID_Category,
@@ -571,7 +532,7 @@ function cargarFiltrosShop() {
             
         },
         error: function(error) {
-            console.log(error);
+            console.error(error);
         }
     });
 
@@ -610,7 +571,7 @@ function ShopAllHome() {
         } if (filtroShop != 0 || filtroShopPrice != 0) {
             var filtroSho2 = JSON.parse(localStorage.getItem('FiltersShop') || 0 );
             setTimeout(function() {
-                ajaxForSearch(friendlyURL('?module=shop&op=ajaxForSearch'), 'POST', 'JSON', {'FiltersShop': filtroSho2});
+                ajaxForSearch(friendlyURL('?module=shop&op=ajaxForSearch'), 'POST', 'JSON', {'FiltersShop': filtroSho2, 'DAORed' : "FiltersShop"});
             }, 200); 
 
             HighlightFilters(filtroSho2);
@@ -870,25 +831,28 @@ function LoadHomeDropShop() {
     }
 
     ajaxForSearch(
-        friendlyURL('?module=shop&op=ajaxForSearch'), //AllHomes
+        friendlyURL('?module=shop&op=ajaxForSearch'), //
         'POST', 
         'JSON', 
-        { 'OrderBy': OrderBy, 'start': start, 'limit': limit }
+        { 'OrderBy': OrderBy, 'start': start, 'limit': limit, 'DAORed' : "AllHomes" }
     );
 }
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
-function ajaxForSearch(durl, type , dataType , sData = undefined, total_prod = 0, items_page = 3) {
-    //console.log(durl, type , dataType , sData);
+function ajaxForSearch(durl, type , dataType , sData = undefined, total_prod = 0, items_page = 3, DAORed) {
+    // console.log(durl, type , dataType , sData, DAORed);
     var url2 = durl;
     var filter = sData;
+    if (DAORed !== undefined) {
+        filter += DAORed;
+    }
     var token = localStorage.getItem('token');
 
-    //console.log(url2, type, dataType, filter);
+    // console.log(url2, type, dataType, filter, "JS");
 
-    ajaxPromise(url2, type, dataType, filter)
+    ajaxPromise(url2, type, dataType, {filter: filter})
     .then(function(data) {
 
-        console.log(data);
+        // console.log(data);
 
         $('#ListViviendasHomeDrop').empty();
 
@@ -903,7 +867,7 @@ function ajaxForSearch(durl, type , dataType , sData = undefined, total_prod = 0
 
                 buildProductHTML(data[row]);
                 
-                CountLikes(data[row].ID_HomeDrop);
+                // CountLikes(data[row].ID_HomeDrop);
             }
             if (localStorage.getItem('id')) {
                 document.getElementById(move_id).scrollIntoView();
@@ -995,7 +959,7 @@ $(document).on('click', '.LikeHeart', function (e) {
                 dataType: 'JSON',
                 data: {ID_HomeDropLike: ID_HomeDropLike, token: token},
                 success: function() {
-                    CountLikes(ID_HomeDropLike);
+                    // CountLikes(ID_HomeDropLike);
                 }
             });
     
@@ -1009,13 +973,13 @@ $(document).on('click', '.LikeHeart', function (e) {
                 dataType: 'JSON',
                 data: {ID_HomeDropLike: ID_HomeDropLike, token: token},
                 success: function() {
-                    CountLikes(ID_HomeDropLike);
+                    // CountLikes(ID_HomeDropLike);
                 }
             });
         }
     
         setTimeout(function() {
-            CountLikes(ID_HomeDropLike);
+            // CountLikes(ID_HomeDropLike);
         }, 110); 
 
     } else {
@@ -1236,31 +1200,43 @@ function Pagination(FiltersShop) {
 
 
     //console.log('FiltersShop',FiltersShop,'filtrosPag',filtrosPag,'flitroSearchPag',flitroSearchPag);
+    var DisCountSel;
+    var data = {};
 
-    var url = "";
     if (FiltersShop != undefined) {
-        url = "Module/Shop/ControllerShop/ControllerShop.php?Option=CountFiltShop";
+        DisCountSel = 'CountFiltShop';
+        data['FiltersShopCount'] = FiltersShop;
+
     } else if (filtrosPag != undefined) {
-        url = "Module/Shop/ControllerShop/ControllerShop.php?Option=CountHomeFilt";
+        DisCountSel = 'CountHomeFilt';
+        data['filtrosPag'] = filtrosPag;
+
     } else if (flitroSearchPag != undefined) {
-        url = "Module/Shop/ControllerShop/ControllerShop.php?Option=CountSearchFilt";
+        DisCountSel = 'CountSearchFilt';
+        data['flitroSearchPag'] = flitroSearchPag;
+
     } else {
-        url = "Module/Shop/ControllerShop/ControllerShop.php?Option=CountGeneral";
+        DisCountSel = 'CountGeneral';
+
     }
 
-    //console.log(url,{ 'FiltersShopCount': FiltersShop, 'filtrosPag': filtrosPag, 'flitroSearchPag': flitroSearchPag });
+    data['DisCountSel'] = DisCountSel;
+
+    // console.log(friendlyURL('?module=shop&op=Pagination'), {data});
 
 
-    ajaxPromise(url, 'POST', 'JSON', { 'FiltersShopCount': FiltersShop, 'filtrosPag': filtrosPag, 'flitroSearchPag': flitroSearchPag })
-        .then(function(data) {
+    ajaxPromise(friendlyURL('?module=shop&op=Pagination'), 'POST', 'JSON', {data})
+        .then(function (data) {
 
-            //console.log(data);
+            // console.log(data);
+            // console.log(data[0]['total']);
 
             if (localStorage.getItem('currentPageId') == null) {
                 localStorage.setItem('currentPageId', 'page_1');
             }
 
-            var total_prod = data;
+            var total_prod = data[0]['total'];
+
 
             var total_pages = 1;
             if (total_prod >= 3) {
@@ -1276,10 +1252,6 @@ function Pagination(FiltersShop) {
             var prevLink = $('<a>').addClass('page-link').attr('href', '#').text('Prev');
             prevButton.append(prevLink);
             paginationContainer.append(prevButton);
-
-
-
-
 
             //console.log(url,{ 'FiltersShopCount': FiltersShop, 'filtrosPag': filtrosPag, 'flitroSearchPag': flitroSearchPag, 'total_pages' : total_pages });
 
@@ -1322,7 +1294,7 @@ function Pagination(FiltersShop) {
                             ajaxForSearch(
                                 friendlyURL('?module=shop&op=ajaxForSearch'),//FiltersShop
                                 'POST',
-                                'JSON', { 'FiltersShop': FiltersShop, 'start': start, 'limit': limit }
+                                'JSON', { 'FiltersShop': FiltersShop, 'start': start, 'limit': limit, 'DAORed' : "FiltersShop" }
                             );
 
 
@@ -1331,9 +1303,9 @@ function Pagination(FiltersShop) {
                             // console.log({ 'FiltersHome': filtrosPag, 'start': start, 'limit': limit });
 
                             ajaxForSearch(
-                                friendlyURL('?module=shop&op=ajaxForSearch'),//FiltersHome
+                                friendlyURL('?module=shop&op=ajaxForSearch'),//
                                 'POST',
-                                'JSON', { 'FiltersHome': filtrosPag, 'start': start, 'limit': limit }
+                                'JSON', { 'FiltersHome': filtrosPag, 'start': start, 'limit': limit, 'DAORed' : "FiltersHome" }
                             );
 
 
@@ -1342,10 +1314,10 @@ function Pagination(FiltersShop) {
                             // console.log('flitroSearchPag');
                             
                             ajaxForSearch(
-                                friendlyURL('?module=shop&op=ajaxForSearch'),//RedirectSearch,
+                                friendlyURL('?module=shop&op=ajaxForSearch'),//,
                                 'POST',
                                 'JSON',
-                                { 'FiltersSearch': flitroSearchPag, 'start': start, 'limit': limit }
+                                { 'FiltersSearch': flitroSearchPag, 'start': start, 'limit': limit, 'DAORed' : "RedirectSearch" }
                             );
 
                         } 
@@ -1360,9 +1332,9 @@ function Pagination(FiltersShop) {
                         }
 
                         ajaxForSearch(
-                            friendlyURL('?module=shop&op=ajaxForSearch'),//AllHomes
+                            friendlyURL('?module=shop&op=ajaxForSearch'),//
                             'POST',
-                            'JSON', { 'OrderBy': OrderBy, 'start': start, 'limit': limit }
+                            'JSON', { 'OrderBy': OrderBy, 'start': start, 'limit': limit, 'DAORed' : "AllHomes" }
                         );
                     }
 

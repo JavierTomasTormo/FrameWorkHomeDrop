@@ -8,29 +8,29 @@
 
         function ajaxForSearch() {
             // echo json_encode("✅ ajaxForSearch ✅");
-            // echo json_encode(common::load_model('shop_model', 'get_ajaxForSearch',[$_POST['url2'], $_POST['type'], $_POST['dataType'], $_POST['filter']]));
-            echo json_encode(common::load_model('shop_model', 'get_ajaxForSearch',[$_POST['url2'], $_POST['type'], $_POST['dataType'], $_POST['filter']]));  
+            // echo json_encode($_POST['filter']);
+            echo json_encode(common::load_model('shop_model', 'get_ajaxForSearch', $_POST['filter']));  
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
         //
         function updateResultsCount() {
-            echo json_encode("updateResultsCount");
-            // echo json_encode(common::load_model('shop_model', 'get_updateResultsCount', [$_POST['FiltersShopCount']]));
+            // echo json_encode("updateResultsCount");
+            echo json_encode(common::load_model('shop_model', 'get_updateResultsCount', $_POST['FiltersShopCount']));
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//     
 
         function cargarFiltrosShop() {
-            echo json_encode("cargarFiltrosShop");
-            // echo json_encode(common::load_model('shop_model', 'get_cargarFiltrosShop'));
+            // echo json_encode("cargarFiltrosShop");
+            echo json_encode(common::load_model('shop_model', 'get_cargarFiltrosShop', $_POST['data']));
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
         function LoadSearch() {
-            echo json_encode("✅ LoadSearch ✅");
-            // echo json_encode(common::load_model('shop_model', 'get_LoadSearch', [$_POST['FiltersSearch']]));
+            // echo json_encode("✅ LoadSearch ✅");
+            echo json_encode(common::load_model('shop_model', 'get_LoadSearch', $_POST['FiltersSearch']));
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
@@ -59,14 +59,15 @@
 
         function loadDetails() {
             // echo json_encode("✅ loadDetails ✅");
-            echo json_encode(common::load_model('shop_model', 'get_loadDetails', $_POST['id']));
+            echo json_encode(common::load_model('shop_model', 'get_loadDetails', CountGeneral));
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
         function Pagination() {
-            echo json_encode("✅ Pagination ✅");
-            // echo json_encode(common::load_model('shop_model', 'get_Pagination'));
+            // echo json_encode("✅ Pagination ✅");
+            // echo json_encode($_POST['data']);
+            echo json_encode(common::load_model('shop_model', 'get_Pagination', $_POST['data']));
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
