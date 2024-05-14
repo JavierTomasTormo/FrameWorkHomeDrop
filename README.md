@@ -33,25 +33,3 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más 
 
 ## ¡Explora, Descubre, y Encuentra tu Hogar Ideal con HomeDrop! 🏠✨
 
-
-
-<!--horizontal divider(gradiant)-->
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
-</div>
-
-## Contribuir 🚀
-
-¡Estamos emocionados de recibir contribuciones! Si tienes ideas para hacer de HomeDrop una herramienta aún mejor, no dudes en abrir un issue o enviar una pull request. ¡Tu creatividad es bienvenida!
-
-## Autores ✍️
-
-- Javier Tomás Tormo
-
-## Licencia 📜
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
-
-## ¡Explora, Descubre, y Encuentra tu Hogar Ideal con HomeDrop! 🏠✨
-
-
