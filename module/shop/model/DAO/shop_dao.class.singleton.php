@@ -360,6 +360,16 @@
             return $db->listar($stmt);
         }
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+        public function CountLikes($db ,$ID_HomeDropLike) {
+
+            $sql = "SELECT COUNT(vh.ID_HomeDrop) AS total
+                        FROM likeshomedrop vh
+                        WHERE vh.ID_HomeDrop = $ID_HomeDropLike";
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
 
         // public function CountRelatedHomes($db, $Category, $Ciudad, $ID_HomeDrop) {
 

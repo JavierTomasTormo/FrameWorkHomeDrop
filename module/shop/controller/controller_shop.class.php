@@ -59,7 +59,7 @@
 
         function loadDetails() {
             // echo json_encode("✅ loadDetails ✅");
-            echo json_encode(common::load_model('shop_model', 'get_loadDetails', CountGeneral));
+            echo json_encode(common::load_model('shop_model', 'get_loadDetails', $_POST['id']));
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
@@ -82,6 +82,15 @@
         function ViviendasRelacionadas() {
             // echo json_encode("✅ ViviendasRelacionadas ✅");
             echo json_encode(common::load_model('shop_model', 'get_ViviendasRelacionadas',[$_POST['CategoryVivRel'], $_POST['CiudadVivRel'], $_POST['ID_HomeDrop'], $_POST['loaded'], $_POST['items']]));
+        }
+
+//.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
+
+        function CountLikes() {
+            // echo json_encode("✅ CountLikes ✅");
+            // echo json_encode($_POST['ID_HomeDropLike']);
+            
+            echo json_encode(common::load_model('shop_model', 'get_CountLikes', $_POST['ID_HomeDropLike']));
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//

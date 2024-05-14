@@ -54,11 +54,11 @@
 			// return $args;
 			if (array_key_exists('DAORed', $args)) {
 				$DAORed = $args['DAORed'];
+				$start = $args['start'] ?? 0;
+				$limit = $args['limit'] ?? 3;
 
 				if ($DAORed == "FiltersShop") {
 					$consulta = "";
-					$start = $_POST['start'] ?? 0;
-					$limit = $_POST['limit'] ?? 3;
 
 					for ($i = 0; $i < count($args['FiltersShop']); $i++) {
 						if ($args['FiltersShop'][$i][0] === 'vh.Precio') {
@@ -78,10 +78,10 @@
 
 					return $this -> dao -> Filters_Shop($this->db, $consulta);
 				} 
+
+
 				if ($DAORed == "FiltersHome") {
 					$consulta = "";
-					$start = $_POST['start'] ?? 0;
-					$limit = $_POST['limit'] ?? 3;
 
 					$filtroArrayhme = json_decode($args['FiltersHome'], true);
 					//$filtroArrayhme = $filtrosPag;
@@ -107,19 +107,17 @@
 
 					return $this -> dao -> Filters_Home($this->db, $consulta);
 				} 
-				if ($DAORed == "AllHomes") {
 
-					$start = $_POST['start'] ?? 0;
-					$limit = $_POST['limit'] ?? 3;
+
+				if ($DAORed == "AllHomes") {
 
 					return $this -> dao -> SelectAllHomes($this->db, $args['OrderBy'],$start, $limit);
 
 				}
+
+
 				if ($DAORed == "RedirectSearch") {
 					$consulta = "";
-					$start = $_POST['start'] ?? 0;
-					$limit = $_POST['limit'] ?? 3;
-
 
 					$filtroArray = json_decode($args['FiltersSearch'], true); 
 
@@ -335,12 +333,9 @@
 			// return $this -> dao -> select_details_images($this->db, $args);
 		}
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-		// public function get_load_likes_BLL($args) {
-
-		// 	$token = explode('"', $args);
-		// 	$decode = middleware::decode_username($token[1]);
-		// 	return $this -> dao -> select_load_likes($this->db, $decode);
-		// }
+		public function get_CountLikes_BLL($ID_HomeDropLike) {
+			return $this -> dao -> CountLikes($this->db, $ID_HomeDropLike);
+		}
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
 		// public function get_control_likes_BLL($args) {
 

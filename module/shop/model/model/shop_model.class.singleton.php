@@ -62,5 +62,10 @@
             // return $args;
             return $this -> bll -> get_Pagination_BLL($args);
         }
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
+        public function get_CountLikes($ID_HomeDropLike) {
+            return $this -> bll -> get_CountLikes_BLL($ID_HomeDropLike);
+        }
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
     }
 ?>
