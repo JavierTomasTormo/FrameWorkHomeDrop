@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>LoadCitySearch</name>
+        <uri>LoadCitySearch</uri>
+    </function>
+    <function>
+        <name>LoadOperationSearch</name>
+        <uri>LoadOperationSearch</uri>
+    </function>
+    <function>
+        <name>SearchCharger</name>
+        <uri>SearchCharger</uri>
+    </function>
+    <function>
+        <name>AutocompleteSearch</name>
+        <uri>AutocompleteSearch</uri>
+    </function>
+</functions>

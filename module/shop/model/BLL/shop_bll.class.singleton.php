@@ -245,7 +245,6 @@
 			return $this -> dao -> RedirectSearchDAO($this->db, $select);
 		}
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-
 		public function get_Pagination_BLL($args) {
 			// return $args;
 
