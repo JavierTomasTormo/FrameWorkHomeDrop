@@ -20,6 +20,8 @@ function LoadCitySearch() {
 function LoadOperationSearch(Ciudad) {
 
     // console.log('Entro a LoadOperationSearch');
+
+
     return new Promise(function(resolve, reject) {
         $('.search_selectOperation').empty();
 
@@ -61,7 +63,6 @@ function LoadOperationSearch(Ciudad) {
 }
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
-
 function SearchCharger() {
     localStorage.removeItem('Ciudad');
     localStorage.removeItem('Operacion');
@@ -86,9 +87,53 @@ function SearchCharger() {
 }
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
-
 function AutocompleteSearch() {
-    $("#autocom").on("keyup", function () {
+    // console.log("Estoy en AutocompleteSearch");
+
+    // $("#autocom").on("keyup", function () {
+    // });
+
+    $("#autocom").keyup(function() {
+            // console.log("keyup presionado");
+     
+             let sdata = { complete: $(this).val() };
+     
+             if ($('.search_selectCity').val() != undefined) {
+                 sdata.Ciudad = $('.search_selectCity').val();
+     
+                 if ($('.search_selectOperation').val() != undefined) {
+                     sdata.Operation = $('.search_selectOperation').val();
+     
+                 }
+             } else if ($('.search_selectOperation').val() != undefined) {
+                 sdata.Operation = $('.search_selectOperation').val();
+                 
+             }
+             // console.log(sdata);
+             ajaxPromise(friendlyURL('?module=search&op=AutocompleteSearch'), 'POST', 'JSON', { 'sdata': sdata })
+             .then(function (data) {
+         
+                //  console.log(data);
+         
+                 $('#search_auto').empty();
+                 $('#search_auto').fadeIn(1000);
+                 for (row in data) {
+     
+                     $('<div></div>')
+                         .addClass('autocomplete-item searchElement')
+                         .attr('id', data[row].Type)
+                         .text(data[row].Type)
+                         .appendTo('#search_auto');
+                 }
+             }).catch(function () {
+                 $('#search_auto').fadeOut(500);
+             });
+         
+    });
+
+    $(document).on("keyup", "#autocom", function() {
+        // console.log("keyup presionado");
+     
         let sdata = { complete: $(this).val() };
 
         if ($('.search_selectCity').val() != undefined) {
@@ -106,7 +151,7 @@ function AutocompleteSearch() {
         ajaxPromise(friendlyURL('?module=search&op=AutocompleteSearch'), 'POST', 'JSON', { 'sdata': sdata })
         .then(function (data) {
     
-            // console.log(data);
+           //  console.log(data);
     
             $('#search_auto').empty();
             $('#search_auto').fadeIn(1000);
@@ -123,7 +168,6 @@ function AutocompleteSearch() {
         });
     
     });
-
 
     $("#search-btn").on("click", function () {
         let searchQuery = $("#autocom").val();
@@ -197,9 +241,6 @@ function ButtonSearch() {
     window.location.href = 'index.php?module=shop';
     });
 }
-
-
-
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 

@@ -90,6 +90,8 @@
                 // $path = MODULES_PATH . $this -> nameModule . '/resources/function.xml';
                 $path = MODULES_PATH . $moduleName . '/resources/function.xml';
 
+                // echo $path;
+
                 // echo $_GET['module'], "\n";
 
                 // echo $_GET['op'], "\n";
