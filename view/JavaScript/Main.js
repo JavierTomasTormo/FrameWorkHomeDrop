@@ -64,7 +64,7 @@ function LoadMenu() {
                     <li class="opc_exceptions"></li>
                     <li class="log-icon"></li>
                     <li id="des_inf_user"></li>
-                    <li><a href="` + friendlyURL('index.php?module=RegLog&op=view') +`" id="loginBtn">Register/LogIn</a></li>
+                    <li><a href="` + friendlyURL('index.php?module=login') +`" id="loginBtn">Register/LogIn</a></li>
                 </ul>
             </div>
         </nav>

@@ -19,5 +19,5 @@ try {
 }
 
 // Show the response of the sent email to be saved in a log...
-echo $result->toJson();
+echo $result;
 // echo $result;
