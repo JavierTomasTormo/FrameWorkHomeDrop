@@ -3,12 +3,15 @@
     //LoadJump//✅
 
     updateResultsCount();
+
+
+    ShopAllHome();
     CountLikes();
     MostrarFiltrosShop();
     ButtonFilterShop();
 
     LoadHomeDropShop();
-    ShopAllHome();
+    
     clicks();
     Pagination();
 
@@ -158,8 +161,9 @@ function ButtonFilterShop() {
     //console.log(TodoFiltroShop.length);    
    
         $('.FiltersShop_Category, .FiltersShop_City, .FiltersShop_Type, .FiltersShop_Operation, .FiltersShop_Price').change(function() {
-            //console.log(localStorage.getItem('FiltersShop'));
+            // console.log(localStorage.getItem('FiltersShop'));
             //console.log(localStorage.getItem('FiltersShop_City'),'Cargar UpdateCount'); 
+            // HighlightFilters(localStorage.getItem('FiltersShop'));
             updateResultsCount();
                     
         });
@@ -211,8 +215,10 @@ function ButtonFilterShop() {
             localStorage.setItem('OrderBySeleccted', localStorage.getItem('FilterShop_OrderBy'));
         }
     //---------------------------------------------------------------//
-        if (FiltersShop) {
 
+        // location.reload();
+        if (FiltersShop) {
+            
             //console.log(FiltersShop);
 
             setTimeout(function() {
@@ -225,10 +231,11 @@ function ButtonFilterShop() {
         }
 
         localStorage.setItem('FiltersShop', JSON.stringify(FiltersShop) || undefined);
+        HighlightFilters(localStorage.getItem('FiltersShop'));
 
-        //location.reload();
         
     });
+     
 }
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 function updateResultsCount() {
@@ -569,12 +576,13 @@ function ShopAllHome() {
             }, 200); 
 
         } if (filtroShop != 0 || filtroShopPrice != 0) {
-            var filtroSho2 = JSON.parse(localStorage.getItem('FiltersShop') || 0 );
+            // var filtroSho2 = JSON.parse(localStorage.getItem('FiltersShop') || 0 );
+            console.log(filtroShop);
             setTimeout(function() {
-                ajaxForSearch(friendlyURL('?module=shop&op=ajaxForSearch'), 'POST', 'JSON', {'FiltersShop': filtroSho2, 'DAORed' : "FiltersShop"});
+                ajaxForSearch(friendlyURL('?module=shop&op=ajaxForSearch'), 'POST', 'JSON', {'FiltersShop': filtroShop, 'DAORed' : "FiltersShop"});
             }, 200); 
 
-            HighlightFilters(filtroSho2);
+            HighlightFilters(filtroShop);
 
         } if (flitroSearch != undefined) {
             setTimeout(function() {
@@ -608,7 +616,7 @@ function LoadSearch() {
 
             //console.log(FiltersSearch);
 
-            console.log(Serach);
+            // console.log(Serach);
 
 
             $("#ListViviendasHomeDrop").empty();
@@ -762,7 +770,7 @@ function HighlightFilters() {
 
         if (FiltrosApplied2 > localStorage.getItem('FiltrosApplied')) {
             localStorage.setItem('FiltrosApplied', FiltrosApplied2);
-            location.reload();
+            location.reload();//???
         }
         localStorage.setItem('FiltrosApplied', FiltrosApplied2);
 
@@ -848,7 +856,7 @@ function ajaxForSearch(durl, type , dataType , sData = undefined, total_prod = 0
     }
     var token = localStorage.getItem('token');
 
-    // console.log(filter, "JS");
+    // console.log(url2, type, dataType,  {filter: filter}, "JS");
 
     ajaxPromise(url2, type, dataType,  {filter: filter})//start, limit,
     .then(function(data) {

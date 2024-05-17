@@ -1,0 +1,7 @@
+# Mac OS X dumps these all over the place.
+.DS_Store
+*.ini
+# Ignore the /vendor/ directory and composer.lock.
+/utils/vendor/
+composer.lock
+./.htaccess
