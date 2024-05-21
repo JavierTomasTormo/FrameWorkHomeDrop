@@ -318,12 +318,74 @@ function ClickShop() {
         localStorage.removeItem('move');
     });
 }
+
+
+//--------------------------------------------//
+//================LoadContent================//
+function load_content() {
+    let path = window.location.pathname.split('/');
+
+
+    //Para debug de esto entrar en el gmail link creo que es el Path[4]
+    console.log(path);
+    // console.log(path[4]);
+    
+    if (path[4] === 'recover') {
+        window.location.href = friendlyURL("?module=login&op=recover_view");
+        localStorage.setItem("token_email", path[5]);
+
+    } else if (path[4] === 'verify') {
+        // console.log('Path===verify');
+        toastr.options.timeOut = 3000;
+
+        // window.location.href = friendlyURL("?module=login&op=verify_email");
+
+        ajaxPromise(friendlyURL("?module=login&op=verify_email"), 'POST', 'JSON', {token_email: path[5]})//friendlyURL("?module=login&op=verify_email")
+        .then(function(data) {
+
+            console.log(data);
+
+            if (data === 'error') {
+                // window.location.href = friendlyURL("?module=home");
+
+                setTimeout( 
+                    window.onload = function() {
+                        toastr.error('El token ha caducado. Por favor, solicita un nuevo enlace de verificación.');
+                    }
+                ,2000);
+
+            } else {
+                // window.location.href = friendlyURL("?module=home");
+                setTimeout( 
+                    window.onload = function() {
+                        toastr.success('Email verified');
+                    }
+                ,2000);
+
+
+                // setTimeout(toastr.success('Email verified'), 2000);
+            }
+
+
+        }).catch(function() {
+          console.log('Error: verify email error');
+        });
+
+
+    }else if (path[4] === 'view') {
+        $(".login-wrap").show();
+        $(".forget_html").hide();
+    }else if (path[4] === 'recover_view') {
+        load_form_new_password();
+    }
+}
 //--------------------------------------------//
 //================DocReady================//
 $(document).ready(function() {
     LoadMenu();
     ClickLogOut();
     ClickShop();
+    load_content();
 });
 //--------------------------------------------//
 
