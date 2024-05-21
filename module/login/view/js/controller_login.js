@@ -103,7 +103,10 @@ function ButtonLogIn() {
         LogIn();
     });
 }
-/*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
+
+/*~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~*/
+/*~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~*/
+
 function Register() {
 
     //console.log('Llego al Register function Register()');
@@ -111,7 +114,22 @@ function Register() {
     if (ValidateRegister() != 0) {
         var data = $('#register__form').serialize();
 
-        ajaxPromise('Module/RegisterLogIn/ControladorRegLog/ControladorRegLog.php?Option=Register', 'POST', 'JSON', {'data': data })
+        var datadec = parseUrlEncodedData(data);
+
+        function parseUrlEncodedData(data) {
+            const decodedData = decodeURIComponent(data);
+            const pairs = decodedData.split('&');
+            const result = {};
+
+            pairs.forEach((pair) => {
+                const [key, value] = pair.split('=');
+                result[key] = decodeURIComponent(value);
+            });
+
+            return result;
+        }
+        // console.log(datadec);
+        ajaxPromise(friendlyURL('?module=login&op=register'), 'POST', 'JSON', {'data': datadec })
             .then(function(result) {
 
                 console.log(result);
@@ -129,10 +147,11 @@ function Register() {
                     toastr.error("La solicitud ha fallado: " + result);
                     
                 } else {
-                    toastr.success("Registery succesfully");
+                    toastr.success("El correo de verificación se ha enviado correctamente");
 
                    setTimeout(
-                        location.reload()
+                        console.log("El correo de verificación se ha enviado correctamente")
+                        // location.reload()
                     , 1000);
                 }
 
@@ -251,12 +270,16 @@ function ButtonRegister() {
         Register();
     });
 }
-/*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
+
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 $(document).ready(function() {
-    //console.log('LogIn.js Document Ready');
+    // console.log('LogIn.js Document Ready');
+
+    //LogIn
     KeyLogIn();
     ButtonLogIn();
+
+    //Register
     KeyRegister();
     ButtonRegister();
 });
