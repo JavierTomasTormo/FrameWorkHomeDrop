@@ -1,3 +1,5 @@
+
+
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 function LogIn() {
     //console.log('LogIn');
@@ -147,12 +149,11 @@ function Register() {
                     toastr.error("La solicitud ha fallado: " + result);
                     
                 } else {
-                    toastr.success("El correo de verificación se ha enviado correctamente");
-
-                   setTimeout(
-                        console.log("El correo de verificación se ha enviado correctamente")
-                        // location.reload()
-                    , 1000);
+                    
+                    location.reload();
+                    localStorage.setItem('emailReg', 1);
+                    
+                    
                 }
 
 
@@ -163,6 +164,11 @@ function Register() {
                 }
             });
     }
+}
+/*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
+function showVerificationMessage() {
+    console.log("El correo de verificación se ha enviado correctamente");
+    toastr.success("El correo de verificación se ha enviado correctamente");
 }
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 function ValidateRegister() {
@@ -274,6 +280,13 @@ function ButtonRegister() {
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 $(document).ready(function() {
     // console.log('LogIn.js Document Ready');
+    var emailReg = localStorage.getItem('emailReg');
+    // console.log(emailReg);
+    if (emailReg == 1) {
+        showVerificationMessage();
+        localStorage.setItem('emailReg', 0);
+    }
+    // console.log(emailReg);
 
     //LogIn
     KeyLogIn();

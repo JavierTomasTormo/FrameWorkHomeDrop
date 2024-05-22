@@ -25,7 +25,7 @@
 
 			$hashed_pass = password_hash($args[1], PASSWORD_DEFAULT);
 			$hashavatar = md5(strtolower(trim($args[2]))); 
-			$avatar = "https://robohash.org/$hashavatar";
+			$avatar = "https://i.pravatar.cc/500?u=$hashavatar";
 			$token_email = common::generate_Token_secure(20);
 			$id = common::generate_Token_secure(6);
 			$tiempo_generacion = time();
@@ -50,20 +50,31 @@
 				//19:40 20/02/2024 Cambiado, probar con el email de prueba!
 
 				if (!empty($email)) {
-					return;  
-				}   
+					return "Inserción y creacion de usuario ejecutado sin complicaciones";  
+				} else {
+					return "Error al enviar el email de verificacion ($email)";
+				}
 			}
 		}
 
 		public function get_verify_email_BLL($token_email) {
 			$tiempo_actual = time();
 			$tiempo_generacion = $this->dao->obtener_tiempo_generacion($this->db, $token_email);
+			
+			// return $tiempo_generacion;
+
+			// return ["Tiempo de generacion" => $tiempo_generacion, "Tiempo actual" => $tiempo_actual];
 		
 			if ($tiempo_generacion !== false) {
 				$diferencia_tiempo = $tiempo_actual - $tiempo_generacion;
-				if ($diferencia_tiempo > 300) { // 5 minutos = 300 segundos
+
+				// return $diferencia_tiempo;
+
+
+				if ($diferencia_tiempo > 900) { // 5 minutos = 300 segundos //poner a 900 para que se actualice el token cada 5 minutos
 					return 'token_caducado';
 				} else {
+					// return ['El token no esta caducado', $diferencia_tiempo];
 					if ($this->dao->select_verify_email($this->db, $token_email)) {
 						$this->dao->update_verify_email($this->db, $token_email);
 						return 'verify';

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página de notificación de token caducado. Solicite un nuevo enlace de verificación.">
+    <meta name="author" content="Tu Nombre">
+    <title>Token Caducado</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; 
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .title {
+            font-size: 8em;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #ddba6b;
+            margin-bottom: 20px;
+        }
+        .container {
+            text-align: center;
+            padding: 20px 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: 0 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        p {
+            margin-bottom: 30px;
+            font-size: 16px;
+            color: #666;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="title">H&#920;M&#926;DR&#920;P</h2>
+    <div class="container">
+        <h1>Token Caducado</h1>
+        <p>El token ha caducado. Por favor, solicita un nuevo enlace de verificación.</p>
+        <button onclick='window.location.href = "../../"'>Solicitar nuevo enlace</button>
+    </div>
+</body>
+</html>

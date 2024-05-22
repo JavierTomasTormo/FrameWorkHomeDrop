@@ -327,7 +327,7 @@ function load_content() {
 
 
     //Para debug de esto entrar en el gmail link creo que es el Path[4]
-    console.log(path);
+    // console.log(path);
     // console.log(path[4]);
     
     if (path[4] === 'recover') {
@@ -345,25 +345,13 @@ function load_content() {
 
             console.log(data);
 
-            if (data === 'error') {
-                // window.location.href = friendlyURL("?module=home");
-
-                setTimeout( 
-                    window.onload = function() {
-                        toastr.error('El token ha caducado. Por favor, solicita un nuevo enlace de verificación.');
-                    }
-                ,2000);
-
+            if (data == '"token_caducado"') {
+                window.location.href = '/FrameWorkHomeDrop/view/inc/token_expired.html';
+            
             } else {
-                // window.location.href = friendlyURL("?module=home");
-                setTimeout( 
-                    window.onload = function() {
-                        toastr.success('Email verified');
-                    }
-                ,2000);
+                window.location.href = friendlyURL("?module=home");
+                localStorage.setItem('tokenready', 1);
 
-
-                // setTimeout(toastr.success('Email verified'), 2000);
             }
 
 
@@ -382,6 +370,14 @@ function load_content() {
 //--------------------------------------------//
 //================DocReady================//
 $(document).ready(function() {
+
+    var tokenready = localStorage.getItem('tokenready');
+
+    if (tokenready == 1) {
+        toastr.success('Email verified');
+        localStorage.setItem('tokenready', 0);
+    }
+
     LoadMenu();
     ClickLogOut();
     ClickShop();

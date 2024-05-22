@@ -16,9 +16,10 @@
 
             $sql = "INSERT INTO Users (Username, Password, Email, UserType, Avatar, token_email, tiempo_generacion, activate)
             VALUES ('$username_reg', '$hashed_pass', '$email_reg', 'client', '$avatar', '$token_email', '$tiempo_generacion', false)";
-            return $sql;
-
-            return $stmt = $db->ejecutar($sql);
+            // return $sql;
+                $stmt = $db->ejecutar($sql);
+            return "Usuario Insertado Correctamente"; 
+            
         }
        
         public function select_user($db, $username, $email){
@@ -33,6 +34,8 @@
             $sql = "SELECT tiempo_generacion FROM Users WHERE token_email = '$token_email'";
             $stmt = $db->ejecutar($sql);
             $resultado = $db->listar($stmt);
+
+            // return $resultado[0]['tiempo_generacion'];
         
             if (!empty($resultado)) {
                 return $resultado[0]['tiempo_generacion'];
