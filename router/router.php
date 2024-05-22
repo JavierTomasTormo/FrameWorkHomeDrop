@@ -66,17 +66,15 @@
                                 require_once($path);
                                 $controllerName = 'controller_' . (string)$row->name;
                                 $this->nameModule = (string)$row->name;
-                                //
                                 //var_dump($this->nameModule = (string)$row->name , "Linea 67");
-                                //
-
+                                ///////////////////////////////////////////////////////////
                                 if (method_exists($controllerName, 'getInstance')) {
                                     return call_user_func(array($controllerName, 'getInstance'));
                                 } else {
-                                    echo "No existe el metodo getInstance en el controlador";
+                                    // echo "No existe el metodo getInstance en el controlador";
                                     return new $controllerName;
                                 }
-                                
+                                /////////////////////////////////////////////////////////
                                 // return new $controllerName;
                             } else { 
                                 // // Si la función no se encuentra en el archivo XML

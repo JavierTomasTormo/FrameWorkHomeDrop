@@ -325,14 +325,13 @@ function ClickShop() {
 function load_content() {
     let path = window.location.pathname.split('/');
 
-
     //Para debug de esto entrar en el gmail link creo que es el Path[4]
     // console.log(path);
     // console.log(path[4]);
     
     if (path[4] === 'recover') {
         window.location.href = friendlyURL("?module=login&op=recover_view");
-        localStorage.setItem("token_email", path[5]);
+        
 
     } else if (path[4] === 'verify') {
         // console.log('Path===verify');
@@ -346,14 +345,14 @@ function load_content() {
             console.log(data);
 
             if (data == '"token_caducado"') {
-                window.location.href = '/FrameWorkHomeDrop/view/inc/token_expired.html';
+
+                window.location.href = '/FrameWorkHomeDrop/view/inc/token_expired.html?token_email=' + path[5];
             
             } else {
                 window.location.href = friendlyURL("?module=home");
                 localStorage.setItem('tokenready', 1);
 
             }
-
 
         }).catch(function() {
           console.log('Error: verify email error');

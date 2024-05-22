@@ -82,6 +82,10 @@
         <name>verify_email</name>
         <uri>verify_email</uri>
     </function>
+    <function>
+        <name>GenerarNuevoToken</name>
+        <uri>GenerarNuevoToken</uri>
+    </function>
 </functions>
 
 

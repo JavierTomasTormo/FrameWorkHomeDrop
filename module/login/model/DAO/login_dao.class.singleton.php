@@ -60,7 +60,13 @@
             return "update";
         }
 
-
+        public function actualizarTokenEmail($db, $OLDtoken_email, $token_email, $tiempo_generacion) {
+            $sql = "UPDATE Users SET token_email = '$token_email', tiempo_generacion = '$tiempo_generacion' WHERE token_email = '$OLDtoken_email'";
+            $stmt = $db->ejecutar($sql);
+            // return $sql;
+            return;
+        }
+        
 
 
         // public function select_social_login($db, $id){

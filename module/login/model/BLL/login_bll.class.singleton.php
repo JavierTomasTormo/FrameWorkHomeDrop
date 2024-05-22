@@ -87,8 +87,30 @@
 			}
 		}
 		
+		public function get_newToken_BLL($OLDtoken_email) {
+			// return "WhatsssUP";
+			// return $email;
 
 
+			$token_email = common::generate_Token_secure(20);
+			$tiempo_generacion = time();
+
+		
+			// Actualiza el token y el tiempo de generación en la base de datos
+			$this->dao->actualizarTokenEmail($this->db, $OLDtoken_email, $token_email, $tiempo_generacion);
+		
+			// Envía el nuevo token por correo electrónico
+			$message = [
+				'type' => 'validate',
+				'token' => $token_email,
+				'toEmail' => $OLDtoken_email
+			];
+			mail::send_email($message);
+		
+			return 'Se ha enviado un nuevo token de verificación a tu correo electrónico.';
+		
+		}
+		
 
 		// public function get_login_BLL($args) {
 		// 	if (!empty($this -> dao -> select_user($this->db, $args[0], $args[0]))) {

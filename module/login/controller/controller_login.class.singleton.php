@@ -6,8 +6,6 @@
 		static $_instance;
 
 		function __construct() {
-			$this -> dao = login_dao::getInstance();
-			$this -> db = db::getInstance();
 		}
 
 		public static function getInstance() {
@@ -49,6 +47,11 @@
             } else {
                 echo json_encode($verify);
             }
+        }
+
+        function GenerarNuevoToken() {
+            // echo json_encode($_POST['token_email']);          
+            echo json_encode(common::load_model('login_model', 'get_GenerarNuevoToken', $_POST['token_email']));
         }
 
         // function verify_email() {

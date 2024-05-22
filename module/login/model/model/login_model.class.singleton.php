@@ -22,6 +22,10 @@ class login_model {
     public function get_verify_email($token_email) {
         return $this->bll->get_verify_email_BLL($token_email);
     }
+
+    public function get_GenerarNuevoToken($token_email) {
+        return $this->bll->get_newToken_BLL($token_email);
+    }
     
     // public function get_login($args) {
     //     return $this -> bll -> get_login_BLL($args);
