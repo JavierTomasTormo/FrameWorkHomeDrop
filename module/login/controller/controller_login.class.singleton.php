@@ -1,6 +1,22 @@
 <?php
     class controller_login {
 
+        private $dao;
+		private $db;
+		static $_instance;
+
+		function __construct() {
+			$this -> dao = login_dao::getInstance();
+			$this -> db = db::getInstance();
+		}
+
+		public static function getInstance() {
+			if (!(self::$_instance instanceof self)) {
+				self::$_instance = new self();
+			}
+			return self::$_instance;
+		}
+        
         function view() {
             common::load_view('top_page_login.html', VIEW_PATH_LOGIN . 'login.html');
         }

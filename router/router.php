@@ -60,7 +60,7 @@
                     foreach ($modules as $row) {
                         //var_dump($row);
                         if (in_array($this->uriModule, (array)$row->uri)) {
-                            $path = MODULES_PATH . $row->name . '/controller/controller_' . (string)$row->name . '.class.php';
+                            $path = MODULES_PATH . $row->name . '/controller/controller_' . (string)$row->name . '.class.singleton.php';
                             //var_dump( "$path");
                             if (file_exists($path)) {
                                 require_once($path);
@@ -69,7 +69,15 @@
                                 //
                                 //var_dump($this->nameModule = (string)$row->name , "Linea 67");
                                 //
-                                return new $controllerName;
+
+                                if (method_exists($controllerName, 'getInstance')) {
+                                    return call_user_func(array($controllerName, 'getInstance'));
+                                } else {
+                                    echo "No existe el metodo getInstance en el controlador";
+                                    return new $controllerName;
+                                }
+                                
+                                // return new $controllerName;
                             } else { 
                                 // // Si la función no se encuentra en el archivo XML
                                 throw new Exception('no se ha encontrado el modulo.');

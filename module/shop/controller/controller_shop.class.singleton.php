@@ -1,5 +1,23 @@
 <?php
     class controller_shop {
+
+        private $dao;
+		private $db;
+		static $_instance;
+
+		function __construct() {
+			$this -> dao = shop_dao::getInstance();
+			$this -> db = db::getInstance();
+		}
+
+		public static function getInstance() {
+			if (!(self::$_instance instanceof self)) {
+				self::$_instance = new self();
+			}
+			return self::$_instance;
+		}
+
+
         function view() {
             // echo "Hola VIEW de controller Shop !!";
             common::load_view('top_page_shop.html', VIEW_PATH_SHOP . 'shop.html');
