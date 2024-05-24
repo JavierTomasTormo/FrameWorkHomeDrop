@@ -3,7 +3,7 @@ class middleware{
 //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-//
     public static function decode_username($get_token){
 		$jwt = parse_ini_file(UTILS . "JWT.ini");
-		$secret = $jwt['secret'];
+		$secret = $jwt['JWT_SECRET'];
 		$token = $get_token;
 
 		$JWT = new JWT;
@@ -16,7 +16,7 @@ class middleware{
 //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-//
 	public static function decode_exp($get_token){
 		$jwt = parse_ini_file(UTILS . "JWT.ini");
-		$secret = $jwt['secret'];
+		$secret = $jwt['JWT_SECRET'];
 		$token = $get_token;
 
 		$JWT = new JWT;
@@ -30,8 +30,8 @@ class middleware{
 	public static function encode($user) {
         $jwt = parse_ini_file(UTILS . "JWT.ini");
 
-        $header = $jwt['header'];
-        $secret = $jwt['secret'];
+        $header = $jwt['JWT_HEADER'];
+        $secret = $jwt['JWT_SECRET'];
         $payload = json_encode(['iat' => time(), 'exp' => time() + (60 * 60), 'name' => $user]);
 
         $JWT = new jwt();

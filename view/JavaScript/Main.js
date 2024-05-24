@@ -74,7 +74,7 @@ function LoadMenu() {
 
 
     if (token) {
-        ajaxPromise('Module/RegisterLogIn/ControladorRegLog/ControladorRegLog.php?Option=DataUser', 'POST', 'JSON', { 'token': token })
+        ajaxPromise(friendlyURL('?module=login&op=DataUser'), 'POST', 'JSON', { 'token': token })
             .then(function(data) {
                 $('#loginBtn').hide();
 
@@ -326,7 +326,7 @@ function load_content() {
     let path = window.location.pathname.split('/');
 
     //Para debug de esto entrar en el gmail link creo que es el Path[4]
-    console.log(path);
+    // console.log(path);
     // console.log(path[4]);
     
     if (path[4] === 'recover') {

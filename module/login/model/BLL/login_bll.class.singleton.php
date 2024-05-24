@@ -16,9 +16,6 @@
 			return self::$_instance;
 		}
 
-
-
-
 		public function get_register_BLL($args) {
 
 			// return $args;
@@ -115,24 +112,51 @@
 		}
 		
 
-		// public function get_login_BLL($args) {
-		// 	if (!empty($this -> dao -> select_user($this->db, $args[0], $args[0]))) {
-		// 		$user = $this -> dao -> select_user($this->db, $args[0], $args[0]);
-		// 		if (password_verify($args[1], $user[0]['password']) && $user[0]['activate'] == 1) {
-		// 			$jwt = jwt_process::encode($user[0]['username']);
-		// 			$_SESSION['username'] = $user[0]['username'];
-		// 			$_SESSION['tiempo'] = time();
-        //             session_regenerate_id();
-		// 			return json_encode($jwt);
-		// 		} else if (password_verify($args[1], $user[0]['password']) && $user[0]['activate'] == 0) {
-		// 			return 'activate error';
-		// 		} else {
-		// 			return 'error';
-		// 		}
-        //     } else {
-		// 		return 'user error';
-		// 	}
-		// }
+		public function get_login_BLL($args) {
+
+			// return $args;
+
+			if (!empty($this -> dao -> select_user($this->db, $args[0], $args[0]))) {
+				$user = $this -> dao -> select_user($this->db, $args[0], $args[0]);
+				// return $user[0]['Username'];
+
+				if (password_verify($args[1], $user[0]['Password']) && $user[0]['activate'] == 1) {
+
+					// return 'Buenas tardes';
+					$jwt = middleware::encode($user[0]['Username']);
+					// return $jwt;
+
+					$_SESSION['username'] = $user[0]['Username'];
+
+					$_SESSION['tiempo'] = time();
+
+					// return $_SESSION['username'];
+					
+                    session_regenerate_id();
+
+					$response = array(
+						'token' => $jwt,
+						'user' => $user,
+					);
+
+					return $response;
+
+				} else if (password_verify($args[1], $user[0]['password']) && $user[0]['activate'] == 0) {
+					$this->get_newToken_BLL($user[0]['token_email']);
+				} else {
+					return 'error_auth';
+				}
+            } else {
+				return 'error_user';
+			}
+		}
+
+		public function get_DataUser_BLL($token) {
+			$jwt = middleware::decode_username($token);
+			$user = $this -> dao -> SeleccionarDatosUsuario($this->db, $jwt);
+			return $user;
+		}
+		
 
 		// public function get_social_login_BLL($args) {
 		// 	if (!empty($this -> dao -> select_user($this->db, $args[1], $args[2]))) {

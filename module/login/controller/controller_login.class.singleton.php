@@ -23,9 +23,10 @@
             common::load_view('top_page_login.html', VIEW_PATH_LOGIN . 'recover_pass.html');
         }
     
-        // function login() {
-        //     echo json_encode(common::load_model('login_model', 'get_login', [$_POST['username'], $_POST['password']]));
-        // }
+        function login() {
+            // echo json_encode('LogIn Del Controlador');//passwd_log': formData['passwd_log'], 'username_log': formData['username_log']
+            echo json_encode(common::load_model('login_model', 'get_login', [$_POST['username_log'], $_POST['passwd_log']]));
+        }
 
         function register() {
             // echo json_encode($_POST['data']);          
@@ -49,7 +50,12 @@
             echo json_encode(common::load_model('login_model', 'get_GenerarNuevoToken', $_POST['token_email']));
         }
 
-        // function verify_email() {
+        function DataUser() {
+            // echo json_encode($_POST['token_email']);          
+            echo json_encode(common::load_model('login_model', 'get_DataUser', $_POST['token']));
+        }
+
+        // function verify_email() {//
         //     $verify = json_encode(common::load_model('login_model', 'get_verify_email', $_POST['token_email']));
         //     echo json_encode($verify);
         // }
