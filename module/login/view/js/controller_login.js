@@ -292,6 +292,9 @@ $(document).ready(function() {
     KeyLogIn();
     ButtonLogIn();
 
+
+
+    
     //Register
     KeyRegister();
     ButtonRegister();

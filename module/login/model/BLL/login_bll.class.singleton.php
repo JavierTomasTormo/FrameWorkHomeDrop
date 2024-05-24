@@ -58,12 +58,11 @@
 		}
 
 		public function get_verify_email_BLL($token_email) {
+			// return("BLL   ".$token_email);
 			$tiempo_actual = time();
 			$tiempo_generacion = $this->dao->obtener_tiempo_generacion($this->db, $token_email);
 			
-			// return $tiempo_generacion;
-
-			// return ["Tiempo de generacion" => $tiempo_generacion, "Tiempo actual" => $tiempo_actual];
+			// return ("Tiempo Generacion   ".$tiempo_generacion."   Tiempo actual   ".$tiempo_actual);
 		
 			if ($tiempo_generacion !== false) {
 				$diferencia_tiempo = $tiempo_actual - $tiempo_generacion;
@@ -79,7 +78,7 @@
 						$this->dao->update_verify_email($this->db, $token_email);
 						return 'verify';
 					} else {
-						return 'fail';
+						return 'token_caducado';
 					}
 				}
 			} else {
@@ -90,24 +89,28 @@
 		public function get_newToken_BLL($OLDtoken_email) {
 			// return "WhatsssUP";
 			// return $email;
-
-
 			$token_email = common::generate_Token_secure(20);
 			$tiempo_generacion = time();
 
-		
+			// return $token_email;
+
+			$args = $this->dao->UserdelNuevoToken($this->db, $OLDtoken_email);
+
+			// return $args[0]['ID_User'];
+			
 			// Actualiza el token y el tiempo de generación en la base de datos
-			$this->dao->actualizarTokenEmail($this->db, $OLDtoken_email, $token_email, $tiempo_generacion);
+			$this->dao->actualizarTokenEmail($this->db, $args[0]['ID_User'], $token_email, $tiempo_generacion);
 		
+
 			// Envía el nuevo token por correo electrónico
 			$message = [
 				'type' => 'validate',
 				'token' => $token_email,
-				'toEmail' => $OLDtoken_email
+				'toEmail' => 'javiertomas2003@gmail.com'
 			];
 			mail::send_email($message);
 		
-			return 'Se ha enviado un nuevo token de verificación a tu correo electrónico.';
+			return;
 		
 		}
 		

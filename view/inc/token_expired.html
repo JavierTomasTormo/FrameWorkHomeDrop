@@ -119,12 +119,12 @@
 
             // document.getElementById('token-email').textContent = tokenEmail;
 
-            // console.log(tokenEmail);
+            console.log(tokenEmail);
 
             ajaxPromise(friendlyURL('?module=login&op=GenerarNuevoToken'), 'POST', 'JSON', {token_email: tokenEmail})
             .then(function(result) {
 
-                // console.log(result);
+                console.log(result);
 
                 console.log("El correo de verificación se ha enviado correctamente");
                 toastr.success("El correo de verificación se ha enviado correctamente");

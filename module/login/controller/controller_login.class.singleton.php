@@ -40,13 +40,8 @@
             // echo json_encode($_POST['token_email']);
             // echo json_encode('Entro en el verify_email');
 
-            $verify = json_encode(common::load_model('login_model', 'get_verify_email', $_POST['token_email']));
+            echo json_encode(common::load_model('login_model', 'get_verify_email', $_POST['token_email']));
 
-            if ($verify == 'token_caducado') {
-                echo json_encode('error');
-            } else {
-                echo json_encode($verify);
-            }
         }
 
         function GenerarNuevoToken() {
