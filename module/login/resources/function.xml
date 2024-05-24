@@ -86,8 +86,16 @@
         <name>GenerarNuevoToken</name>
         <uri>GenerarNuevoToken</uri>
     </function>
+    <function>
+        <name>LogIn</name>
+        <uri>LogIn</uri>
+    </function>
+    <function>
+        <name>DataUser</name>
+        <uri>DataUser</uri>
+    </function>
 </functions>
 
 
 
-<!--                 -->
+<!--        DataUser         -->

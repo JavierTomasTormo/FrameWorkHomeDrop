@@ -24,7 +24,7 @@
        
         public function select_user($db, $username, $email){
 
-			$sql = "SELECT `ID_User`, `Username`, `Password`, `Email`, `UserType`, `Avatar` FROM `users` WHERE username='$username' OR Email='$email'";
+			$sql = "SELECT `ID_User`, `Username`, `Password`, `Email`, `UserType`, `Avatar`, `token_email`,`tiempo_generacion`,`activate` FROM `users` WHERE username='$username' OR Email='$email'";
 
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
@@ -72,6 +72,13 @@
             $sql = "SELECT * FROM Users WHERE token_email = '$OLDtoken_email'";
             $stmt = $db->ejecutar($sql);
             // return $sql;
+            return $db->listar($stmt);
+            // return;
+        }
+
+        public function SeleccionarDatosUsuario($db, $username) {
+            $sql = "SELECT * FROM users WHERE username = '$username'";
+            $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
             // return;
         }

@@ -27,9 +27,13 @@ class login_model {
         return $this->bll->get_newToken_BLL($token_email);
     }
     
-    // public function get_login($args) {
-    //     return $this -> bll -> get_login_BLL($args);
-    // }
+    public function get_login($args) {
+        return $this -> bll -> get_login_BLL($args);
+    }
+
+    public function get_DataUser($token) {
+        return $this -> bll -> get_DataUser_BLL($token);
+    }
 
     // public function get_social_login($args) {
     //     return $this -> bll -> get_social_login_BLL($args);

@@ -17,33 +17,41 @@ function LogIn() {
         // console.log(formData['username_log']);
 
 
-        ajaxPromise('Module/RegisterLogIn/ControladorRegLog/ControladorRegLog.php?Option=LogIn', 'POST', 'JSON', {'passwd_log': formData['passwd_log'], 'username_log': formData['username_log'] })
+        ajaxPromise(friendlyURL('?module=login&op=login'), 'POST', 'JSON', {'passwd_log': formData['passwd_log'], 'username_log': formData['username_log'] })
         .then(function(result) {
-            console.log(result);
+            console.log(result);//error_auth
 
             if (result === "error_user") {
                 document.getElementById('error_username_log').innerHTML = "Creemos que tu Usuario esta mal escrito o no existe";
+
             } else if (result === "error_passwd") {
                 document.getElementById('error_passwd_log').innerHTML = "Escribe más despacio, la contraseña es errónea";
+
+            } else if (result === "error_auth") {
+                toastr.error('Tu usuario no esta activado');
+                toastr.info('Hemos vuelto a enviar un correo de verificación a tu cuenta');
+
             } else {
                 localStorage.setItem("token", result.token);
                 toastr.success("Logged in successfully");
-            
+
+            //========================================================//
+                // console.log(result.user);
                 // console.log(localStorage.getItem('token'));     
                 // console.log("Token:", result.token);
-                // console.log("Avatar:", result.user['Avatar']);
-                // console.log("Username:", result.user['Username']);        
-   
+                // console.log("Avatar:", result.user[0]['Avatar']);
+                // console.log("Username:", result.user[0]['Username']);        
+            //=======================================================//
 
                 localStorage.setItem("loggedInUser", JSON.stringify({
                     token: result.token,
-                    avatar: result.user['Avatar'],
-                    username: result.user['Username']
+                    avatar: result.user[0]['Avatar'],
+                    username: result.user[0]['Username']
                 }));
 
 
                 setTimeout(function() {
-                    window.location.href = "index.php?page=Controller_HomeDrop&Option=List";
+                    window.location.href = friendlyURL("?module=home&op=view");
                 }, 1000);
             }
         })
@@ -288,14 +296,14 @@ $(document).ready(function() {
     }
     // console.log(emailReg);
 
+
     //LogIn
     KeyLogIn();
     ButtonLogIn();
 
 
-
     
-    //Register
+    //Register //100%
     KeyRegister();
     ButtonRegister();
 });
