@@ -236,8 +236,95 @@ a {
   display: none;
 }
 
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.button_recover {
+  background-color: #3311af; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  /* margin: 4px 2px; */
+  cursor: pointer;
+  border-radius: 12px; 
+  transition: background-color 0.3s ease; 
+}
 
+.button_recover:hover {
+  background-color: #5269bb; /* Verde oscuro al pasar el ratón */
+}
 
+.forget_html {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  
+}
+
+.forget2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.forget2 h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+.forget {
+  display: flex;
+  flex-direction: column;
+}
+
+.email_recover {
+  margin-bottom: 20px;
+}
+
+.label {
+  font-size: 14px;
+  color: #333;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.error {
+  font-size: 12px;
+}
+
+.button_forget {
+  text-align: center;
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
 
 
 
@@ -567,86 +654,9 @@ fieldset {
 }
 
 
-/*SECOND GLIDER*/
 
 
 
-/*Thrid Glider*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Forget password */
-
-.forget_html {
-  display: block;
-  width: 100%;
-  text-align: center;
-}
-
-.forget {
-  display: block;
-  width: 300px;
-  height: 200px;
-  margin: auto;
-  text-align: center;
-  border-style: solid;
-  border-width: 3px;
-  border-color: #333;
-}
-
-.email_recover {
-  display: block;
-  margin-top: 20px;
-  font-family: 'Verdana', sans-serif;
-  color: #333;
-  font-size: 18px;
-  font-weight: 800;
-}
-
-#email_forg {
-  text-align: center;
-  width: 200px;
-}
-
-#button_recover {
-  display: block;
-  margin: auto;
-  margin-top: 20px;
-  line-height: normal;
-  font-size: 14px;
-  text-align: center;
-  font-family: 'Verdana', sans-serif;
-  font-weight: 600;
-  padding: 0.4em 0em 0.4em 0em;
-  width: 120px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  border: solid 2px #333;
-  color: #333;
-  background-color: #fff;
-}
-
-#button_recover:hover {
-  background: rgb(192, 192, 192);
-}
-
-#error_email_forg { 
-  color: red;
-  font-family: arial;
-  font-size: 15px;
-  font-style: italic;
-}
 
 /* Recover password */
 

@@ -111,7 +111,6 @@ function KeyLogIn() {
 }
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 function ButtonLogIn() {
-    
     $('#login').on('click', function(e) {
         //console.log('ButtonLogIn Ready');
 
@@ -121,6 +120,12 @@ function ButtonLogIn() {
 }
 
 /*~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~*/
+function ButtonForgetPassword() {
+    $('#forget_pass').on('click', function(e) {
+        e.preventDefault();
+        load_form_recover_password();
+    });
+}
 /*~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~*/
 
 function Register() {
@@ -291,6 +296,7 @@ function ButtonRegister() {
     });
 }
 
+
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 $(document).ready(function() {
     // console.log('LogIn.js Document Ready');
@@ -301,6 +307,9 @@ $(document).ready(function() {
         localStorage.setItem('emailReg', 0);
     }
     // console.log(emailReg);
+
+    //Forget
+    ButtonForgetPassword();
 
     //LogIn
     KeyLogIn();

@@ -23,7 +23,7 @@
                     </div>
                     <div class="hr" style="margin-top: 10%;"></div>
                         <div class="foot-lnk">
-                            <a id="forgot-password-link" href="#"><label>¿Has olvidado tu contraseña?</label></a>
+                            <a id="forget_pass"><label>¿Has olvidado tu contraseña?</label></a>
                         </div>
 
                     <br>
@@ -77,7 +77,27 @@
     </div>
 </div>
 
-<script>
+<div class="center-container">
+    <div class="forget_html">
+        <div class="forget2">
+            <h1>Recuperar contraseña</h1>
+        </div>
+        <form class="forget" method="post" id="forget">
+            <div class="email_recover">
+                <label class="label">Correo electrónico</label>
+                <input type="email" id="email_recover_input" class="input" required>
+                <span id="error_email_forg" class="error"></span>
+            </div>
+            <div class="button_forget">
+                <button type="submit" class="button_recover" id="button_recover">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
 
-    document.getElementById('forgot-password-link').href = friendlyURL('index.php?module=login&op=recover_view');
-</script>
+<!-- <script>
+    document.getElementById('forgot-password-link').addEventListener('click', function(event) {
+        event.preventDefault();
+        load_form_new_password();
+    });
+</script> -->
