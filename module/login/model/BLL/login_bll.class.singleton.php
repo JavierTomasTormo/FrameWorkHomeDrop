@@ -156,7 +156,77 @@
 			$user = $this -> dao -> SeleccionarDatosUsuario($this->db, $jwt);
 			return $user;
 		}
+
+		public function get_LikedHouses_BLL($Username) {
+			// return $Username;
+			$user = $this -> dao -> LikedHouses($this->db, $Username);
+
+			if ($user) {
+				return $user;
+			} else {
+				return 'El Usuario no tiene Likes';
+			}
+			// return $user;
+		}
+
+		public function get_LogOut_BLL() {
+			unset($_SESSION['Username']);
+			unset($_SESSION['tiempo']);
+			session_destroy();
+	
+			return('Done');
+		}
+
+		public function get_ControlUser_BLL($token) {
+			// return $token;
+			$token_dec = middleware::decode_username($token);
+
+			// return ["User Logged",  $token_dec, "      User session Logg", $_SESSION['Username']];
+
+			if (isset($_SESSION['Username']) && ($_SESSION['Username']) == $token_dec) {
+				return "Correct_User";
+
+			} else {
+				return "Wrong_User";
+				
+			}
+			// return $user;
+		}
+
+		public function get_Actividad_BLL() {
+			// return $_SESSION;
+
+			if (!isset($_SESSION["tiempo"])) {
+				return ("Inactivo");
+				
+			} else {
+				if ((time() - $_SESSION["tiempo"]) >= 1800) { //1800s=30min
+					return ("Inactivo");
+					
+				} else {
+					return ("Activo");
+				
+				}
+			}
+		}
+
+		public function get_RefreshToken_BLL($token) {
+			// return $_SESSION;
+			$OldToken = middleware::decode_username($token);
+
+			// return $OldToken;
+	
+			$NewToken = middleware::encode($OldToken);
+			return ($NewToken);
+		}
 		
+		public function get_RefreshCookie_BLL() {
+			session_regenerate_id();
+			return "Done";
+			
+		}
+		
+/*get_LogOut_BLL get_Actividad_BLL  get_RefreshCookie_BLL   get_ControlUser_BLL*/
 
 		// public function get_social_login_BLL($args) {
 		// 	if (!empty($this -> dao -> select_user($this->db, $args[1], $args[2]))) {

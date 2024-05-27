@@ -6,18 +6,20 @@ function ProtectURL() {
     // const data = JSON.parse(response);
 
         if (token) {
-            ajaxPromise('Module/RegisterLogIn/ControladorRegLog/ControladorRegLog.php?Option=ControlUser', 'POST', 'JSON', { 'token': token })
+            ajaxPromise(friendlyURL("?module=login&op=ControlUser"), 'POST', 'JSON', { 'token': token })
             .then(function(response) {
+
+
                 // console.log(response); 
     
                 if (!response) {
                     console.error('Error: Respuesta vacía del servidor');
                 } 
                 if (response === "Correct_User") {
-                    console.log("CORRECTO--> El usuario conectado coincide con el Loggeado");
+                    console.log("CORRECTO --> El usuario conectado coincide con el Loggeado");
     
                 } else if (response === "Wrong_User") {
-                    console.log("ERROR--> Se está intentando forzar una cuenta");
+                    console.log("ERROR --> Se está intentando forzar una cuenta");
                     LogOutAuto();
     
                 } else {
@@ -42,10 +44,10 @@ function ControlActivity() {
     // console.log(token);
 
     if (token) {
-        ajaxPromise('Module/RegisterLogIn/ControladorRegLog/ControladorRegLog.php?Option=Actividad', 'POST', 'JSON')
+        ajaxPromise(friendlyURL("?module=login&op=Actividad"), 'POST', 'JSON')
             .then(function(response) {
 
-                //console.log(response);
+                // console.log(response);
 
                 if (response == "Inactivo") {
                     console.log("User INACTIVO");
@@ -63,10 +65,11 @@ function ControlActivity() {
 function RefreshToken() {   
     var token = localStorage.getItem('token');
     if (token) {
-        ajaxPromise('Module/RegisterLogIn/ControladorRegLog/ControladorRegLog.php?Option=RefreshToken', 'POST', 'JSON', { 'token': token })
+        ajaxPromise(friendlyURL("?module=login&op=RefreshToken"), 'POST', 'JSON', { 'token': token })
             .then(function(DataToken) {
 
                 // console.log(DataToken);
+
                 location.reload();
                 console.log("Refresh token correctly");
                 localStorage.setItem("token", DataToken);
@@ -78,7 +81,7 @@ function RefreshToken() {
         //========================================================//
 //============================RefreshCookie============================//
 function RefreshCookie() {
-    ajaxPromise('Module/RegisterLogIn/ControladorRegLog/ControladorRegLog.php?Option=RefreshCookie', 'POST', 'JSON')
+    ajaxPromise(friendlyURL("?module=login&op=RefreshCookie"), 'POST', 'JSON')
         .then(function(response) {
             location.reload();
             console.log("Refresh cookie correctly", response);
@@ -92,7 +95,7 @@ function LogOutAuto() {
 
     toastr.warning("Error, tiempo de sesión expirado");
 
-    setTimeout('window.location.href = "http://localhost/ViviendaHomeDrop/index.php?page=RegLog";', 1000);
+    setTimeout(window.location.href = friendlyURL("?module=home") , 2000);
 }
         //========================================================//
 //============================Document Ready============================//

@@ -35,6 +35,30 @@ class login_model {
         return $this -> bll -> get_DataUser_BLL($token);
     }
 
+    public function get_LikedHouses($Username) {
+        return $this -> bll -> get_LikedHouses_BLL($Username);
+    }
+
+    public function get_LogOut() {
+        return $this -> bll -> get_LogOut_BLL();
+    }
+
+    public function get_ControlUser($token) {
+        return $this -> bll -> get_ControlUser_BLL($token);
+    }
+
+    public function get_Actividad() {
+        return $this -> bll -> get_Actividad_BLL();
+    }
+
+    public function get_RefreshToken($token) {
+        return $this -> bll -> get_RefreshToken_BLL($token);
+    }
+
+    public function get_RefreshCookie() {
+        return $this -> bll -> get_RefreshCookie_BLL();
+    }
+/*get_LikedHouses  get_RefreshCookie get_LogOut*/
     // public function get_social_login($args) {
     //     return $this -> bll -> get_social_login_BLL($args);
     // }
