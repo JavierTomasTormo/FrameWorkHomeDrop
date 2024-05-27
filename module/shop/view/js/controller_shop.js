@@ -891,14 +891,21 @@ function ajaxForSearch(durl, type , dataType , sData = undefined, total_prod = 0
                 '<img src="' + productData.Img + '" style="height: 420px; width: 327px; object-fit: cover;">' +
                 '</div>' +
                 '<div class="product-info">';
+
+                // console.log(token);
+
             if (token) {
+
+                // console.log(productData);
+
                 $.ajax({
-                    url: 'Module/Shop/ControllerShop/ControllerShop.php?Option=UserLikes',
+                    url: friendlyURL('?module=shop&op=UserLikes'),//'Module/Shop/ControllerShop/ControllerShop.php?Option=UserLikes',
                     type: 'POST',
                     dataType: 'JSON',
                     data: { ID_HomeDropLike: productData.ID_HomeDrop, token: token },
                     success: function(response) {
-                        //console.log(response);
+
+                        console.log(response);
 
                         if (response === 'Like') {
                             productHTML += '<div class="LikeHeart is-active" id="' + productData.ID_HomeDrop + '"></div><br>' +
@@ -923,8 +930,12 @@ function ajaxForSearch(durl, type , dataType , sData = undefined, total_prod = 0
                             '</div>';
 
                         $('#' + productData.ID_HomeDrop).html(productHTML);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error en la petición AJAX:", error);
                     }
                 });
+
             } else {
                 productHTML += '<div class="LikeHeart" id="' + productData.ID_HomeDrop + '"></div><br>' +
                 '<b><div class="resultsCountLike" id="resultsCountLike' + productData.ID_HomeDrop + '">0 Likes</div></b>';
@@ -959,30 +970,30 @@ $(document).on('click', '.LikeHeart', function (e) {
     if (token){
 
         if ($(this).hasClass("is-active")) {
-            //console.log('Like');
+            // console.log('Like');
             // console.log(ID_HomeDropLike);
             
             $.ajax({
-                url: 'Module/Shop/ControllerShop/ControllerShop.php?Option=Like',
+                url: friendlyURL('?module=shop&op=Like'),//'Module/Shop/ControllerShop/ControllerShop.php?Option=Like',
                 type: 'POST',
                 dataType: 'JSON',
                 data: {ID_HomeDropLike: ID_HomeDropLike, token: token},
                 success: function() {
-                    // CountLikes(ID_HomeDropLike);
+                    CountLikes(ID_HomeDropLike);
                 }
             });
     
         } else {
-            //console.log('Dislike');
+            // console.log('Dislike');
             //console.log(ID_HomeDropLike);
     
             $.ajax({
-                url: 'Module/Shop/ControllerShop/ControllerShop.php?Option=DisLike',
+                url: friendlyURL('?module=shop&op=DisLike'),//'Module/Shop/ControllerShop/ControllerShop.php?Option=DisLike',
                 type: 'POST',
                 dataType: 'JSON',
                 data: {ID_HomeDropLike: ID_HomeDropLike, token: token},
                 success: function() {
-                    // CountLikes(ID_HomeDropLike);
+                    CountLikes(ID_HomeDropLike);
                 }
             });
         }
@@ -992,7 +1003,7 @@ $(document).on('click', '.LikeHeart', function (e) {
         }, 110); 
 
     } else {
-        setTimeout('window.location.href = "#";', 1000);//http://localhost/ViviendaHomeDrop/index.php?page=RegLog
+        setTimeout(window.location.href = friendlyURL('?module=login'), 1000);//http://localhost/ViviendaHomeDrop/index.php?page=RegLog
 
     }
 });

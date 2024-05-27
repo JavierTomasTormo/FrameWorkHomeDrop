@@ -19,7 +19,12 @@ function LogIn() {
 
         ajaxPromise(friendlyURL('?module=login&op=login'), 'POST', 'JSON', {'passwd_log': formData['passwd_log'], 'username_log': formData['username_log'] })
         .then(function(result) {
-            console.log(result);//error_auth
+
+            // console.log(result);
+
+            // console.log(result['user'][0].token);
+
+            // console.log(result);
 
             if (result === "error_user") {
                 document.getElementById('error_username_log').innerHTML = "Creemos que tu Usuario esta mal escrito o no existe";
@@ -36,11 +41,11 @@ function LogIn() {
                 toastr.success("Logged in successfully");
 
             //========================================================//
-                // console.log(result.user);
+                // console.log(result['user']);
                 // console.log(localStorage.getItem('token'));     
                 // console.log("Token:", result.token);
-                // console.log("Avatar:", result.user[0]['Avatar']);
-                // console.log("Username:", result.user[0]['Username']);        
+                // console.log("Avatar:", result['user'][0].Avatar);
+                // console.log("Username:", result['user'][0].Username);        
             //=======================================================//
 
                 localStorage.setItem("loggedInUser", JSON.stringify({
@@ -51,11 +56,12 @@ function LogIn() {
 
 
                 setTimeout(function() {
-                    window.location.href = friendlyURL("?module=home&op=view");
+                    window.location.href = friendlyURL("?module=home");
                 }, 1000);
             }
         })
         .catch(function(error) {
+            toastr.error("Algo ha sucedido, por favor intenta de nuevo");
             console.error('Error:', error);
         });
 
@@ -296,12 +302,9 @@ $(document).ready(function() {
     }
     // console.log(emailReg);
 
-
     //LogIn
     KeyLogIn();
     ButtonLogIn();
-
-
     
     //Register //100%
     KeyRegister();

@@ -370,6 +370,30 @@
             return $db->listar($stmt);
         }
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+        public function UserLikes($db ,$ID_HomeDrop, $Username) {
+
+                $sql = "SELECT vh.ID_HomeDrop
+                        FROM likeshomedrop vh
+                        WHERE vh.ID_HomeDrop = $ID_HomeDrop AND ID_User= (SELECT ID_User FROM users WHERE Username = '$Username')";
+
+                $stmt = $db->ejecutar($sql);
+                return $db->listar($stmt);
+        }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+                public function Likes($db ,$ID_HomeDrop, $Username) {
+
+                        $sql = "INSERT INTO `likeshomedrop`(`ID_HomeDrop`, `ID_User`) VALUES ($ID_HomeDrop,(SELECT ID_User FROM users WHERE Username = '$Username' ))";
+
+                        $stmt = $db->ejecutar($sql);
+                }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+                public function DisLikes($db ,$ID_HomeDrop, $Username) {
+
+                        $sql = "DELETE FROM `likeshomedrop` WHERE ID_HomeDrop = $ID_HomeDrop AND ID_User= (SELECT ID_User FROM users WHERE Username = '$Username')";
+
+                        $stmt = $db->ejecutar($sql);
+                }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
 
         // public function CountRelatedHomes($db, $Category, $Ciudad, $ID_HomeDrop) {
 

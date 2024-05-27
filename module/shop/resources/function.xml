@@ -66,4 +66,16 @@
             <uri>clicks</uri>
         </function>
     <!----> 
+        <function>
+            <name>UserLikes</name>
+            <uri>UserLikes</uri>
+        </function>
+        <function>
+            <name>Like</name>
+            <uri>Like</uri>
+        </function>
+        <function>
+            <name>DisLike</name>
+            <uri>DisLike</uri>
+        </function>
 </functions>

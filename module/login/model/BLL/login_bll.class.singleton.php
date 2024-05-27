@@ -114,10 +114,11 @@
 
 		public function get_login_BLL($args) {
 
-			// return $args;
+			// return "error_passwd";
 
 			if (!empty($this -> dao -> select_user($this->db, $args[0], $args[0]))) {
 				$user = $this -> dao -> select_user($this->db, $args[0], $args[0]);
+				// return $user;
 				// return $user[0]['Username'];
 
 				if (password_verify($args[1], $user[0]['Password']) && $user[0]['activate'] == 1) {
@@ -134,27 +135,32 @@
 					
                     session_regenerate_id();
 
-					$response = array(
+					// return "Regenaerado ID";
+
+					$responsearr = array(
 						'token' => $jwt,
 						'user' => $user,
 					);
 
-					return $response;
+					return $responsearr;
+
+				} else if (!password_verify($args[1], $user[0]['password'])) {
+					return "error_passwd";				
 
 				} else if (password_verify($args[1], $user[0]['password']) && $user[0]['activate'] == 0) {
 					$this->get_newToken_BLL($user[0]['token_email']);
 				} else {
-					return 'error_auth';
+					return "error_auth";
 				}
             } else {
-				return 'error_user';
+				return "error_user";
 			}
 		}
 
 		public function get_DataUser_BLL($token) {
 			$jwt = middleware::decode_username($token);
-			$user = $this -> dao -> SeleccionarDatosUsuario($this->db, $jwt);
-			return $user;
+			return $this -> dao -> SeleccionarDatosUsuario($this->db, $jwt);
+			// return $user;
 		}
 
 		public function get_LikedHouses_BLL($Username) {
@@ -178,12 +184,18 @@
 		}
 
 		public function get_ControlUser_BLL($token) {
+
+
 			// return $token;
+
 			$token_dec = middleware::decode_username($token);
+			// return $token_dec;
+			// return $_SESSION['username'];
 
-			// return ["User Logged",  $token_dec, "      User session Logg", $_SESSION['Username']];
+			// return [$token_dec ,$_SESSION['username']];
 
-			if (isset($_SESSION['Username']) && ($_SESSION['Username']) == $token_dec) {
+
+			if (isset($_SESSION['username']) && ($_SESSION['username']) == $token_dec) {
 				return "Correct_User";
 
 			} else {

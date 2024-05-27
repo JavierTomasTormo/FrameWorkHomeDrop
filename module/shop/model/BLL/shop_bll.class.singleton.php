@@ -336,6 +336,41 @@
 			return $this -> dao -> CountLikes($this->db, $ID_HomeDropLike);
 		}
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
+		public function get_UserLikes_BLL($ID_HomeDropLike, $token) {
+
+			$decode = middleware::decode_username($token);
+
+			
+			$count = $this -> dao -> UserLikes($this->db, $ID_HomeDropLike, $decode);
+
+			// return $count;
+
+			if (!empty($count)) {
+				return "Like";
+			}
+			else {
+				return "NoLike";
+			}
+		}
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
+		public function get_Like_BLL($ID_HomeDropLike, $token) {
+
+			$decode = middleware::decode_username($token);
+
+			
+			return $this -> dao -> Likes($this->db, $ID_HomeDropLike, $decode);
+
+		}
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
+		public function get_DisLike_BLL($ID_HomeDropLike, $token) {
+
+			$decode = middleware::decode_username($token);
+
+			
+			return $this -> dao -> Dislikes($this->db, $ID_HomeDropLike, $decode);
+
+		}
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
 		// public function get_control_likes_BLL($args) {
 
 		// 	$token = explode('"', $args[1]);

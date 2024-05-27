@@ -2,34 +2,43 @@
 function ProtectURL() {
     var token = localStorage.getItem('token');
 
-    //console.log(token);
+    // console.log(token);
     // const data = JSON.parse(response);
 
         if (token) {
-            ajaxPromise(friendlyURL("?module=login&op=ControlUser"), 'POST', 'JSON', { 'token': token })
-            .then(function(response) {
+            // console.log("token existe", token);
+
+            if (token == "undefined") {
+                console.log("Token vacío");
+
+            } else {
+                // console.log("token existe");
+        
+                ajaxPromise(friendlyURL("?module=login&op=ControlUser"), 'POST', 'JSON', { 'token': token })
+                .then(function(response) {
 
 
-                // console.log(response); 
-    
-                if (!response) {
-                    console.error('Error: Respuesta vacía del servidor');
-                } 
-                if (response === "Correct_User") {
-                    console.log("CORRECTO --> El usuario conectado coincide con el Loggeado");
-    
-                } else if (response === "Wrong_User") {
-                    console.log("ERROR --> Se está intentando forzar una cuenta");
-                    LogOutAuto();
-    
-                } else {
-                    console.error('Error: Respuesta del servidor inesperada');
-    
-                }
-            })
-            .catch(function(error) {
-                console.error('Error:', error);
-            }); 
+                    // console.log(response); 
+        
+                    if (!response) {
+                        console.error('Error: Respuesta vacía del servidor');
+                    } 
+                    if (response === "Correct_User") {
+                        console.log("CORRECTO --> El usuario conectado coincide con el Loggeado");
+        
+                    } else if (response === "Wrong_User") {
+                        console.log("ERROR --> Se está intentando forzar una cuenta");
+                        LogOutAuto();
+        
+                    } else {
+                        console.error('Error: Respuesta del servidor inesperada');
+        
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Error:', error);
+                }); 
+            }
         } else {
             var hoy = new Date();   
             console.log("No hay token disponible: \n" + hoy.toDateString() + "\n" + hoy.toLocaleTimeString());
@@ -71,7 +80,7 @@ function RefreshToken() {
                 // console.log(DataToken);
 
                 location.reload();
-                console.log("Refresh token correctly");
+                console.log("Refresh token correctly", DataToken);
                 localStorage.setItem("token", DataToken);
                 
                 LoadMenu();
@@ -95,7 +104,7 @@ function LogOutAuto() {
 
     toastr.warning("Error, tiempo de sesión expirado");
 
-    setTimeout(window.location.href = friendlyURL("?module=home") , 2000);
+    setTimeout(window.location.href = friendlyURL("?module=login") , 2000);
 }
         //========================================================//
 //============================Document Ready============================//

@@ -24,7 +24,7 @@
         }
     
         function login() {
-            // echo json_encode('LogIn Del Controlador');//passwd_log': formData['passwd_log'], 'username_log': formData['username_log']
+            // echo json_encode(['LogIn Del Controlador', [$_POST['username_log'], $_POST['passwd_log']]]);//passwd_log': formData['passwd_log'], 'username_log': formData['username_log']
             echo json_encode(common::load_model('login_model', 'get_login', [$_POST['username_log'], $_POST['passwd_log']]));
         }
 

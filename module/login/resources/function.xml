@@ -118,8 +118,9 @@
         <name>RefreshCookie</name>
         <uri>RefreshCookie</uri>
     </function>
+
 </functions>
 
 
 
-<!--       RefreshToken  RefreshCookie  Actividad       -->
+<!--       RefreshToken  RefreshCookie  UserLikes  Actividad       -->

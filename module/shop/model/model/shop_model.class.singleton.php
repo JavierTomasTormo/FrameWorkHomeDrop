@@ -67,5 +67,20 @@
             return $this -> bll -> get_CountLikes_BLL($ID_HomeDropLike);
         }
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
+        public function get_UserLikes($args) {
+            // return  $args;
+            return $this -> bll -> get_UserLikes_BLL($args[0], $args[1]);
+        }
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
+        public function get_Like($args) {
+            // return  $args;
+            return $this -> bll -> get_Like_BLL($args[0], $args[1]);
+        }
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
+        public function get_DisLike($args) {
+            // return  $args;
+            return $this -> bll -> get_DisLike_BLL($args[0], $args[1]);
+        }
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
     }
 ?>

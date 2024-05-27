@@ -60,10 +60,11 @@
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
-        // function CountLikes() {
-        //     echo json_encode("✅ CountLikes ✅");
-        //     // echo json_encode(common::load_model('shop_model', 'get_MostVisited'));
-        // }
+        function UserLikes() {
+            // echo json_encode("✅ UserLikes ✅");
+            // echo json_encode([$_POST['ID_HomeDropLike'], $_POST['token']]);
+            echo json_encode(common::load_model('shop_model', 'get_UserLikes', [$_POST['ID_HomeDropLike'], $_POST['token']]));
+        }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
@@ -109,6 +110,22 @@
             // echo json_encode($_POST['ID_HomeDropLike']);
             
             echo json_encode(common::load_model('shop_model', 'get_CountLikes', $_POST['ID_HomeDropLike']));
+        }
+
+//.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
+//.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
+
+        function Like() {
+            // echo json_encode("✅ CountLikes ✅");
+            // echo json_encode($_POST['ID_HomeDropLike']);
+            
+            echo json_encode(common::load_model('shop_model', 'get_Like', [$_POST['ID_HomeDropLike'], $_POST['token']]));
+        }
+        function DisLike() {
+            // echo json_encode("✅ CountLikes ✅");
+            // echo json_encode($_POST['ID_HomeDropLike']);
+            
+            echo json_encode(common::load_model('shop_model', 'get_DisLike', [$_POST['ID_HomeDropLike'], $_POST['token']]));
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
