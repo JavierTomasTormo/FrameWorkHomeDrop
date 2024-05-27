@@ -94,8 +94,32 @@
         <name>DataUser</name>
         <uri>DataUser</uri>
     </function>
+    <function>
+        <name>LikedHouses</name>
+        <uri>LikedHouses</uri>
+    </function>
+    <function>
+        <name>LogOut</name>
+        <uri>LogOut</uri>
+    </function>
+    <function>
+        <name>ControlUser</name>
+        <uri>ControlUser</uri>
+    </function>
+    <function>
+        <name>Actividad</name>
+        <uri>Actividad</uri>
+    </function>
+    <function>
+        <name>RefreshToken</name>
+        <uri>RefreshToken</uri>
+    </function>
+    <function>
+        <name>RefreshCookie</name>
+        <uri>RefreshCookie</uri>
+    </function>
 </functions>
 
 
 
-<!--        DataUser         -->
+<!--       RefreshToken  RefreshCookie  Actividad       -->

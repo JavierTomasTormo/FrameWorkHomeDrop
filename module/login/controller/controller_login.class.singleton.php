@@ -55,11 +55,38 @@
             echo json_encode(common::load_model('login_model', 'get_DataUser', $_POST['token']));
         }
 
-        // function verify_email() {//
-        //     $verify = json_encode(common::load_model('login_model', 'get_verify_email', $_POST['token_email']));
-        //     echo json_encode($verify);
-        // }
+        function LikedHouses() {
+            // echo json_encode($_POST['Username']);
+            echo json_encode(common::load_model('login_model', 'get_LikedHouses', $_POST['Username']));
+        }
 
+        function LogOut() {
+            // echo json_encode($_POST['Username']);
+            echo json_encode(common::load_model('login_model', 'get_LogOut'));
+        }
+
+        function ControlUser() {
+            // echo json_encode($_POST['Username']);
+            echo json_encode(common::load_model('login_model', 'get_ControlUser', $_POST['token']));
+        }
+
+        function Actividad() {
+            // echo json_encode($_POST['Username']);
+            echo json_encode(common::load_model('login_model', 'get_Actividad'));
+        }
+
+        function RefreshToken() {
+            // echo json_encode($_POST['Username']);
+            echo json_encode(common::load_model('login_model', 'get_RefreshToken', $_POST['token']));
+        }
+
+        function RefreshCookie() {
+            // echo json_encode($_POST['Username']);
+            echo json_encode(common::load_model('login_model', 'get_RefreshCookie'));
+        }
+
+
+        /*Actividad  RefreshToken*/
         // function send_recover_email() {
         //     echo json_encode(common::load_model('login_model', 'get_recover_email', $_POST['email_forg']));
         // }
