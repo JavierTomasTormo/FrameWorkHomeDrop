@@ -659,66 +659,68 @@ fieldset {
 
 
 /* Recover password */
-
+/* Container */
 .recover_html {
-  display: block;
-  width: 100%;
-  text-align: center;
-}
-
-.recover {
-  display: block;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 300px;
-  height: 350px;
-  margin: auto;
-  text-align: center;
-  border-style: solid;
-  border-width: 3px;
-  border-color: #333;
+  margin: 0 auto;
+  margin-top: 50px;
 }
 
-.password_recover, .password_recover_2 {
-  display: block;
-  margin-top: 20px;
-  font-family: 'Verdana', sans-serif;
+/* Form Title */
+.recover_html h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
   color: #333;
-  font-size: 18px;
-  font-weight: 800;
-}
-
-#pass_rec, #pass_rec_2 {
   text-align: center;
-  width: 200px;
 }
 
-#button_set_pass {
+/* Form Elements */
+.recover_label {
+  font-weight: bold;
+  color: #333;
   display: block;
-  margin: auto;
-  margin-top: 20px;
-  line-height: normal;
-  font-size: 14px;
-  text-align: center;
-  font-family: 'Verdana', sans-serif;
-  font-weight: 600;
-  padding: 0.4em 0em 0.4em 0em;
-  width: 150px;
+  margin-bottom: 5px;
+}
+
+.recover_input {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   box-sizing: border-box;
-  border-radius: 10px;
-  border: solid 2px #333;
-  color: #333;
-  background-color: #fff;
+  font-size: 14px;
 }
 
-#button_set_pass:hover {
-  background: rgb(192, 192, 192);
+.recover_button {
+  width: 100%;
+  padding: 10px;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
-#error_password_rec, #error_password_rec_2 { 
+.recover_button:hover {
+  background-color: #4cae4c;
+}
+
+/* Error Message */
+.recover_error {
   color: red;
-  font-family: arial;
-  font-size: 15px;
-  font-style: italic;
+  font-size: 12px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  display: block;
 }
+
 
 
 

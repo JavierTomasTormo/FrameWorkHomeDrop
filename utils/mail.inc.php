@@ -46,15 +46,15 @@
                             </div>
                             <div style="padding: 20px; text-align: center;">
                                 <p style="font-size: 16px; color: #666666; line-height: 1.5; margin-bottom: 30px;">
-                                    We received a request to reset your password. Click the button below to reset it.
+                                    We received a request to reset your password. <br> Click the button below to reset it.
                                 </p>
                                 <a href="http://localhost/FrameWorkHomeDrop/module/login/recover/'.$email['token'].'" 
                                    style="background-color: #ddba6b; color: #ffffff; padding: 15px 25px; text-decoration: none; font-size: 16px; border-radius: 5px; display: inline-block;">
                                     Reset Password
                                 </a>
                             </div>
-                            <div style="padding: 20px; text-align: center;">
-                                <p style="font-size: 14px; color: #999999; line-height: 1.5; margin-top: 30px;">
+                            <div style="padding: 10px; text-align: center;">
+                                <p style="font-size: 14px; color: #999999; line-height: 1.5; margin-top: 15px;">
                                     If you did not request a password reset, please ignore this email or contact support if you have questions.
                                 </p>
                             </div>

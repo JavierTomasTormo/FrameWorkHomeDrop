@@ -336,8 +336,23 @@ function load_content() {
     // console.log(path[4]);
     
     if (path[4] === 'recover') {
-        window.location.href = friendlyURL("?module=login&op=recover_view");
+        var token_email_recover  = localStorage.getItem('token_email');
 
+        var tokenURL = path[5];
+
+        // console.log(token_email_recover);
+        // console.log(tokenURL);
+
+        if (tokenURL === token_email_recover) {
+            // console.log('Path===email');
+            window.location.href = friendlyURL("?module=login&op=recover_view");
+
+        } else {
+            toastr.error("Token inválido");
+            setTimeout(function() {
+                window.location.href = friendlyURL("?module=login&op=view");
+            }, 2000)
+        }
     } else if (path[4] === 'verify') {
         // console.log('Path===verify');
         toastr.options.timeOut = 3000;
@@ -356,8 +371,6 @@ function load_content() {
         }).catch(function() {
           console.log('Error: verify email error');
         });
-
-
     }else if (path[3] === 'view') {
         $(".login-wrap").show();
         $(".forget_html").hide();
@@ -423,28 +436,33 @@ function send_recover_password(){
     // console.log('send_recover_password');
 
     if(validate_recover_password() != 0){
+        // console.log('recover_password validado');
+    
+        const data = document.getElementById('email_recover_input').value;
+    
+        // console.log('Correo electrónico:', data);
 
-        console.log('recover_password validado');
+        $.ajax({
+            url: friendlyURL('?module=login&op=send_recover_email'),
+            dataType: 'JSON',
+            type: "POST",
+            data: { 'data' : data }
+        }).done(function(data) {
 
-        var data = $('#recover_email_form').serialize();
+            if(data == "error"){		
+                $("#error_email_forg").html("The email doesn't exist");
+            } else {
+                toastr.options.timeOut = 3000;
+                toastr.success("Email sended");
 
-        console.log(data);
-        // $.ajax({
-        //     url: friendlyURL('?module=login&op=send_recover_email'),
-        //     dataType: 'json',
-        //     type: "POST",
-        //     data: data,
-        // }).done(function(data) {
-        //     if(data == "error"){		
-        //         $("#error_email_forg").html("The email doesn't exist");
-        //     } else{
-        //         toastr.options.timeOut = 3000;
-        //         toastr.success("Email sended");
-        //         setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 1000);
-        //     }
-        // }).fail(function( textStatus ) {
-        //     console.log('Error: Recover password error');
-        // });    
+                localStorage.setItem('token_email', [data]);
+
+                setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 1000);
+
+            }
+        }).fail(function( textStatus ) {
+            console.log('Error: Recover password error', textStatus);
+        });    
     }
 }
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/

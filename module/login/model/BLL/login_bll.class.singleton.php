@@ -238,6 +238,42 @@
 			
 		}
 		
+
+		public function get_recover_email_BBL($args) {
+			// return $args;
+			$user = $this -> dao -> select_recover_password($this->db, $args);
+			// return $user;
+			$token = middleware::encode($user);
+			$recover_token = $token;
+
+			if (!empty($user)) {
+
+                $message = [
+								'type' => 'recover', 
+								'token' => $token, 
+								'toEmail' => $args
+							];
+				// return $recover_token;	
+                $email = mail::send_email($message);
+				// return $email;
+
+				if (!$email) {
+					return;  
+				}
+
+				return $recover_token;
+            } else {
+                return 'error';
+            }
+		}
+
+
+		// public function get_verify_token_BLL($args) {
+		// 	if($this -> dao -> select_verify_email($this->db, $args)){
+		// 		return 'verify';
+		// 	}
+		// 	return 'fail';
+		// }
 /*get_LogOut_BLL get_Actividad_BLL  get_RefreshCookie_BLL   get_ControlUser_BLL*/
 
 		// public function get_social_login_BLL($args) {
@@ -262,31 +298,7 @@
 		// 	}
 		// }
 
-		// public function get_recover_email_BBL($args) {
-		// 	$user = $this -> dao -> select_recover_password($this->db, $args);
-		// 	$token = common::generate_Token_secure(20);
 
-		// 	if (!empty($user)) {
-		// 		$this -> dao -> update_recover_password($this->db, $args, $token);
-        //         $message = ['type' => 'recover', 
-        //                     'token' => $token, 
-        //                     'toEmail' => $args];
-        //         $email = json_decode(mail::send_email($message), true);
-		// 		if (!empty($email)) {
-		// 			return;  
-		// 		}   
-        //     }else{
-        //         return 'error';
-        //     }
-		// }
-
-
-		// public function get_verify_token_BLL($args) {
-		// 	if($this -> dao -> select_verify_email($this->db, $args)){
-		// 		return 'verify';
-		// 	}
-		// 	return 'fail';
-		// }
 
 		// public function get_new_password_BLL($args) {
 		// 	$hashed_pass = password_hash($args[1], PASSWORD_DEFAULT, ['cost' => 12]);

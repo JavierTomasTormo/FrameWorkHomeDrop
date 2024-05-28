@@ -58,6 +58,12 @@ class login_model {
     public function get_RefreshCookie() {
         return $this -> bll -> get_RefreshCookie_BLL();
     }
+
+    public function get_recover_email($args) {
+        // return $args;
+        return $this -> bll -> get_recover_email_BBL($args);
+    }
+
 /*get_LikedHouses  get_RefreshCookie get_LogOut*/
     // public function get_social_login($args) {
     //     return $this -> bll -> get_social_login_BLL($args);
@@ -67,9 +73,7 @@ class login_model {
     //     return $this -> bll -> get_verify_email_BLL($args);
     // }
 
-    // public function get_recover_email($args) {
-    //     return $this -> bll -> get_recover_email_BBL($args);
-    // }
+
 
     // public function get_verify_token($args) {
     //     return $this -> bll -> get_verify_token_BLL($args);
