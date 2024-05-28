@@ -64,6 +64,15 @@ class login_model {
         return $this -> bll -> get_recover_email_BBL($args);
     }
 
+    public function get_JWT_Caduco($args) {
+        // return $args;
+        return $this -> bll -> get_JWT_Caduco_BBL($args);
+    }
+
+    public function get_verify_token($args) {
+        return $this -> bll -> get_verify_token_BLL($args);
+    }
+    
 /*get_LikedHouses  get_RefreshCookie get_LogOut*/
     // public function get_social_login($args) {
     //     return $this -> bll -> get_social_login_BLL($args);
@@ -75,9 +84,7 @@ class login_model {
 
 
 
-    // public function get_verify_token($args) {
-    //     return $this -> bll -> get_verify_token_BLL($args);
-    // }
+
 
     // public function get_new_password($args) {
     //     return $this -> bll -> get_new_password_BLL($args);

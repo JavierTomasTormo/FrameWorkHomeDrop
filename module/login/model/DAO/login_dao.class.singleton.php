@@ -31,7 +31,7 @@
         }
 
         public function obtener_tiempo_generacion($db, $token_email) {
-            $sql = "SELECT tiempo_generacion FROM Users WHERE token_email = '$token_email'";
+            $sql = "SELECT tiempo_generacion FROM Users WHERE token_email = '$token_email' OR Email = '$token_email'";
             $stmt = $db->ejecutar($sql);
             $resultado = $db->listar($stmt);
 
@@ -120,7 +120,11 @@
             // return;
         }
 
-        public function select_recover_password($db, $email){
+        public function select_recover_password($db, $email, $tiempo_actual){
+
+			$sql_time = "UPDATE `users` SET `tiempo_generacion`='$tiempo_actual',`activate`='0' WHERE Email = '$email'";
+            $stmtpart = $db->ejecutar($sql_time);
+
 			$sql = "SELECT `Email` FROM `Users` WHERE Email = '$email' AND password NOT LIKE ('')";
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);

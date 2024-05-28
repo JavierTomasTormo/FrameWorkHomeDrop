@@ -118,9 +118,19 @@
         <name>RefreshCookie</name>
         <uri>RefreshCookie</uri>
     </function>
+    <function>
+        <name>JWT_Caduco</name>
+        <uri>JWT_Caduco</uri>
+    </function>
+    <function>
+        <name>verify_token</name>
+        <uri>verify_token</uri>
+    </function>
+
+
 
 </functions>
 
 
 
-<!--       RefreshToken  RefreshCookie  UserLikes  Actividad       -->
+<!--    JWT_Caduco   RefreshToken  RefreshCookie  UserLikes  Actividad   verify_token    -->

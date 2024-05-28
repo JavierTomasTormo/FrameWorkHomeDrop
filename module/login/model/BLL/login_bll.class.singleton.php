@@ -238,10 +238,11 @@
 			
 		}
 		
-
 		public function get_recover_email_BBL($args) {
 			// return $args;
-			$user = $this -> dao -> select_recover_password($this->db, $args);
+			$tiempo_actual = time();
+			$user = $this -> dao -> select_recover_password($this->db, $args, $tiempo_actual);
+			
 			// return $user;
 			$token = middleware::encode($user);
 			$recover_token = $token;
@@ -267,14 +268,35 @@
             }
 		}
 
+		public function get_JWT_Caduco_BBL($email_actual) {
+			$tiempo_actual = time();
+			$tiempo_generacion = $this->dao->obtener_tiempo_generacion($this->db, $email_actual);
 
-		// public function get_verify_token_BLL($args) {
-		// 	if($this -> dao -> select_verify_email($this->db, $args)){
-		// 		return 'verify';
-		// 	}
-		// 	return 'fail';
-		// }
-/*get_LogOut_BLL get_Actividad_BLL  get_RefreshCookie_BLL   get_ControlUser_BLL*/
+
+			if ($tiempo_generacion !== false) {
+				$diferencia_tiempo = $tiempo_actual - $tiempo_generacion;
+
+				// return $diferencia_tiempo;
+
+
+				if ($diferencia_tiempo > 3000) { // 5 minutos = 300 segundos //poner a 900 para que se actualice el token cada 9 +- minutos
+					return 'token_caducado';
+				} else {
+					// return ['El token no esta caducado', $diferencia_tiempo];
+					return 'verify';
+				}
+			} else {
+				return 'token_caducado';
+			}
+		}
+
+		public function get_verify_token_BLL($args) {
+			if($this -> dao -> select_verify_email($this->db, $args)){
+				return 'verify';
+			}
+			return 'fail';
+		}
+/*get_LogOut_BLL get_Actividad_BLL   get_RefreshCookie_BLL   get_ControlUser_BLL*/
 
 		// public function get_social_login_BLL($args) {
 		// 	if (!empty($this -> dao -> select_user($this->db, $args[1], $args[2]))) {

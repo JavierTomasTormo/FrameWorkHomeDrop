@@ -50,6 +50,12 @@
             echo json_encode(common::load_model('login_model', 'get_GenerarNuevoToken', $_POST['token_email']));
         }
 
+
+        function JWT_Caduco() {
+            // echo json_encode($_POST['token_email']);          
+            echo json_encode(common::load_model('login_model', 'get_JWT_Caduco', $_POST['email_actual']));
+        }
+
         function DataUser() {
             // echo json_encode($_POST['token_email']);          
             echo json_encode(common::load_model('login_model', 'get_DataUser', $_POST['token']));
@@ -92,9 +98,9 @@
             echo json_encode(common::load_model('login_model', 'get_recover_email', $_POST['data']));
         }
 
-        // function verify_token() {
-        //     echo json_encode(common::load_model('login_model', 'get_verify_token', $_POST['token_email']));
-        // }
+        function verify_token() {
+            echo json_encode(common::load_model('login_model', 'get_verify_token', $_POST['token_email']));
+        }
 
         // function new_password() {
         //     echo json_encode(common::load_model('login_model', 'get_new_password', [$_POST['token_email'], $_POST['password']]));
