@@ -139,6 +139,30 @@
             return "ok";
         }
 
+        public function get_attempts($db, $user) {
+            $sql = "SELECT `attempts` FROM `Users` WHERE `Username` = '$user'";
+            $stmt = $db->ejecutar($sql);
+            $result = $db->listar($stmt);
+        
+            if ($result) {
+                return $result[0]['attempts'];
+            } else {
+                return false;
+            }
+        }
+        
+        public function update_attempts($db, $user, $newAttempts) {
+            $sql = "UPDATE `Users` SET `attempts` = $newAttempts WHERE `Username` = '$user'";
+            $stmt = $db->ejecutar($sql);
+            return $stmt;
+        }
+        
+        public function update_attempts_and_deactivate($db, $user, $newAttempts) {
+            $sql = "UPDATE `Users` SET `attempts` = $newAttempts, `activate` = 0 WHERE `Username` = '$user'";
+            $stmt = $db->ejecutar($sql);
+            return $stmt;
+        }
+        
         // public function update_recover_password($db, $email, $token_email){
 		// 	$sql = "UPDATE `users` SET `token_email`= '$token_email' WHERE `email` = '$email'";
         //     $stmt = $db->ejecutar($sql);

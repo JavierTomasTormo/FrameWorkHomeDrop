@@ -117,42 +117,44 @@
 
 			if (!empty($this -> dao -> select_user($this->db, $args[0], $args[0]))) {
 				$user = $this -> dao -> select_user($this->db, $args[0], $args[0]);
-				// return $user;
+
+
+				// return [$user, $args];
+
 				// return $user[0]['Username'];
 
 				if (password_verify($args[1], $user[0]['Password']) && $user[0]['activate'] == 1) {
-
-					// return 'Buenas tardes';
+					// Si la contraseña es correcta y la cuenta está activada
+				
 					$jwt = middleware::encode($user[0]['Username']);
-					// return $jwt;
-
 					$_SESSION['username'] = $user[0]['Username'];
-
 					$_SESSION['tiempo'] = time();
-
-					// return $_SESSION['username'];
-					
-                    session_regenerate_id();
-
-					// return "Regenaerado ID";
-
+					session_regenerate_id();
+				
 					$responsearr = array(
 						'token' => $jwt,
 						'user' => $user,
 					);
-
+				
 					return $responsearr;
+				
+				} else if (!password_verify($args[1], $user[0]['Password']) && $user[0]['activate'] == 1) {
+					// Si la contraseña es incorrecta
+					// return $user;
 
-				} else if (!password_verify($args[1], $user[0]['password'])) {
-					return "error_passwd";				
+					return "error_passwd";
 
-				} else if (password_verify($args[1], $user[0]['password']) && $user[0]['activate'] == 0) {
+				} else if (password_verify($args[1], $user[0]['Password']) && $user[0]['activate'] == 0) {
+					// Si la contraseña es correcta pero la cuenta no está activada
 					$this->get_newToken_BLL($user[0]['token_email']);
+				
 				} else {
+					// Cualquier otro caso de error de autenticación
 					return "error_auth";
 				}
-            } else {
-				return "error_user";
+				
+            // } else {
+			// 	return "error_user";
 			}
 		}
 
@@ -303,6 +305,36 @@
 			return 'fail';
 		}
 
+		public function handle_login_attempt_BLL($user) {
+			// Obtener el número actual de intentos para el usuario
+			$attempts = $this->dao->get_attempts($this->db, $user);
+		
+			// return $attempts;
+
+			if ($attempts !== false) {
+				$newAttempts = $attempts + 1;
+		
+				// Si se han alcanzado 3 intentos, desactivar la cuenta y mostrar el campo OTP
+				if ($newAttempts >= 4) {
+					if ($this->dao->update_attempts_and_deactivate($this->db, $user, $newAttempts)) {
+						return ['OTP_REQUIRED', $attempts];
+					} else {
+						return 'Error al actualizar los intentos y desactivar la cuenta';
+					}
+				} else {
+					// Actualizar el número de intentos
+					if ($this->dao->update_attempts($this->db, $user, $newAttempts)) {
+						return ['ATTEMPT_UPDATED', $attempts];
+					} else {
+						return 'Error al actualizar los intentos';
+					}
+				}
+			} else {
+				return 'Usuario no encontrado';
+			}
+		}
+		
+		
 /*get_LogOut_BLL get_Actividad_BLL   get_RefreshCookie_BLL   get_ControlUser_BLL*/
 
 		// public function get_social_login_BLL($args) {

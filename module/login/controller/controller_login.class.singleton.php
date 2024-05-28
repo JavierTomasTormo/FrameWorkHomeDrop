@@ -50,6 +50,9 @@
             echo json_encode(common::load_model('login_model', 'get_GenerarNuevoToken', $_POST['token_email']));
         }
 
+        function handleLoginAttempt() {
+            echo json_encode(common::load_model('login_model', 'handle_login_attempt', $_POST['user']));
+        }        
 
         function JWT_Caduco() {
             // echo json_encode($_POST['token_email']);          
@@ -97,8 +100,6 @@
             // echo json_encode("yo si que llego a esto mi rey");
             echo json_encode(common::load_model('login_model', 'get_recover_email', $_POST['data']));
         }
-
-
 
         function new_password() {
             // echo json_encode("Hola desde el putíssimo contolador");

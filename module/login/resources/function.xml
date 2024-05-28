@@ -130,10 +130,13 @@
         <name>new_password</name>
         <uri>new_password</uri>
     </function>
-
+    <function>
+        <name>handleLoginAttempt</name>
+        <uri>handleLoginAttempt</uri>
+    </function>
 
 </functions>
 
 
 
-<!--  new_password  JWT_Caduco   RefreshToken  RefreshCookie  UserLikes  Actividad   verify_token    -->
+<!--  handleLoginAttempt new_password  JWT_Caduco   RefreshToken  RefreshCookie  UserLikes  Actividad   verify_token    -->

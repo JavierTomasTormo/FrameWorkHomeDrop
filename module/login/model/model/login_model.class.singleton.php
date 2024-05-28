@@ -69,7 +69,10 @@ class login_model {
         return $this -> bll -> get_JWT_Caduco_BBL($args);
     }
 
-
+    public function handle_login_attempt($user) {
+        return $this->bll->handle_login_attempt_BLL($user);
+    }
+    
 
 /*get_LikedHouses  get_RefreshCookie get_LogOut*/
     // public function get_social_login($args) {

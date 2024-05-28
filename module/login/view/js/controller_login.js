@@ -16,30 +16,37 @@ function LogIn() {
         // console.log(formData['passwd_log']);
         // console.log(formData['username_log']);
 
-
         ajaxPromise(friendlyURL('?module=login&op=login'), 'POST', 'JSON', {'passwd_log': formData['passwd_log'], 'username_log': formData['username_log'] })
         .then(function(result) {
-
-            // console.log(result);
-
-            // console.log(result['user'][0].token);
-
-            // console.log(result);
 
             if (result === "error_user") {
                 document.getElementById('error_username_log').innerHTML = "Creemos que tu Usuario esta mal escrito o no existe";
 
             } else if (result === "error_passwd") {
-                document.getElementById('error_passwd_log').innerHTML = "Escribe más despacio, la contraseña es errónea";
+                ajaxPromise(friendlyURL('?module=login&op=handleLoginAttempt'), 'POST', 'JSON', { 'user': formData['username_log'] })
+                .then(function(result) {
+                    // console.log(result);
+                    if (result[0] === 'OTP_REQUIRED') {
+                        // Mostrar el campo OTP
+                        console.log('Se han alcanzado 3 intentos fallidos. Por favor, ingrese el código OTP.');
+                    } else {
+                        console.log('Intento registrado correctamente.');
+                    }
+                    document.getElementById('error_passwd_log').innerHTML = "Escribe más despacio, la contraseña es errónea, tienes: " + result[1] + " intentos fallidos (a los 3 se bloqueará)";
+                })
+                .catch(function(error) {
+                    console.error('Error:', error);
+                });
+
 
             } else if (result === "error_auth") {
                 toastr.error('Tu usuario no esta activado');
-                toastr.info('Hemos vuelto a enviar un correo de verificación a tu cuenta');
+                toastr.info('Ahora tendrás que activar tu cuenta con el OTP que hemos enviado');
+                toastr.info('Si no lo recibes en unos minutos, ponte en contacto con nosotros por telepatía o por bizum ;-)');
 
             } else {
                 localStorage.setItem("token", result.token);
                 toastr.success("Logged in successfully");
-
             //========================================================//
                 // console.log(result['user']);
                 // console.log(localStorage.getItem('token'));     
@@ -47,22 +54,20 @@ function LogIn() {
                 // console.log("Avatar:", result['user'][0].Avatar);
                 // console.log("Username:", result['user'][0].Username);        
             //=======================================================//
-
                 localStorage.setItem("loggedInUser", JSON.stringify({
                     token: result.token,
                     avatar: result.user[0]['Avatar'],
                     username: result.user[0]['Username']
                 }));
 
-
                 setTimeout(function() {
                     window.location.href = friendlyURL("?module=home");
                 }, 1000);
             }
         })
-        .catch(function(error) {
+        .catch(function(errorter) {
             toastr.error("Algo ha sucedido, por favor intenta de nuevo");
-            console.error('Error:', error);
+            console.error('Errortrer:', errorter);
         });
 
     }
