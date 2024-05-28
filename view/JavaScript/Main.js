@@ -336,30 +336,48 @@ function load_content() {
     // console.log(path[4]);
     
     if (path[4] === 'recover') {
+        var token_email = path[5];
         var token_email_recover  = localStorage.getItem('token_email');
-
         var tokenURL = path[5];
+        var email_actual = localStorage.getItem('email_actual');
+        localStorage.removeItem('email_actual');
 
-        // console.log(token_email_recover);
-        // console.log(tokenURL);
+        // console.log(token_email);
 
-        if (tokenURL === token_email_recover) {
-            // console.log('Path===email');
-            window.location.href = friendlyURL("?module=login&op=recover_view");
+        ajaxPromise(friendlyURL("?module=login&op=JWT_Caduco"), 'POST', 'JSON', {email_actual: email_actual})//LogOut
+        .then(function(data) {
+            // console.log(token_email_recover);
+            // console.log(tokenURL);
+            console.log(email_actual);
+            console.log(data);
 
-        } else {
-            toastr.error("Token inválido");
-            setTimeout(function() {
-                window.location.href = friendlyURL("?module=login&op=view");
-            }, 2000)
-        }
+            if( data == 'token_caducado'){
+                toastr.error("Token inválido");
+                setTimeout(function() {
+                    window.location.href = friendlyURL("?module=login&op=view");
+                }, 2000)
+            } else {
+                if (tokenURL === token_email_recover) {
+                    window.location.href = friendlyURL("?module=login&op=recover_view");
+                } else {
+                    toastr.error("Token inválido");
+                    setTimeout(function() {
+                        window.location.href = friendlyURL("?module=login&op=view");
+                    }, 2000)
+                }
+            }
+
+        }).catch(function(error) {
+            console.log('Error: verify email error'+error);
+        });   
+
     } else if (path[4] === 'verify') {
         // console.log('Path===verify');
         toastr.options.timeOut = 3000;
         var token_email = path[5];
         
         // console.log(token_email);
-        ajaxPromise(friendlyURL("?module=login&op=verify_email"), 'POST', 'JSON', {token_email: token_email})//friendlyURL("?module=login&op=verify_email")
+        ajaxPromise(friendlyURL("?module=login&op=verify_email"), 'POST', 'JSON', {token_email: token_email})
         .then(function(data) {
             // console.log(data);
             if (data == 'token_caducado') {
@@ -377,12 +395,12 @@ function load_content() {
         $(".center-container").hide();
 
     } else if (path[3] === 'recover_view') {
-        console.log('Path===recover_view');
+        // console.log('Path===recover_view');
         load_form_new_password();
     }
 }
 /*~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~*/
-                                // ------------------- RECOVER PASSWORD ------------------------ //
+                                // ------------------- Recover Password PASSWORD ------------------------ //
 /*~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~*/
 function load_form_recover_password(){
     // console.log('load_form_recover_password');
@@ -432,7 +450,6 @@ function validate_recover_password(){
 }
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 function send_recover_password(){
-
     // console.log('send_recover_password');
 
     if(validate_recover_password() != 0){
@@ -440,7 +457,8 @@ function send_recover_password(){
     
         const data = document.getElementById('email_recover_input').value;
     
-        // console.log('Correo electrónico:', data);
+        // console.log('Correo electrónio:', data);
+        localStorage.setItem('email_actual', data);
 
         $.ajax({
             url: friendlyURL('?module=login&op=send_recover_email'),
@@ -465,27 +483,22 @@ function send_recover_password(){
         });    
     }
 }
-/*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
+/*~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~*/
+                                // ------------------- Update new PASSWORD ------------------------ //
+/*~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~*/
 function load_form_new_password(){
-
-    console.log('load_form_recover_password, vengo del login html');
-
     token_email = localStorage.getItem('token_email');
     localStorage.removeItem('token_email');
-    $.ajax({
-        url: friendlyURL('?module=login&op=verify_token'),
-        dataType: 'json',
-        type: "POST",
-        data: {token_email: token_email},
-    }).done(function(data) {
-        if(data == "verify"){
-            click_new_password(token_email); 
-        }else {
-            console.log("error");
-        }
-    }).fail(function( textStatus ) {
-        console.log("Error: Verify token error");
-    });    
+    // console.log('token_email', token_email);
+
+    if (token_email != null) {
+        click_new_password(token_email); 
+    } else{
+        toastr.error("Token inválido");
+        setTimeout(function() {
+            window.location.href = friendlyURL("?module=login&op=view");
+        }, 2000)
+    } 
 }
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 function click_new_password(token_email){
