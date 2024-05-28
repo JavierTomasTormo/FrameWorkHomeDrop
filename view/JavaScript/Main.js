@@ -340,7 +340,7 @@ function load_content() {
         var token_email_recover  = localStorage.getItem('token_email');
         var tokenURL = path[5];
         var email_actual = localStorage.getItem('email_actual');
-        localStorage.removeItem('email_actual');
+       
 
         // console.log(token_email);
 
@@ -348,8 +348,8 @@ function load_content() {
         .then(function(data) {
             // console.log(token_email_recover);
             // console.log(tokenURL);
-            console.log(email_actual);
-            console.log(data);
+            // console.log(email_actual);
+            // console.log(data);
 
             if( data == 'token_caducado'){
                 toastr.error("Token inválido");
@@ -467,6 +467,8 @@ function send_recover_password(){
             data: { 'data' : data }
         }).done(function(data) {
 
+            // console.log(data);
+
             if(data == "error"){		
                 $("#error_email_forg").html("The email doesn't exist");
             } else {
@@ -475,7 +477,7 @@ function send_recover_password(){
 
                 localStorage.setItem('token_email', [data]);
 
-                setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 1000);
+                setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 500);
 
             }
         }).fail(function( textStatus ) {
@@ -489,10 +491,13 @@ function send_recover_password(){
 function load_form_new_password(){
     token_email = localStorage.getItem('token_email');
     localStorage.removeItem('token_email');
+
+    email_actual = localStorage.getItem('email_actual');
+    localStorage.removeItem('email_actual');
     // console.log('token_email', token_email);
 
-    if (token_email != null) {
-        click_new_password(token_email); 
+    if (email_actual != null) {
+        click_new_password(email_actual); 
     } else{
         toastr.error("Token inválido");
         setTimeout(function() {
@@ -501,18 +506,18 @@ function load_form_new_password(){
     } 
 }
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
-function click_new_password(token_email){
+function click_new_password(email_actual){
     $(".recover_html").keypress(function(e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         if(code==13){
         	e.preventDefault();
-            send_new_password(token_email);
+            send_new_password(email_actual);
         }
     });
 
     $('#button_set_pass').on('click', function(e) {
         e.preventDefault();
-        send_new_password(token_email);
+        send_new_password(email_actual);
     }); 
 }
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
@@ -543,26 +548,35 @@ function validate_new_password(){
     }
 }
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
-function send_new_password(token_email){
+function send_new_password(email_actual){
+    // console.log('send_new_password');
     if(validate_new_password() != 0){
-        var data = {token_email: token_email, password : $('#pass_rec').val()};
-        $.ajax({
-            url: friendlyURL("?module=login&op=new_password"),
-            type: "POST",
-            dataType: "JSON",
-            data: data,
-        }).done(function(data) {
-            if(data == "done"){
-                toastr.options.timeOut = 3000;
-                toastr.success('New password changed');
-                setTimeout('window.location.href = friendlyURL("?module=login&op=view")', 1000);
-            } else {
-                toastr.options.timeOut = 3000;
-                toastr.error('Error seting new password');
-            }
-        }).fail(function(textStatus) {
-            console.log("Error: New password error");
-        });    
+        // console.log('new_password validado');
+
+        var data = {email_actual: email_actual, password : $('#pass_rec').val()};
+        // var data = { [email_actual]: $('#pass_rec').val() };
+
+        // console.log('data', data);
+        
+        ajaxPromise(friendlyURL("?module=login&op=new_password"), 'POST', 'JSON', {'data' : data})
+            .then(function(data) {
+                console.log(data);
+        
+                if (data === "done") {
+                    toastr.options.timeOut = 3000;
+                    toastr.success('Contraseña Actualizada');
+                    setTimeout(function() {
+                        window.location.href = friendlyURL("?module=login&op=view");
+                    }, 2000);
+                } else {
+                    toastr.options.timeOut = 3000;
+                    toastr.error('Error al introducir la nueva contraseña');
+                }
+            })
+            .catch(function(error) {
+                console.log("Error: New password error" + error);
+            });
+        
     }
 }
 //--------------------------------------------//

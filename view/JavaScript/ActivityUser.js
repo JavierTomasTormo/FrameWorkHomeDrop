@@ -41,7 +41,7 @@ function ProtectURL() {
             }
         } else {
             var hoy = new Date();   
-            console.log("No hay token disponible: \n" + hoy.toDateString() + "\n" + hoy.toLocaleTimeString());
+            console.log("No hay Usuario disponible: \n" + hoy.toDateString() + "\n" + hoy.toLocaleTimeString());
 
         }
 }

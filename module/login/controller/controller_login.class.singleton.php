@@ -98,13 +98,13 @@
             echo json_encode(common::load_model('login_model', 'get_recover_email', $_POST['data']));
         }
 
-        function verify_token() {
-            echo json_encode(common::load_model('login_model', 'get_verify_token', $_POST['token_email']));
-        }
 
-        // function new_password() {
-        //     echo json_encode(common::load_model('login_model', 'get_new_password', [$_POST['token_email'], $_POST['password']]));
-        // }  
+
+        function new_password() {
+            // echo json_encode("Hola desde el putíssimo contolador");
+            // echo json_encode($_POST['data']);
+            echo json_encode(common::load_model('login_model', 'get_new_password', $_POST['data']));
+        }  
     
         // function logout() {
         //     echo json_encode('Done');

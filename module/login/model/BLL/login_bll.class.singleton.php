@@ -110,7 +110,6 @@
 			return;
 		
 		}
-		
 
 		public function get_login_BLL($args) {
 
@@ -290,12 +289,20 @@
 			}
 		}
 
-		public function get_verify_token_BLL($args) {
-			if($this -> dao -> select_verify_email($this->db, $args)){
-				return 'verify';
+
+		public function get_new_password_BLL($data) {
+			// return $data;
+
+			$hashed_pass = password_hash($data['password'], PASSWORD_DEFAULT, ['cost' => 12]);
+
+			// return $this -> dao -> update_new_passwoord($this->db, $data['email_actual'], $hashed_pass);
+
+			if($this -> dao -> update_new_passwoord($this->db, $data['email_actual'], $hashed_pass)){
+				return 'done';
 			}
 			return 'fail';
 		}
+
 /*get_LogOut_BLL get_Actividad_BLL   get_RefreshCookie_BLL   get_ControlUser_BLL*/
 
 		// public function get_social_login_BLL($args) {
@@ -322,13 +329,7 @@
 
 
 
-		// public function get_new_password_BLL($args) {
-		// 	$hashed_pass = password_hash($args[1], PASSWORD_DEFAULT, ['cost' => 12]);
-		// 	if($this -> dao -> update_new_passwoord($this->db, $args[0], $hashed_pass)){
-		// 		return 'done';
-		// 	}
-		// 	return 'fail';
-		// }
+
 
 		// public function get_data_user_BLL($args) {
 		// 	$token = explode('"', $args);

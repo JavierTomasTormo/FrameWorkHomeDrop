@@ -130,6 +130,15 @@
             return $db->listar($stmt);
         }
 
+        
+        public function update_new_passwoord($db, $email , $password){
+            $sql = "UPDATE `Users` SET `Password`= '$password', `token_email`= '', `activate` = 1 WHERE `Email` = '$email'";
+            // return $sql;
+
+            $stmt = $db->ejecutar($sql);
+            return "ok";
+        }
+
         // public function update_recover_password($db, $email, $token_email){
 		// 	$sql = "UPDATE `users` SET `token_email`= '$token_email' WHERE `email` = '$email'";
         //     $stmt = $db->ejecutar($sql);
@@ -163,11 +172,6 @@
 
 
 
-        // public function update_new_passwoord($db, $token_email, $password){
-        //     $sql = "UPDATE `users` SET `password`= '$password', `token_email`= '' WHERE `token_email` = '$token_email'";
-        //     $stmt = $db->ejecutar($sql);
-        //     return "ok";
-        // }
 
 
 
