@@ -119,23 +119,7 @@
         
             $result = Whatsapp::sendWhatsAppOTP($whatsappNumber, $otp);
             echo json_encode($result);
-        }
-
-        // function send_otp() {
-        //     // echo json_encode($_POST['whatsappNumber']);
-
-        //     $otp = common::load_model('login_model', 'generateOTP');
-        //     $whatsappNumber = $_POST['whatsappNumber'];
-        //     // $whatsappNumber = '573188255022';
-
-        //     // echo json_encode([$otp. "    " . $whatsappNumber]);
-        
-        //     $_SESSION['otp'] = $otp;
-        
-        //     $result = Whatsapp::sendWhatsAppOTP($whatsappNumber, $otp);
-        //     echo json_encode($result);
-        // }
-        
+        }  
         
         function verify_otp() {
             $otp = $_POST['otp'];
@@ -147,6 +131,12 @@
             } else {
                 echo json_encode(['success' => false, 'message' => 'OTP incorrecto']);
             }
+        }
+
+        function UpdateOTP() {
+            echo json_encode($_POST['Username']);
+            // echo json_encode(common::load_model('login_model', 'getStoredOTP'));
+        
         }
         
     

@@ -35,7 +35,7 @@ function LogIn() {
                         if (whatsappNumber) {
                             console.log('Se ha ingresado un número de WhatsApp válido');
                             // console.log(whatsappNumber);
-                            sendOTP(whatsappNumber);
+                            sendOTP(whatsappNumber, formData['username_log']);
                         } else {
                             toastr.error("Debe ingresar un número de WhatsApp válido");
                         }
@@ -96,13 +96,13 @@ function LogIn() {
     }
 }
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
-function sendOTP(whatsappNumber) {
+function sendOTP(whatsappNumber, username) {
 
-    console.log('sendOTP');
+    // console.log('sendOTP');
 
     ajaxPromise(friendlyURL('?module=login&op=send_otp'), 'POST', 'JSON', { 'whatsappNumber': whatsappNumber })
         .then(function(result) {
-            console.log(result);
+            // console.log(result);
 
             if (result.success) {
                 console.log(result.message);
@@ -110,7 +110,7 @@ function sendOTP(whatsappNumber) {
 
                 var otp = prompt("Ingrese el OTP recibido en su WhatsApp:");
                 if (otp) {
-                    verifyOTP(otp);
+                    verifyOTP(otp, username);
                 } else {
                     toastr.error("Debe ingresar el OTP recibido");
                 }
@@ -126,12 +126,31 @@ function sendOTP(whatsappNumber) {
 }
 
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
-function verifyOTP(otp) {
+function verifyOTP(otp,username) {
+    
+    console.log(username);
+
     ajaxPromise(friendlyURL('?module=login&op=verify_otp'), 'POST', 'JSON', { 'otp': otp })
         .then(function(result) {
             if (result.success) {
                 console.log(result.message);
                 toastr.success(result.message);
+
+                ajaxPromise(friendlyURL('?module=login&op=UpdateOTP'), 'POST', 'JSON', { 'Username': username })
+                .then(function(result) {
+
+                        console.log(result);
+                        
+                        setTimeout(function() {
+                            // window.location.href = friendlyURL("?module=login&op=view");
+                        }, 1000);
+
+                })
+                .catch(function(error) {
+                    console.error('Error:', error);
+                    toastr.error('Error al verificar el OTP');
+                });
+
             } else {
                 console.error(result.message);
                 toastr.error(result.message);

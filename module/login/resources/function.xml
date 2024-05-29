@@ -142,7 +142,10 @@
         <name>verify_otp</name>
         <uri>verify_otp</uri>
     </function>
-
+    <function>
+        <name>UpdateOTP</name>
+        <uri>UpdateOTP</uri>
+    </function>
 
 
 
@@ -151,4 +154,4 @@
 
 
 
-<!--  verify_otp send_otp  handleLoginAttempt new_password  JWT_Caduco   RefreshToken  RefreshCookie  UserLikes  Actividad   verify_token    -->
+<!--  UpdateOTP verify_otp send_otp  handleLoginAttempt new_password  JWT_Caduco   RefreshToken  RefreshCookie  UserLikes  Actividad   verify_token    -->
