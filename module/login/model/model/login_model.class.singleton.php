@@ -73,7 +73,14 @@ class login_model {
         return $this->bll->handle_login_attempt_BLL($user);
     }
     
+    public function generateOTP() {
+        return $this->bll->generateOTP();
+    }
 
+    public function getStoredOTP() {
+        return $this->bll->getStoredOTP();
+    }
+    
 /*get_LikedHouses  get_RefreshCookie get_LogOut*/
     // public function get_social_login($args) {
     //     return $this -> bll -> get_social_login_BLL($args);

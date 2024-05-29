@@ -94,8 +94,6 @@
             echo json_encode(common::load_model('login_model', 'get_RefreshCookie'));
         }
 
-
-        /*Actividad  RefreshToken*/
         function send_recover_email() {
             // echo json_encode("yo si que llego a esto mi rey");
             echo json_encode(common::load_model('login_model', 'get_recover_email', $_POST['data']));
@@ -106,6 +104,51 @@
             // echo json_encode($_POST['data']);
             echo json_encode(common::load_model('login_model', 'get_new_password', $_POST['data']));
         }  
+
+
+        function send_otp() {
+            // echo json_encode($_POST['whatsappNumber']);
+        
+            $otp = common::load_model('login_model', 'generateOTP');
+            $whatsappNumber = $_POST['whatsappNumber'];
+            // $whatsappNumber = '573188255022';
+        
+            // echo json_encode([$otp. "    " . $whatsappNumber]);
+        
+            $_SESSION['otp'] = $otp;
+        
+            $result = Whatsapp::sendWhatsAppOTP($whatsappNumber, $otp);
+            echo json_encode($result);
+        }
+
+        // function send_otp() {
+        //     // echo json_encode($_POST['whatsappNumber']);
+
+        //     $otp = common::load_model('login_model', 'generateOTP');
+        //     $whatsappNumber = $_POST['whatsappNumber'];
+        //     // $whatsappNumber = '573188255022';
+
+        //     // echo json_encode([$otp. "    " . $whatsappNumber]);
+        
+        //     $_SESSION['otp'] = $otp;
+        
+        //     $result = Whatsapp::sendWhatsAppOTP($whatsappNumber, $otp);
+        //     echo json_encode($result);
+        // }
+        
+        
+        function verify_otp() {
+            $otp = $_POST['otp'];
+            $storedOtp = common::load_model('login_model', 'getStoredOTP');
+        
+            if ($otp === $storedOtp) {
+                echo json_encode(['success' => true, 'message' => 'OTP verificado correctamente']);
+                // Continuar con el proceso de inicio de sesión
+            } else {
+                echo json_encode(['success' => false, 'message' => 'OTP incorrecto']);
+            }
+        }
+        
     
         // function logout() {
         //     echo json_encode('Done');

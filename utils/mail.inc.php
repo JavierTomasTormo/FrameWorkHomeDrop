@@ -64,6 +64,7 @@
                         </div>
                     </div>';
                 break;
+                
             }
 
             return self::send_resend($email);

@@ -134,9 +134,21 @@
         <name>handleLoginAttempt</name>
         <uri>handleLoginAttempt</uri>
     </function>
+    <function>
+        <name>send_otp</name>
+        <uri>send_otp</uri>
+    </function>
+    <function>
+        <name>verify_otp</name>
+        <uri>verify_otp</uri>
+    </function>
+
+
+
+
 
 </functions>
 
 
 
-<!--  handleLoginAttempt new_password  JWT_Caduco   RefreshToken  RefreshCookie  UserLikes  Actividad   verify_token    -->
+<!--  verify_otp send_otp  handleLoginAttempt new_password  JWT_Caduco   RefreshToken  RefreshCookie  UserLikes  Actividad   verify_token    -->

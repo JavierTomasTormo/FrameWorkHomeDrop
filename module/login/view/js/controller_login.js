@@ -11,11 +11,9 @@ function LogIn() {
         $.each(formDataArray, function(index, field){
             formData[field.name] = field.value;
         });
-
         // console.log(formData);
         // console.log(formData['passwd_log']);
         // console.log(formData['username_log']);
-
         ajaxPromise(friendlyURL('?module=login&op=login'), 'POST', 'JSON', {'passwd_log': formData['passwd_log'], 'username_log': formData['username_log'] })
         .then(function(result) {
 
@@ -29,6 +27,20 @@ function LogIn() {
                     if (result[0] === 'OTP_REQUIRED') {
                         // Mostrar el campo OTP
                         console.log('Se han alcanzado 3 intentos fallidos. Por favor, ingrese el código OTP.');
+
+
+                        var whatsappNumber = prompt("Por favor, ingrese su número de WhatsApp para recibir el OTP:");
+
+
+                        if (whatsappNumber) {
+                            console.log('Se ha ingresado un número de WhatsApp válido');
+                            // console.log(whatsappNumber);
+                            sendOTP(whatsappNumber);
+                        } else {
+                            toastr.error("Debe ingresar un número de WhatsApp válido");
+                        }
+
+
                     } else {
                         console.log('Intento registrado correctamente.');
                     }
@@ -37,12 +49,23 @@ function LogIn() {
                 .catch(function(error) {
                     console.error('Error:', error);
                 });
-
-
             } else if (result === "error_auth") {
                 toastr.error('Tu usuario no esta activado');
                 toastr.info('Ahora tendrás que activar tu cuenta con el OTP que hemos enviado');
                 toastr.info('Si no lo recibes en unos minutos, ponte en contacto con nosotros por telepatía o por bizum ;-)');
+
+
+                var whatsappNumber = prompt("Por favor, ingrese su número de WhatsApp para recibir el OTP:");
+
+
+                if (whatsappNumber) {
+                    console.log('Se ha ingresado un número de WhatsApp válido');
+                    // console.log(whatsappNumber);
+                    sendOTP(whatsappNumber);
+                } else {
+                    toastr.error("Debe ingresar un número de WhatsApp válido");
+                }
+
 
             } else {
                 localStorage.setItem("token", result.token);
@@ -71,6 +94,53 @@ function LogIn() {
         });
 
     }
+}
+/*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
+function sendOTP(whatsappNumber) {
+
+    console.log('sendOTP');
+
+    ajaxPromise(friendlyURL('?module=login&op=send_otp'), 'POST', 'JSON', { 'whatsappNumber': whatsappNumber })
+        .then(function(result) {
+            console.log(result);
+
+            if (result.success) {
+                console.log(result.message);
+                toastr.success(result.message);
+
+                var otp = prompt("Ingrese el OTP recibido en su WhatsApp:");
+                if (otp) {
+                    verifyOTP(otp);
+                } else {
+                    toastr.error("Debe ingresar el OTP recibido");
+                }
+            } else {
+                console.error(result.message);
+                toastr.error(result.message);
+            }
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
+            toastr.error('Error al enviar el OTP');
+        });
+}
+
+/*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
+function verifyOTP(otp) {
+    ajaxPromise(friendlyURL('?module=login&op=verify_otp'), 'POST', 'JSON', { 'otp': otp })
+        .then(function(result) {
+            if (result.success) {
+                console.log(result.message);
+                toastr.success(result.message);
+            } else {
+                console.error(result.message);
+                toastr.error(result.message);
+            }
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
+            toastr.error('Error al verificar el OTP');
+        });
 }
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 function ValidateLogIn() {

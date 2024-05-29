@@ -334,6 +334,20 @@
 			}
 		}
 		
+		public function generateOTP() {
+			$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			$otp = '';
+			for ($i = 0; $i < 5; $i++) {
+				$otp .= $characters[rand(0, strlen($characters) - 1)];
+			}
+			return $otp;
+		}
+		
+		public function getStoredOTP() {
+			// Obtener el OTP almacenado (desde una variable de sesión o la base de datos)
+			$storedOtp = $_SESSION['otp'];
+			return $storedOtp;
+		}
 		
 /*get_LogOut_BLL get_Actividad_BLL   get_RefreshCookie_BLL   get_ControlUser_BLL*/
 

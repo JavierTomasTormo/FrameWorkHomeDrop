@@ -3,7 +3,10 @@
     "description": "Resend PHP example",
     "type": "project",
     "require": {
-        "resend/resend-php": "^0.6.0"
+        "resend/resend-php": "^0.6.0",
+        "facebook/php-business-sdk": "^19.0",
+        "twilio/sdk": "^8.1",
+        "php-curl-class/php-curl-class": "^9.19"
     },
     "license": "MIT",
     "minimum-stability": "stable"
