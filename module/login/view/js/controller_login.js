@@ -402,48 +402,39 @@ function ButtonRegister() {
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 function ButtonSLGoogle() {
     $('#google').on('click', function(e) {
+        e.preventDefault();
+        // console.log('Google');
         social_login('google');
     }); 
 }
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 function ButtonSLGitHub() {
     $('#github').on('click', function(e) {
+        e.preventDefault();
+        // console.log('GitHub');
         social_login('github');
     }); 
 }
-/*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
-function firebase_config(){
-    var config = {
-        apiKey: "AIzaSyBeI_KzLpCTLGHKkRoqnvNPvMFDqX7rnvc",
-        authDomain: "frameworkhomedrop.firebaseapp.com",
-        projectId: "frameworkhomedrop",
-        storageBucket: "frameworkhomedrop.appspot.com",
-        messagingSenderId: "510535967889",
-        // appId: "1:495514694215:web:b183cd7f513ce8b0d6f762",
-        // measurementId: "G-JXEGLTGLTC"
-    };
-    if(!firebase.apps.length){
-        firebase.initializeApp(config);
-    }else{
-        firebase.app();
-    }
-    return authService = firebase.auth();
-}
+
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 function social_login(param){
 
-    console.log('Iniciando proceso de autenticación con ' + param);
+    // console.log('Iniciando proceso de autenticación con ' + param);
 
-    // if(param == 'google'){
-    //     provider_config = new firebase.auth.GoogleAuthProvider();
-    // }else if(param == 'github'){
-    //     provider_config = new firebase.auth.GithubAuthProvider();
-    // }
+    if(param == 'google'){
+        provider_config = new firebase.auth.GoogleAuthProvider();
+    }else if(param == 'github'){
+        provider_config = new firebase.auth.GithubAuthProvider();
+    }
 
     authService = firebase_config();
 
-    authService.signInWithPopup(provider_config(param))
+    // console.log(authService);
+
+    authService.signInWithPopup(provider_config)
     .then(function(result) {
+
+        console.log(result);
 
         console.log('Hemos autenticado al usuario ', result.user);
 
@@ -452,22 +443,22 @@ function social_login(param){
         console.log(username[0]);
 
         social_user = {id: result.user.uid, username: username[0], email: result.user.email, avatar: result.user.photoURL};
-        if (result) {
-            ajaxPromise(friendlyURL("?module=login&op=social_login"), 'POST', 'JSON', social_user)
-            .then(function(data) {
-                localStorage.setItem("token", data);
-                toastr.options.timeOut = 3000;
-                toastr.success("Inicio de sesión realizado");
-                if(localStorage.getItem('likes') == null) {
-                    setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
-                } else {
-                    setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
-                }
-            })
-            .catch(function() {
-                console.log('Error: Social login error');
-            });
-        }
+        // if (result) {
+        //     ajaxPromise(friendlyURL("?module=login&op=social_login"), 'POST', 'JSON', social_user)
+        //     .then(function(data) {
+        //         localStorage.setItem("token", data);
+        //         toastr.options.timeOut = 3000;
+        //         toastr.success("Inicio de sesión realizado");
+        //         if(localStorage.getItem('likes') == null) {
+        //             setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
+        //         } else {
+        //             setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
+        //         }
+        //     })
+        //     .catch(function() {
+        //         console.log('Error: Social login error');
+        //     });
+        // }
     })
     .catch(function(error) {
         var errorCode = error.code;
