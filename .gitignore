@@ -1,16 +1,11 @@
 # Archivos de configuración con datos sensibles
-*.env
-*.env.*
+*.env*
 config/*.php
 config/*.ini
 utils/*.ini
 utils/*.lock
 utils/*.json
 JWT.ini
-*.ini
-*.lock
-*.json
-
 
 # Archivos de clave privada
 *.pem
@@ -19,8 +14,7 @@ JWT.ini
 
 # Archivos de base de datos
 *.sql
-*.sqlite
-*.sqlite3
+*.sqlite*
 
 # Otros archivos sensibles
 credentials.json
