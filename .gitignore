@@ -1,21 +1,6 @@
 # Archivos de configuración con datos sensibles
-*.env*
-config/*.php
-config/*.ini
-utils/*.ini
-utils/*.lock
-utils/*.json
-JWT.ini
-utils\JWT.ini
-# Archivos de clave privada
-*.pem
-*.ppk
-*.key
+**/utils/*.ini
+**/utils/*.lock
+**/utils/*.json
+**/utils/JWT.ini
 
-# Archivos de base de datos
-*.sql
-*.sqlite*
-
-# Otros archivos sensibles
-credentials.json
-secrets.yml
