@@ -1,5 +1,6 @@
 # Archivos de configuración con datos sensibles
-**/*.ini
+C:\xampp\htdocs\FrameWorkHomeDrop\utils\JWT.ini
+# **/*.ini
 **/utils/*.lock
 **/utils/*.json
 # **/utils/JWT.ini
