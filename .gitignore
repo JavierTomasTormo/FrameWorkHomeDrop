@@ -6,7 +6,7 @@ utils/*.ini
 utils/*.lock
 utils/*.json
 JWT.ini
-
+utils\JWT.ini
 # Archivos de clave privada
 *.pem
 *.ppk
