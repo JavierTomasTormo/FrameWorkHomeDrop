@@ -432,6 +432,14 @@ function firebase_config(){
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 function social_login(param){
 
+    console.log('Iniciando proceso de autenticación con ' + param);
+
+    // if(param == 'google'){
+    //     provider_config = new firebase.auth.GoogleAuthProvider();
+    // }else if(param == 'github'){
+    //     provider_config = new firebase.auth.GithubAuthProvider();
+    // }
+
     authService = firebase_config();
 
     authService.signInWithPopup(provider_config(param))
