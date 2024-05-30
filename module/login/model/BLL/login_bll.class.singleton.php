@@ -348,8 +348,16 @@
 			$storedOtp = $_SESSION['otp'];
 			return $storedOtp;
 		}
+
+		public function getUpdateOTP_BLL($Username) {
+			if ($this->dao->UpdateUserOTP($this->db, $Username)) {
+				return "Success";
+			} else {
+				return 'Failure';
+			}
+		}
 		
-/*get_LogOut_BLL get_Actividad_BLL   get_RefreshCookie_BLL   get_ControlUser_BLL*/
+/*get_LogOut_BLL get_Actividad_BLL  getUpdateOTP_BLL  get_RefreshCookie_BLL   get_ControlUser_BLL*/
 
 		// public function get_social_login_BLL($args) {
 		// 	if (!empty($this -> dao -> select_user($this->db, $args[1], $args[2]))) {

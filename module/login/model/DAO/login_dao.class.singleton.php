@@ -162,6 +162,14 @@
             $stmt = $db->ejecutar($sql);
             return $stmt;
         }
+
+        public function UpdateUserOTP($db, $Username) {
+            $sql = "UPDATE `Users` SET `attempts` = 0, `activate` = 1 WHERE `Username` = '$Username'";
+            $stmt = $db->ejecutar($sql);
+            return $stmt;
+        }
+
+        /*UpdateUserOTP */ 
         
         // public function update_recover_password($db, $email, $token_email){
 		// 	$sql = "UPDATE `users` SET `token_email`= '$token_email' WHERE `email` = '$email'";

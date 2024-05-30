@@ -134,8 +134,8 @@
         }
 
         function UpdateOTP() {
-            echo json_encode($_POST['Username']);
-            // echo json_encode(common::load_model('login_model', 'getStoredOTP'));
+            // echo json_encode($_POST['Username']);
+            echo json_encode(common::load_model('login_model', 'getUpdateOTP', $_POST['Username']));
         
         }
         

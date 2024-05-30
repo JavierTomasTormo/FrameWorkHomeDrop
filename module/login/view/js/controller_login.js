@@ -61,7 +61,7 @@ function LogIn() {
                 if (whatsappNumber) {
                     console.log('Se ha ingresado un número de WhatsApp válido');
                     // console.log(whatsappNumber);
-                    sendOTP(whatsappNumber);
+                    sendOTP(whatsappNumber, formData['username_log']);
                 } else {
                     toastr.error("Debe ingresar un número de WhatsApp válido");
                 }
@@ -98,7 +98,7 @@ function LogIn() {
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 function sendOTP(whatsappNumber, username) {
 
-    // console.log('sendOTP');
+    console.log(username);
 
     ajaxPromise(friendlyURL('?module=login&op=send_otp'), 'POST', 'JSON', { 'whatsappNumber': whatsappNumber })
         .then(function(result) {
@@ -128,7 +128,7 @@ function sendOTP(whatsappNumber, username) {
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 function verifyOTP(otp,username) {
     
-    console.log(username);
+    // console.log(username);
 
     ajaxPromise(friendlyURL('?module=login&op=verify_otp'), 'POST', 'JSON', { 'otp': otp })
         .then(function(result) {
@@ -140,10 +140,17 @@ function verifyOTP(otp,username) {
                 .then(function(result) {
 
                         console.log(result);
-                        
-                        setTimeout(function() {
-                            // window.location.href = friendlyURL("?module=login&op=view");
-                        }, 1000);
+
+                        if (result == "Success") {
+                            console.log(result.message);
+                            toastr.success(result.message);
+                            setTimeout(function() {
+                                window.location.href = friendlyURL("?module=login&op=view");
+                            }, 1000);
+                        } else {
+                            console.error(result.message);
+                            toastr.error(result.message);
+                        }
 
                 })
                 .catch(function(error) {
@@ -389,8 +396,89 @@ function ButtonRegister() {
         Register();
     });
 }
+/*~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~*/
+                                                        /*SOCIAL LOGIN */
+/*~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~*/
+/*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
+function ButtonSLGoogle() {
+    $('#google').on('click', function(e) {
+        social_login('google');
+    }); 
+}
+/*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
+function ButtonSLGitHub() {
+    $('#github').on('click', function(e) {
+        social_login('github');
+    }); 
+}
+/*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
+function firebase_config(){
+    var config = {
+        apiKey: "AIzaSyBeI_KzLpCTLGHKkRoqnvNPvMFDqX7rnvc",
+        authDomain: "frameworkhomedrop.firebaseapp.com",
+        projectId: "frameworkhomedrop",
+        storageBucket: "frameworkhomedrop.appspot.com",
+        messagingSenderId: "510535967889",
+        // appId: "1:495514694215:web:b183cd7f513ce8b0d6f762",
+        // measurementId: "G-JXEGLTGLTC"
+    };
+    if(!firebase.apps.length){
+        firebase.initializeApp(config);
+    }else{
+        firebase.app();
+    }
+    return authService = firebase.auth();
+}
+/*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
+function social_login(param){
 
+    authService = firebase_config();
 
+    authService.signInWithPopup(provider_config(param))
+    .then(function(result) {
+
+        console.log('Hemos autenticado al usuario ', result.user);
+
+        email_name = result.user.email;
+        let username = email_name.split('@');
+        console.log(username[0]);
+
+        social_user = {id: result.user.uid, username: username[0], email: result.user.email, avatar: result.user.photoURL};
+        if (result) {
+            ajaxPromise(friendlyURL("?module=login&op=social_login"), 'POST', 'JSON', social_user)
+            .then(function(data) {
+                localStorage.setItem("token", data);
+                toastr.options.timeOut = 3000;
+                toastr.success("Inicio de sesión realizado");
+                if(localStorage.getItem('likes') == null) {
+                    setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
+                } else {
+                    setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
+                }
+            })
+            .catch(function() {
+                console.log('Error: Social login error');
+            });
+        }
+    })
+    .catch(function(error) {
+        var errorCode = error.code;
+        console.log(errorCode);
+
+        var errorMessage = error.message;
+        console.log(errorMessage);
+
+        var email = error.email;
+        console.log(email);
+        
+        var credential = error.credential;
+        console.log(credential);
+    });
+}
+/*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
+/*~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~*/
+                                                        /*DOCUMENT READY */
+/*~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~*/
 /*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*/
 $(document).ready(function() {
     // console.log('LogIn.js Document Ready');
@@ -400,15 +488,17 @@ $(document).ready(function() {
         showVerificationMessage();
         localStorage.setItem('emailReg', 0);
     }
-    // console.log(emailReg);
-
+    
     //Forget
     ButtonForgetPassword();
 
     //LogIn
     KeyLogIn();
     ButtonLogIn();
-    
+        //Social_LogIn
+        ButtonSLGoogle();
+        ButtonSLGitHub();
+
     //Register //100%
     KeyRegister();
     ButtonRegister();
