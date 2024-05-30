@@ -3,6 +3,9 @@
 *.env.*
 config/*.php
 config/*.ini
+utils/*.ini
+utils/*.lock
+utils/*.json
 
 # Archivos de clave privada
 *.pem
