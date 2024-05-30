@@ -1,6 +1,6 @@
 # Archivos de configuración con datos sensibles
-**/utils/*.ini
+**/*.ini
 **/utils/*.lock
 **/utils/*.json
-**/utils/JWT.ini
+# **/utils/JWT.ini
 
