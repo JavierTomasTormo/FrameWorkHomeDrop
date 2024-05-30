@@ -6,6 +6,11 @@ config/*.ini
 utils/*.ini
 utils/*.lock
 utils/*.json
+JWT.ini
+*.ini
+*.lock
+*.json
+
 
 # Archivos de clave privada
 *.pem
