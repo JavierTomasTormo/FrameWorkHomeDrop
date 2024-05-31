@@ -95,6 +95,7 @@ function LoadMenu() {
                 var userData = JSON.parse(localStorage.getItem("loggedInUser"));
 
                 // console.log(userData);
+                // 
 
                 if (userData) {
                     $('#loginBtn').hide();

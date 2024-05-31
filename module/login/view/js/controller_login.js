@@ -68,24 +68,33 @@ function LogIn() {
 
 
             } else {
-                localStorage.setItem("token", result.token);
-                toastr.success("Logged in successfully");
-            //========================================================//
-                // console.log(result['user']);
-                // console.log(localStorage.getItem('token'));     
-                // console.log("Token:", result.token);
-                // console.log("Avatar:", result['user'][0].Avatar);
-                // console.log("Username:", result['user'][0].Username);        
-            //=======================================================//
-                localStorage.setItem("loggedInUser", JSON.stringify({
-                    token: result.token,
-                    avatar: result.user[0]['Avatar'],
-                    username: result.user[0]['Username']
-                }));
 
-                setTimeout(function() {
-                    window.location.href = friendlyURL("?module=home");
-                }, 1000);
+                ajaxPromise(friendlyURL('?module=login&op=UpdateOTP'), 'POST', 'JSON', { 'Username': result.user[0]['Username'] })
+                .then(function() {
+                    localStorage.setItem("token", result.token);
+                    toastr.success("Logged in successfully");
+                //========================================================//
+                    // console.log(result['user']);
+                    // console.log(localStorage.getItem('token'));     
+                    // console.log("Token:", result.token);
+                    // console.log("Avatar:", result['user'][0].Avatar);
+                    // console.log("Username:", result['user'][0].Username);        
+                //=======================================================//
+                    localStorage.setItem("loggedInUser", JSON.stringify({
+                        token: result.token,
+                        avatar: result.user[0]['Avatar'],
+                        username: result.user[0]['Username']
+                    }));
+    
+                    setTimeout(function() {
+                        window.location.href = friendlyURL("?module=home");
+                    }, 1000);
+
+                })
+                .catch(function(error) {
+                    console.error('Error:', error);
+                    toastr.error('Error al verificar el OTP');
+                });
             }
         })
         .catch(function(errorter) {
@@ -446,14 +455,20 @@ function social_login(param){
 
                 console.log(data);
 
-                // localStorage.setItem("token", data);
-                // toastr.options.timeOut = 3000;
-                // toastr.success("Inicio de sesión realizado");
-                // if(localStorage.getItem('likes') == null) {
-                //     setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
-                // } else {
-                //     setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
-                // }
+                localStorage.setItem("token", data);
+                toastr.success("Logged in successfully");
+
+                localStorage.setItem("loggedInUser", JSON.stringify({
+                    token: data,
+                    avatar: result.user.photoURL,
+                    username: username[0]
+                }));
+
+                setTimeout(function() {
+                    // console.log('Redirecting to home');
+                    window.location.href = friendlyURL("?module=home");
+                }, 1500);
+
             })
             .catch(function(error) {
                 console.log('Error: Social login error    '+ error);

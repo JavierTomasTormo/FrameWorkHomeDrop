@@ -44,7 +44,6 @@
             }
         }
 
-
         public function select_verify_email($db, $token_email) {
             $sql = "SELECT token_email, tiempo_generacion FROM Users WHERE token_email = '$token_email'";
             $stmt = $db->ejecutar($sql);
@@ -66,7 +65,6 @@
             // return $sql;
             return;
         }
-
 
         public function UserdelNuevoToken($db, $OLDtoken_email) {
             $sql = "SELECT * FROM Users WHERE token_email = '$OLDtoken_email'";
@@ -177,17 +175,13 @@
             return 'done';
         }
 
-        /*UpdateUserOTP */ 
+        /* */ 
         
         // public function update_recover_password($db, $email, $token_email){
 		// 	$sql = "UPDATE `users` SET `token_email`= '$token_email' WHERE `email` = '$email'";
         //     $stmt = $db->ejecutar($sql);
         //     return "ok";
         // }
-
-
-
-
 
         // public function select_social_login($db, $id){
 
@@ -204,17 +198,6 @@
 
         //     return $stmt = $db->ejecutar($sql);
         // }
-
-
-
-        
-
-
-
-
-
-
-
 
         // public function select_data_user($db, $username){
 
