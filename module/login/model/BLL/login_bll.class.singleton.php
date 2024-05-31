@@ -356,34 +356,46 @@
 				return 'Failure';
 			}
 		}
+
+		public function get_social_login_BLL($args) {
+
+			// return $args;
+			// return 'github intenta iniciar sesion';
+
+			if (!empty($this -> dao -> select_user($this->db, $args['username'], $args['email']))) {
+
+				$user = $this -> dao -> select_user($this->db, $args['username'], $args['email']);
+
+				// return $user[0]['SL_github'] .''. $user[0]['SL_google'];
+				// return $user[0]['SL_github'];
+				if (!isset($user[0]['SL_google']) || !isset($user[0]['SL_github'])) {
+					// return 'Esta vacio0';
+					$UsernameSL = $user[0]['Username'] .'_'. $args['provider'];
+					// return $UsernameSL;
+					if ($args['provider'] == 'google') {
+						$update = $this -> dao -> InsertUserSocialExists($this->db, $user[0]['Username'], $UsernameSL, 'SL_google');
+
+					} else {
+						$update = $this -> dao -> InsertUserSocialExists($this->db, $user[0]['Username'], $UsernameSL, 'SL_github');
+
+					}
+					// return $update; 
+				}
+				
+				// return 'EH?';
+				$jwt = middleware::encode($user[0]['Username']);
+				return $jwt;
+
+            } else {
+				return 'Funcion no disponible';
+				// $this -> dao -> insert_social_login($this->db, $args[0], $args[1], $args[2], $args[3]);
+				// $user = $this -> dao -> select_user($this->db, $args[1], $args[2]);
+				// $jwt = middleware::encode($user[0]['username']);
+				// return json_encode($jwt);
+			}
+		}
 		
 /*get_LogOut_BLL get_Actividad_BLL  getUpdateOTP_BLL  get_RefreshCookie_BLL   get_ControlUser_BLL*/
-
-		// public function get_social_login_BLL($args) {
-		// 	if (!empty($this -> dao -> select_user($this->db, $args[1], $args[2]))) {
-		// 		$user = $this -> dao -> select_user($this->db, $args[1], $args[2]);
-		// 		$jwt = jwt_process::encode($user[0]['username']);
-		// 		return json_encode($jwt);
-        //     } else {
-		// 		$this -> dao -> insert_social_login($this->db, $args[0], $args[1], $args[2], $args[3]);
-		// 		$user = $this -> dao -> select_user($this->db, $args[1], $args[2]);
-		// 		$jwt = jwt_process::encode($user[0]['username']);
-		// 		return json_encode($jwt);
-		// 	}
-		// }
-
-		// public function get_verify_email_BLL($args) {
-		// 	if($this -> dao -> select_verify_email($this->db, $args)){
-		// 		$this -> dao -> update_verify_email($this->db, $args);
-		// 		return 'verify';
-		// 	} else {
-		// 		return 'fail';
-		// 	}
-		// }
-
-
-
-
 
 		// public function get_data_user_BLL($args) {
 		// 	$token = explode('"', $args);

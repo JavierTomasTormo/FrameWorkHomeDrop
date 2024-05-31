@@ -24,7 +24,7 @@
        
         public function select_user($db, $username, $email){
 
-			$sql = "SELECT `ID_User`, `Username`, `Password`, `Email`, `UserType`, `Avatar`, `token_email`,`tiempo_generacion`,`activate` FROM `users` WHERE username='$username' OR Email='$email'";
+			$sql = "SELECT `ID_User`, `Username`, `Password`, `Email`, `UserType`, `Avatar`, `token_email`,`tiempo_generacion`,`activate`,`SL_google`,`SL_github` FROM `users` WHERE username='$username' OR Email='$email'";
 
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
@@ -167,6 +167,14 @@
             $sql = "UPDATE `Users` SET `attempts` = 0, `activate` = 1 WHERE `Username` = '$Username'";
             $stmt = $db->ejecutar($sql);
             return $stmt;
+        }
+
+        public function InsertUserSocialExists($db, $Username, $UsernameSL, $provider) {
+            // return "ok";
+            $sql = "UPDATE `Users` SET `$provider` = '$UsernameSL' WHERE `Username` = '$Username'";
+            // return $sql;
+            $stmt = $db->ejecutar($sql);
+            return 'done';
         }
 
         /*UpdateUserOTP */ 
