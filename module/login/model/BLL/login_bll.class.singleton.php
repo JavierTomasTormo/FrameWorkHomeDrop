@@ -128,6 +128,7 @@
 				
 					$jwt = middleware::encode($user[0]['Username']);
 					$_SESSION['username'] = $user[0]['Username'];
+					$_SESSION['mail'] = $user[0]['Email'];
 					$_SESSION['tiempo'] = time();
 					session_regenerate_id();
 				
@@ -178,6 +179,7 @@
 
 		public function get_LogOut_BLL() {
 			unset($_SESSION['Username']);
+			unset($_SESSION['mail']);
 			unset($_SESSION['tiempo']);
 			session_destroy();
 	
@@ -186,17 +188,17 @@
 
 		public function get_ControlUser_BLL($token) {
 
-
-			// return $token;
-
 			$token_dec = middleware::decode_username($token);
 			// return $token_dec;
 			// return $_SESSION['username'];
 
 			// return [$token_dec ,$_SESSION['username']];
+			$user = $this -> dao -> select_user($this->db, $token_dec, $token_dec);
+			// return $user;
+			// return $user[0]['Email'];
+			// return $_SESSION['mail'];
 
-
-			if (isset($_SESSION['username']) && ($_SESSION['username']) == $token_dec) {
+			if (isset($_SESSION['mail']) == $user[0]['Email']) {
 				return "Correct_User";
 
 			} else {
@@ -291,7 +293,6 @@
 			}
 		}
 
-
 		public function get_new_password_BLL($data) {
 			// return $data;
 
@@ -358,9 +359,6 @@
 		}
 
 		public function get_social_login_BLL($args) {
-
-			// return $args;
-			// return 'github intenta iniciar sesion';
 
 			if (!empty($this -> dao -> select_user($this->db, $args['username'], $args['email']))) {
 

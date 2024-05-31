@@ -16,9 +16,7 @@ function ProtectURL() {
         
                 ajaxPromise(friendlyURL("?module=login&op=ControlUser"), 'POST', 'JSON', { 'token': token })
                 .then(function(response) {
-
-
-                    // console.log(response); 
+                    console.log(response); 
         
                     if (!response) {
                         console.error('Error: Respuesta vacía del servidor');
