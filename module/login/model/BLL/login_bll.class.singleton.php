@@ -382,14 +382,24 @@
 				
 				// return 'EH?';
 				$jwt = middleware::encode($user[0]['Username']);
+				$_SESSION['username'] = $user[0]['Username'];
+				$_SESSION['mail'] = $user[0]['Email'];
+				$_SESSION['tiempo'] = time();
+				session_regenerate_id();
 				return $jwt;
 
             } else {
-				return 'Funcion no disponible';
-				// $this -> dao -> insert_social_login($this->db, $args[0], $args[1], $args[2], $args[3]);
-				// $user = $this -> dao -> select_user($this->db, $args[1], $args[2]);
-				// $jwt = middleware::encode($user[0]['username']);
-				// return json_encode($jwt);
+				// return 'Funcion no disponible';
+				// return $args;
+
+				$this -> dao -> insert_social_login($this->db, $args['username'], $args['email'], $args['avatar']);
+
+				$user = $this -> dao -> select_user($this->db, $args['username'], $args['email']);
+
+				// return $user;
+
+				$jwt = middleware::encode($user[0]['username']);
+				return $jwt;
 			}
 		}
 		

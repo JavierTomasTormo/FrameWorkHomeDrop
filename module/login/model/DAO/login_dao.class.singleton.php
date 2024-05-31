@@ -175,6 +175,22 @@
             return 'done';
         }
 
+        public function insert_social_login($db, $username, $email, $avatar){
+
+            $sql ="INSERT INTO users (Username, Password, Email, UserType, Avatar, token_email, tiempo_generacion, activate, attempts, SL_github, SL_google)     
+                VALUES ('$username', '', '$email', 'client', '$avatar', '', '', 1, 0, '', '')";
+
+            return $stmt = $db->ejecutar($sql);
+        }
+
+        // public function select_data_user($db, $username){
+
+		// 	$sql = "SELECT id, username, password, email, user_type, avatar, token_email, activate FROM users WHERE username = '$username'";
+            
+        //     $stmt = $db->ejecutar($sql);
+        //     return $db->listar($stmt);
+        // }
+
         /* */ 
         
         // public function update_recover_password($db, $email, $token_email){
@@ -191,21 +207,7 @@
         //     return $db->listar($stmt);
         // }
 
-        // public function insert_social_login($db, $id, $username, $email, $avatar){
 
-        //     $sql ="INSERT INTO users (id, username, password, email, user_type, avatar, token_email, activate)     
-        //         VALUES ('$id', '$username', '', '$email', 'client', '$avatar', '', 1)";
-
-        //     return $stmt = $db->ejecutar($sql);
-        // }
-
-        // public function select_data_user($db, $username){
-
-		// 	$sql = "SELECT id, username, password, email, user_type, avatar, token_email, activate FROM users WHERE username = '$username'";
-            
-        //     $stmt = $db->ejecutar($sql);
-        //     return $db->listar($stmt);
-        // }
 
     }
 
