@@ -430,35 +430,36 @@ function social_login(param){
     authService = firebase_config();
 
     // console.log(authService);
+    console.log(provider_config);
 
     authService.signInWithPopup(provider_config)
     .then(function(result) {
 
-        console.log(result);
-
-        console.log('Hemos autenticado al usuario ', result.user);
-
         email_name = result.user.email;
         let username = email_name.split('@');
-        console.log(username[0]);
 
-        social_user = {id: result.user.uid, username: username[0], email: result.user.email, avatar: result.user.photoURL};
-        // if (result) {
-        //     ajaxPromise(friendlyURL("?module=login&op=social_login"), 'POST', 'JSON', social_user)
-        //     .then(function(data) {
-        //         localStorage.setItem("token", data);
-        //         toastr.options.timeOut = 3000;
-        //         toastr.success("Inicio de sesión realizado");
-        //         if(localStorage.getItem('likes') == null) {
-        //             setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
-        //         } else {
-        //             setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
-        //         }
-        //     })
-        //     .catch(function() {
-        //         console.log('Error: Social login error');
-        //     });
-        // }
+        social_user = {id: result.user.uid, username: username[0], email: result.user.email, avatar: result.user.photoURL, provider: param};
+
+        if (result) {
+            ajaxPromise(friendlyURL("?module=login&op=social_login"), 'POST', 'JSON', {'social_user' : social_user})
+            .then(function(data) {
+
+                console.log(data);
+
+                // localStorage.setItem("token", data);
+                // toastr.options.timeOut = 3000;
+                // toastr.success("Inicio de sesión realizado");
+                // if(localStorage.getItem('likes') == null) {
+                //     setTimeout('window.location.href = friendlyURL("?module=home&op=view")', 1000);
+                // } else {
+                //     setTimeout('window.location.href = friendlyURL("?module=shop&op=view")', 1000);
+                // }
+            })
+            .catch(function(error) {
+                console.log('Error: Social login error    '+ error);
+                console.log(error);
+            });
+        }
     })
     .catch(function(error) {
         var errorCode = error.code;

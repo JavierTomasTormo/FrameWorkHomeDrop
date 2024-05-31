@@ -138,6 +138,11 @@
             echo json_encode(common::load_model('login_model', 'getUpdateOTP', $_POST['Username']));
         
         }
+
+        function social_login() {
+            // echo json_encode($_POST['social_user']);
+            echo json_encode(common::load_model('login_model', 'get_social_login', $_POST['social_user']));
+        } 
         
     
         // function logout() {

@@ -84,6 +84,11 @@ class login_model {
     public function getUpdateOTP($Username) {
         return $this->bll->getUpdateOTP_BLL($Username);
     }
+
+    public function get_social_login($args) {
+        return $this -> bll -> get_social_login_BLL($args);
+    }
+
 /*get_LikedHouses  get_RefreshCookie get_LogOut*/
     // public function get_social_login($args) {
     //     return $this -> bll -> get_social_login_BLL($args);
