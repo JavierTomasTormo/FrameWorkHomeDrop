@@ -7,6 +7,7 @@ HomeDrop es un Framework diseñado para simplificar la búsqueda y publicación 
 - [Características](#características)
 - [Instalación](#instalación)
 - [Estructura del Código](#estructura-del-código)
+- [Tecnologías Utilizadas](#tecnologías-utilizadas)
 - [Contribuir](#contribuir)
 - [Autores](#autores)
 - [Licencia](#licencia)
@@ -32,7 +33,7 @@ cd FrameWorkHomeDrop
 ```
 
 
-## Estructura del Código
+## Estructura del Código 👨‍💻
 
 HomeDrop está construido con una estructura de código organizada y modular, lo que facilita su mantenimiento y escalabilidad. Aquí hay un resumen de los principales componentes:
 
@@ -44,6 +45,36 @@ HomeDrop está construido con una estructura de código organizada y modular, lo
 El código está escrito en una combinación de PHP, HTML, CSS y JavaScript, lo que permite una experiencia web dinámica y atractiva para los usuarios.
 
 
+
+
+---
+## Tecnologías Utilizadas 😏
+
+### 🔙 Backend
+- **PHP**: Nuestro motor principal que maneja toda la lógica y procesamiento del servidor. 🖥️💡
+
+### 🎨 Frontend
+- **HTML, CSS y JavaScript**: Las estrellas de nuestro espectáculo visual. Construyen la interfaz de usuario y agregan interactividad y efectos visuales a nuestra aplicación. 🌈✨
+
+### 🗄️ Base de Datos
+- **MySQL**: Aquí es donde guardamos y recuperamos toda la información importante sobre propiedades, usuarios y mucho más. 📊💾
+
+### 🔐 Autenticación y Autorización
+- **JWT (JSON Web Tokens)**: Utilizamos JWT para mantener la autenticación y autorización de usuarios segura y confiable. 🔑🔒
+
+### 🗺️ Mapas Interactivos
+- **Mapbox GL JS**: Mostramos las ubicaciones de las propiedades en un mapa interactivo y atractivo. ¡Explora y encuentra tu próximo hogar! 🏡🗺️
+
+### 🖼️ Carruseles de Imágenes
+- **Glider.js**: Biblioteca ligera y fácil de usar para mostrar las galerías de fotos de las propiedades. 📸✨
+- **Slick Carousel**: Carrusel altamente personalizable para mostrar las fotos de manera elegante y fluida. 🎠🎨
+
+### 🔔 Notificaciones
+- **Toastr.js**: Biblioteca de notificaciones que utilizamos para mostrar mensajes y alertas de manera atractiva y personalizada. 🔔🎉
+
+Cada una de estas tecnologías juega un papel crucial en la creación de una experiencia de usuario excepcional en HomeDrop. ¡Esperamos que disfrutes de la experiencia tanto como nosotros disfrutamos creándola para ti! 😊🏡
+
+---
 
 ## Contribuir 🚀
 
@@ -59,3 +90,4 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más 
 
 ## ¡Explora, Descubre, y Encuentra tu Hogar Ideal con HomeDrop! 🏠✨
 
+¡Gracias por usar HomeDrop! 🌟🏠🚀
