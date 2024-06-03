@@ -24,10 +24,10 @@
         <name>errors</name>
         <uri>errors</uri>
     </module>
-    <!-- <module>
+    <module>
         <name>cart</name>
         <uri>cart</uri>
-    </module> -->
+    </module>
     <module>
         <name>login</name>
         <uri>login</uri>
