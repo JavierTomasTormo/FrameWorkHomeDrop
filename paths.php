@@ -65,9 +65,9 @@
     // define ('VIEW_PATH_ERRORS', SITE_ROOT . 'module/errors/view/');
     
     //MODEL_CONTACT
-    define('MODEL_CONTACT', SITE_ROOT . 'module/contact/model/model/');
-    define('JS_VIEW_CONTACT', SITE_PATH . 'module/contact/view/js/');
-    define ('VIEW_PATH_CONTACT', SITE_ROOT . 'module/contact/view/');
+    // define('MODEL_CONTACT', SITE_ROOT . 'module/contact/model/model/');
+    // define('JS_VIEW_CONTACT', SITE_PATH . 'module/contact/view/js/');
+    // define ('VIEW_PATH_CONTACT', SITE_ROOT . 'module/contact/view/');
     
 
 

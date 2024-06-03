@@ -27,7 +27,7 @@
         /*=======================================================================*/
             function __construct() {   
 
-                //echo $_GET['module'],"    ", $_GET['op'], "\n";
+                // echo $_GET['module'],"    ", $_GET['op'], "\n";
 
                 if (isset($_GET['module'])) {
                     $this->uriModule = $_GET['module'];
@@ -58,15 +58,15 @@
                     $modules = simplexml_load_file('resources/modules.xml');
                     //var_dump($modules);
                     foreach ($modules as $row) {
-                        //var_dump($row);
+                        // var_dump($row);
                         if (in_array($this->uriModule, (array)$row->uri)) {
                             $path = MODULES_PATH . $row->name . '/controller/controller_' . (string)$row->name . '.class.singleton.php';
-                            //var_dump( "$path");
+                            // var_dump( "$path");
                             if (file_exists($path)) {
                                 require_once($path);
                                 $controllerName = 'controller_' . (string)$row->name;
                                 $this->nameModule = (string)$row->name;
-                                //var_dump($this->nameModule = (string)$row->name , "Linea 67");
+                                // var_dump($this->nameModule = (string)$row->name);
                                 ///////////////////////////////////////////////////////////
                                 if (method_exists($controllerName, 'getInstance')) {
                                     return call_user_func(array($controllerName, 'getInstance'));
@@ -104,7 +104,7 @@
 
                 // echo ("$moduleName". "\n");
 
-                 //var_dump("$path         " . $this -> nameModule);
+                //  var_dump("$path         " . $this -> nameModule);
                 //  $mensaje = "$path      " . $this -> nameModule;
                 //  echo "<script>console.log('" . $mensaje . "');</script>";
 

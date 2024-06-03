@@ -9,6 +9,7 @@
 		}
 
 		public static function getInstance() {
+            // echo self::$_instance;
 			if (!(self::$_instance instanceof self)) {
 				self::$_instance = new self();
 			}
@@ -17,7 +18,7 @@
 
 
         function view() {
-            // echo "Hola VIEW de controller_home";
+            // echo "Hola VIEW de controller_cart";
             common::load_view('top_page_cart.html', VIEW_PATH_CART . 'cart.html');
         }
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
