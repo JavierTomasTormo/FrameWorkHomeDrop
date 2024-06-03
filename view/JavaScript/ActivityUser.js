@@ -26,7 +26,7 @@ function ProtectURL() {
         
                     } else if (response === "Wrong_User") {
                         console.log("ERROR --> Se está intentando forzar una cuenta");
-                        // LogOutAuto();
+                        LogOutAuto();
         
                     } else {
                         console.error('Error: Respuesta del servidor inesperada');
