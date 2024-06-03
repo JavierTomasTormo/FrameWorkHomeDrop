@@ -6,8 +6,6 @@
 		static $_instance;
         
 		function __construct() {
-			$this -> dao = home_dao::getInstance();
-			$this -> db = db::getInstance();
 		}
 
 		public static function getInstance() {
