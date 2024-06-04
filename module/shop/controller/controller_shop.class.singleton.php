@@ -29,7 +29,15 @@
         }
 
 //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
-        //
+        function addToCart() {
+            // echo json_encode("✅ addToCart ✅");
+            // echo json_encode($_POST['homeDropId']);
+
+            echo json_encode(common::load_model('shop_model', 'get_addToCart', $_POST['homeDropId']));  
+        }
+
+//.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
+        
         function updateResultsCount() {
             // echo json_encode("updateResultsCount");
             echo json_encode(common::load_model('shop_model', 'get_updateResultsCount', $_POST['FiltersShopCount']));

@@ -905,7 +905,7 @@ function ajaxForSearch(durl, type , dataType , sData = undefined, total_prod = 0
                     data: { ID_HomeDropLike: productData.ID_HomeDrop, token: token },
                     success: function(response) {
 
-                        console.log(response);
+                        // console.log(response);
 
                         if (response === 'Like') {
                             productHTML += '<div class="LikeHeart is-active" id="' + productData.ID_HomeDrop + '"></div><br>' +
@@ -1075,6 +1075,33 @@ function clicks() {
         //console.log(lastSelectedHouses);
         loadDetails(ID_HomeDrop);
     });
+
+
+
+    $(document).on("click", ".addtoCart", function() {
+        // console.log("Hola, click en agregar al carrito");
+        var homeDropId = $('.addtoCart').attr('id');
+
+        // console.log(homeDropId);
+    
+        $.ajax({
+            url: friendlyURL('?module=shop&op=addToCart'), 
+            type: 'POST',
+            data: { homeDropId: homeDropId },
+            success: function(response) {
+                toastr.success(response);
+                console.log(response); 
+                setTimeout(function() {
+                    location.reload();
+                }, 1500);
+                // location.reload();
+                
+            },
+            error: function(xhr, status, error) {
+                console.error(error); 
+            }
+        });
+    });
     
 }
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
@@ -1123,11 +1150,9 @@ function loadDetails(ID_HomeDrop) {
                     .append($('<div>').addClass('buttons_details')
                         .append($('<div>').addClass('product-price-btn2')
                             .html(`<span>${data[0].Precio}<i class='fa-solid fa-euro-sign'></i></span>`))
-                            .append($('<a>').addClass('button add').attr('href', '#').html('Add to Cart'))
+                            .append($('<button>').addClass('addtoCart button').html('Add to Cart').attr('id', data[0].ID_HomeDrop))
                             .append($('<a>').addClass('button buy2').attr('href', '#').html('Buy'))
                             .append($('<a>').addClass('button buy2').attr('href', friendlyURL('?module=shop')).html('Volver'))
-                            .append($('<a>').addClass('details__heart').attr('id', data[0].ID_HomeDrop)
-                            .append($('<i>').attr('id', data[0].ID_HomeDrop).addClass('fa-solid fa-heart fa-lg')))
                     )
 
                 )
@@ -1151,6 +1176,7 @@ function loadDetails(ID_HomeDrop) {
         // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Load_Details SHOP";
     });
 }
+
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 function AllMapBox(data) {
     mapboxgl.accessToken = 'pk.eyJ1IjoiMjBqdWFuMTUiLCJhIjoiY2t6eWhubW90MDBnYTNlbzdhdTRtb3BkbyJ9.uR4BNyaxVosPVFt8ePxW1g';

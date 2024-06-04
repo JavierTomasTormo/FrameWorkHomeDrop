@@ -395,6 +395,25 @@
                 }
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
 
+                public function checkCartRecord($db, $ID_HomeDrop, $ID_User) {
+                        $sql = "SELECT * FROM cart WHERE ID_HomeDrop = $ID_HomeDrop AND ID_User = $ID_User";
+                        $stmt = $db->ejecutar($sql);
+                        return $stmt->num_rows > 0;
+                }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+                public function incrementCartQuantity($db, $ID_HomeDrop, $ID_User) {
+                        $sql = "UPDATE cart SET Quantity = Quantity + 1 WHERE ID_HomeDrop = $ID_HomeDrop AND ID_User = $ID_User";
+                        return $stmt = $db->ejecutar($sql);
+                }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+                public function addToCart($db, $ID_HomeDrop, $ID_User) {
+                        $sql = "INSERT INTO cart (ID_HomeDrop, ID_User, Quantity) VALUES ($ID_HomeDrop, $ID_User, 1)";
+                        return $stmt = $db->ejecutar($sql);
+                }
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#//
+
         // public function CountRelatedHomes($db, $Category, $Ciudad, $ID_HomeDrop) {
 
         //     $array_filters = array('type_name', 'category_name', 'color', 'extras', 'doors');  // 'brand_name', 

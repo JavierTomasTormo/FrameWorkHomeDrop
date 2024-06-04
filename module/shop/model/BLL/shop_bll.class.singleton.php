@@ -371,6 +371,21 @@
 
 		}
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
+		public function get_addToCart_BLL($ID_HomeDrop) {
+
+			$ID_User = $_SESSION['ID_User'];
+
+			$existingRecord = $this->dao->checkCartRecord($this->db, $ID_HomeDrop, $ID_User);
+
+			if ($existingRecord) {
+				$this->dao->incrementCartQuantity($this->db, $ID_HomeDrop, $ID_User);
+			} else {
+				$this->dao->addToCart($this->db, $ID_HomeDrop, $ID_User);
+			}
+		
+			return "Producto agregado al carrito correctamente";
+		}
+//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
 		// public function get_control_likes_BLL($args) {
 
 		// 	$token = explode('"', $args[1]);

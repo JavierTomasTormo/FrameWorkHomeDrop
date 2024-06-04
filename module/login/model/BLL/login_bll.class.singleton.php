@@ -129,6 +129,7 @@
 					$jwt = middleware::encode($user[0]['Username']);
 					$_SESSION['username'] = $user[0]['Username'];
 					$_SESSION['mail'] = $user[0]['Email'];
+					$_SESSION['ID_User'] = $user[0]['ID_User'];
 					$_SESSION['tiempo'] = time();
 					session_regenerate_id();
 				
@@ -181,6 +182,7 @@
 			unset($_SESSION['Username']);
 			unset($_SESSION['mail']);
 			unset($_SESSION['tiempo']);
+			unset($_SESSION['ID_User']);
 			session_destroy();
 	
 			return('Done');
