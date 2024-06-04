@@ -1,5 +1,6 @@
 body {
-  background-color: #53575f;
+  background-color: #292626;
+  /* background-color: #53575f; */
 }
 select:disabled {
   opacity: 0.6;
@@ -217,12 +218,12 @@ height: auto;
  /* PRICING STYLE */
 
  #footer-sec {
-  background-color:#000;
-  color:#808080;
+  /* background-color:#000; */
+  color:#ffffff;
 }
 #footer-sec h4 {
 text-transform:uppercase;
-color:#fff;
+color:#a2c447;
 }
 
 
@@ -408,4 +409,146 @@ color:#fff;
 #search_auto .autocomplete-item.active {
   background-color: #007bff;
   color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Contenedor principal del carrito */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Título del carrito */
+h2.texto-dorado {
+  color: #d4af37; /* Color dorado */
+  font-family: 'Arial', sans-serif;
+  font-size: 2.5em;
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Filas y columnas */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.col-md-8,
+.col-md-4 {
+  padding: 15px;
+}
+
+.col-md-8 {
+  flex: 0 0 66.66667%;
+  max-width: 66.66667%;
+}
+
+.col-md-4 {
+  flex: 0 0 33.3333%;
+  max-width: 33.33333%;
+}
+
+/* Estilo de los elementos del carrito */
+.cart-items {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo del resumen del carrito */
+.cart-summary {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cart-summary h3 {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.5em;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.summary-item span {
+  font-family: 'Arial', sans-serif;
+}
+
+#subtotal,
+#taxes,
+#total {
+  font-weight: bold;
+}
+
+#total {
+  color: #d9534f; /* Rojo para el total */
+}
+
+.btn-primary {
+  background-color: #d4af37; /* Color dorado */
+  border-color: #d4af37;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #c39a33;
+  border-color: #c39a33;
 }
