@@ -387,6 +387,8 @@
 				$_SESSION['username'] = $user[0]['Username'];
 				$_SESSION['mail'] = $user[0]['Email'];
 				$_SESSION['tiempo'] = time();
+				$_SESSION['ID_User'] = $user[0]['ID_User'];
+
 				session_regenerate_id();
 				return $jwt;
 

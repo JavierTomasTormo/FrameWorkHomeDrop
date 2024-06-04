@@ -23,38 +23,38 @@
         }
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
-//         function CarouselImages() {
-//             echo json_encode(common::load_model('home_model', 'get_CarouselImages'));//✅✅✅
-//         }
+        function ListCart() {
+            echo json_encode(common::load_model('cart_model', 'get_ListCart'));
+        }
 
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
 //         function CategoryCharger() {
-//             echo json_encode(common::load_model('home_model', 'get_CategoryCharger'));//✅✅✅
+//             echo json_encode(common::load_model('cart_model', 'get_CategoryCharger'));//✅✅✅
 //         }
 
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//     
 
 //         function CityCharger() {
-//             echo json_encode(common::load_model('home_model', 'get_CityCharger'));//✅✅✅
+//             echo json_encode(common::load_model('cart_model', 'get_CityCharger'));//✅✅✅
 //         }
 
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
 //         function OperationCharger() {
-//             echo json_encode(common::load_model('home_model', 'get_OperationCharger'));//✅✅✅
+//             echo json_encode(common::load_model('cart_model', 'get_OperationCharger'));//✅✅✅
 //         }
 
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
 //         function showLastSelectedHouseInfo() {
-//             echo json_encode(common::load_model('home_model', 'get_showLastSelectedHouseInfo', $_GET['data'])); //✅✅✅
+//             echo json_encode(common::load_model('cart_model', 'get_showLastSelectedHouseInfo', $_GET['data'])); //✅✅✅
 //         }
 
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
 //         function MostVisited() {
-//             echo json_encode(common::load_model('home_model', 'get_MostVisited'));//✅✅✅
+//             echo json_encode(common::load_model('cart_model', 'get_MostVisited'));//✅✅✅
 //         }
         
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//

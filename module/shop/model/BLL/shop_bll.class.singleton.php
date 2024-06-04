@@ -386,15 +386,5 @@
 			return "Producto agregado al carrito correctamente";
 		}
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
-		// public function get_control_likes_BLL($args) {
-
-		// 	$token = explode('"', $args[1]);
-		// 	$decode = middleware::decode_username($token[1]);
-
-		// 	if ($this -> dao -> select_likes($this->db, $args[0], $decode)) {
-		// 		return $this -> dao -> delete_likes($this->db, $args[0], $decode);
-		// 	}
-		// 	return $this -> dao -> insert_likes($this->db, $args[0], $decode);
-		// }
 	}
 ?>

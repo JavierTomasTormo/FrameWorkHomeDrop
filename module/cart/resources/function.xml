@@ -6,10 +6,10 @@
             <uri>view</uri>
         </function>
     <!---->
-        <!-- <function>
-            <name></name>
-            <uri></uri>
-        </function> -->
+        <function>
+            <name>ListCart</name>
+            <uri>ListCart</uri>
+        </function>
     <!---->    
         <!-- <function>
             <name></name>
