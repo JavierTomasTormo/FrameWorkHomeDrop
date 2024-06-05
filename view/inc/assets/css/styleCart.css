@@ -551,10 +551,10 @@ h2.texto-dorado {
   align-items: center;
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid #b9b6b6;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: #f6f6f0;
 }
 
 /* Contenedor de la imagen del ítem del carrito */
@@ -613,6 +613,7 @@ h2.texto-dorado {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 1px;
   margin-left: auto;
   padding: 10px;
   background-color: #d4af379d;
@@ -627,7 +628,7 @@ h2.texto-dorado {
   text-align: center;
   padding: 10px;
   border-radius: 4px;
-  background-color: #b5b4b4;
+  background-color: #ffffffa1;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
