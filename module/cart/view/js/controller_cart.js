@@ -22,49 +22,85 @@ function ListCart() {
                             "<a href='" + friendlyURL('?module=shop') + "'>Ir a la tienda</a>" +
                         "</div>"
                      );
-            } else {
-                console.log('Hay datos');
 
+            } else {
                 const cartContainer = document.getElementById('cart-items');
+                const cartSummaryItemsContainer = document.getElementById('cart-summary-items');
                 const totalPriceElement = document.getElementById('total');
                 let totalPrice = 0;
 
-                console.log(data);
+                const streetSums = {};
 
-                userCart.forEach(cartItem => {
-                    const matchedItem = matched.find(item => item.ID_HomeDrop === cartItem.ID_HomeDrop);
+                // console.log(data);
+
+                data['UserCart'].forEach(cartItem => {
+                    const matchedItem = data['Matched'].find(item => item.ID_HomeDrop === cartItem.ID_HomeDrop);
                     if (matchedItem) {
                         const itemTotalPrice = parseFloat(matchedItem.Precio) * parseInt(cartItem.Quantity);
                         totalPrice += itemTotalPrice;
-            
+
+                            const street = matchedItem.Calle;
+                            if (streetSums[street]) {
+                                streetSums[street] += itemTotalPrice;
+                            } else {
+                                streetSums[street] = itemTotalPrice;
+                            }
+                
                         const cartItemElement = document.createElement('div');
                         cartItemElement.classList.add('cart-item');
-            
+                
                         cartItemElement.innerHTML = `
+                            <div class="cart-item">
+                            <div class="cart-item-image">
+                                <img src="${matchedItem.Img}" alt="Imagen del producto">
+                                <p><strong>Visitas:</strong> ${matchedItem.vivistas}</p>
+
+                            </div>
+                            <div class="cart-item-general">
+                                <p><strong>Categoría:</strong> ${matchedItem.Category}</p>
+                                <p><strong>Operación:</strong> ${matchedItem.Operation}</p>
+                                <p><strong>Tipo:</strong> ${matchedItem.Type}</p>
+                            </div>
                             <div class="cart-item-details">
                                 <p><strong>Ciudad:</strong> ${matchedItem.Ciudad}</p>
                                 <p><strong>Calle:</strong> ${matchedItem.Calle}</p>
                                 <p><strong>Superficie:</strong> ${matchedItem.Superficie} m²</p>
                             </div>
-                            <div class="cart-item-price">
-                                <p><strong>Precio:</strong> €${parseFloat(matchedItem.Precio).toFixed(2)}</p>
+                            <div class="cart-item-price-container">
+
+                                <div class="cart-item-price">
+                                    <p><strong>Precio:</strong><br>€${parseFloat(matchedItem.Precio).toFixed(2)}</p>
+                                </div>
+
+                                <div class="cart-item-quantity">
+                                    <p><strong>Cantidad:</strong><br>${cartItem.Quantity}</p>
+                                </div>
+
+                                <div class="cart-item-total">
+                                    <p><strong>Total:</strong><br>€${itemTotalPrice.toFixed(2)}</p>
+                                </div>
                             </div>
-                            <div class="cart-item-quantity">
-                                <p><strong>Cantidad:</strong> ${cartItem.Quantity}</p>
-                            </div>
-                            <div class="cart-item-total">
-                                <p><strong>Total:</strong> €${itemTotalPrice.toFixed(2)}</p>
                             </div>
                         `;
-            
+                        // console.log(matchedItem);
+                
                         cartContainer.appendChild(cartItemElement);
                     }
                 });
-            
-                totalPriceElement.textContent = `€${totalPrice.toFixed(2)}`;
-            
-            }
+    
+                // totalPriceElement.textContent = `€${totalPrice.toFixed(2)}`;//suma las cantidades pero lo esta haciendo mal
+                Object.entries(streetSums).forEach(([street, sum]) => {
+                    const summaryItemElement = document.createElement('div');
+                    summaryItemElement.classList.add('summary-item');
+                    summaryItemElement.innerHTML = `
+                        <span>${street}:</span>
+                        <span>€${sum.toFixed(2)}</span>
+                    `;
+                    cartSummaryItemsContainer.appendChild(summaryItemElement);
+                });
 
+                totalPriceElement.textContent = `€${totalPrice.toFixed(2)}`;
+            }
 
         }).catch(function (error) {
             console.error('Error  '+error);
@@ -72,7 +108,6 @@ function ListCart() {
 }
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
-
 
 $(document).ready(function () {
     ListCart();
