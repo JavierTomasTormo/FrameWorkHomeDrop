@@ -19,19 +19,18 @@
             return $this -> bll -> get_ListCart_BLL();
         }
 // //:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+://
-//         public function get_CategoryCharger() {
-//             return $this -> bll -> get_CategoryCharger_BLL();
-//         }
+        public function incrementarCantidad($ID_HomeDrop) {
+            return $this->bll->incrementCartItemQuantity_BLL($ID_HomeDrop);
+        }
+
+// //:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+://get_disminuircantidad
+        public function get_disminuircantidad($ID_HomeDrop) {
+            return $this->bll->get_disminuircantidad_BLL($ID_HomeDrop);
+        }
 // //:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+://
-//         public function get_CityCharger() {
-//             // return 'hola car type';
-//             return $this -> bll -> get_CityCharger_BLL();
-//         }
-// //:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+://
-//         public function get_OperationCharger() {
-//             // return 'hola car type';
-//             return $this -> bll -> get_OperationCharger_BLL();
-//         }
+        public function get_removefromcart($ID_HomeDrop) {
+            return $this -> bll -> get_removefromcart_BLL($ID_HomeDrop);
+        }
 // //:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+://
 //         public function get_MostVisited() {
 //             return $this -> bll -> get_MostVisited_BLL();

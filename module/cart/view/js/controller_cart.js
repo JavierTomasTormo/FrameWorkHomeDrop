@@ -140,7 +140,25 @@ function Buttons() {
 
             console.log(ID_HomeDrop);
 
-            console.log("remove");
+            $.ajax({
+                url: 'index.php?module=cart&op=removefromcart',
+                type: 'POST',
+                data: { ID_HomeDrop: ID_HomeDrop },
+                dataType: 'json',
+                success: function(response) {
+                    // console.log(response);
+                    // console.log(response['success']);
+
+                    if (response['success'] == true) {
+                        location.reload();
+                    } else {
+                        toastr.error("Error en el proceso");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
         });
     /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
         $(document).on('click', '.Button-min', function () {
@@ -148,15 +166,50 @@ function Buttons() {
 
             console.log(ID_HomeDrop);
 
-            console.log("Menos");
+            $.ajax({
+                url: 'index.php?module=cart&op=disminuircantidad',
+                type: 'POST',
+                data: { ID_HomeDrop: ID_HomeDrop },
+                dataType: 'json',
+                success: function(response) {
+                    // console.log(response);
+                    // console.log(response['success']);
+
+                    if (response['success'] == true) {
+                        location.reload();
+                    } else {
+                        toastr.error("Error en el proceso");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+            
         });
     /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
         $(document).on('click', '.Button-max', function () {
             var ID_HomeDrop = this.id.replace('Button-max-', '');
-
-            console.log(ID_HomeDrop);
-
-            console.log("Mas");
+            // console.log(ID_HomeDrop);
+            // console.log("Mas");
+            $.ajax({
+                url: 'index.php?module=cart&op=incrementarcantidad',
+                type: 'POST',
+                data: { ID_HomeDrop: ID_HomeDrop },
+                dataType: 'json',
+                success: function(response) {
+                    // console.log(response);
+                    // console.log(response['success']);
+                    if (response['success'] == true) {
+                        location.reload();
+                    } else {
+                        toastr.error("Error,No queda Stock");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
         });
     /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 }

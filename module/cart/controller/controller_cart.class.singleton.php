@@ -29,21 +29,24 @@
 
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
-//         function CategoryCharger() {
-//             echo json_encode(common::load_model('cart_model', 'get_CategoryCharger'));//✅✅✅
-//         }
+        function incrementarcantidad() {
+            $ID_HomeDrop = $_POST['ID_HomeDrop'];
+            echo json_encode(common::load_model('cart_model', 'incrementarCantidad', $ID_HomeDrop));
+        }
 
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//     
 
-//         function CityCharger() {
-//             echo json_encode(common::load_model('cart_model', 'get_CityCharger'));//✅✅✅
-//         }
+        function disminuircantidad() {
+            $ID_HomeDrop = $_POST['ID_HomeDrop'];
+            echo json_encode(common::load_model('cart_model', 'get_disminuircantidad', $ID_HomeDrop));
+        }
 
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
-//         function OperationCharger() {
-//             echo json_encode(common::load_model('cart_model', 'get_OperationCharger'));//✅✅✅
-//         }
+        function removefromcart() {
+            $ID_HomeDrop = $_POST['ID_HomeDrop'];
+            echo json_encode(common::load_model('cart_model', 'get_removefromcart', $ID_HomeDrop));
+        }
 
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 

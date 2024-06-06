@@ -11,20 +11,20 @@
             <uri>ListCart</uri>
         </function>
     <!---->    
-        <!-- <function>
-            <name></name>
-            <uri></uri>
-        </function> -->
+        <function>
+            <name>incrementarcantidad</name>
+            <uri>incrementarcantidad</uri>
+        </function>
     <!---->   
-        <!-- <function>
-            <name></name>
-            <uri></uri>
-        </function> -->
+        <function>
+            <name>disminuircantidad</name>
+            <uri>disminuircantidad</uri>
+        </function>
     <!---->   
-        <!-- <function>
-            <name></name>
-            <uri></uri>
-        </function> -->
+        <function>
+            <name>removefromcart</name>
+            <uri>removefromcart</uri>
+        </function>
     <!---->   
         <!-- <function>
             <name></name>

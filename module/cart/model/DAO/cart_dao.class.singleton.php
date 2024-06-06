@@ -43,15 +43,30 @@
             return $db -> listar($stmt);
         }
 // //##########################################################################//
-//         public function SelectCity($db) {
+        public function getCartItemQuantity($db, $ID_HomeDrop, $ID_User) {
+            $sql = "SELECT Quantity FROM cart WHERE ID_HomeDrop = $ID_HomeDrop AND ID_User = $ID_User";
+            $stmt = $db->ejecutar($sql);
+            $result = $db->listar($stmt);
+            return $result;
+        }
 
-//             $sql = "SELECT ch.ID_City, ch.Ciudad, vh.Calle, ch.Img FROM cityhomedrop ch 
-//              			INNER JOIN viviendashomedrop vh ON vh.ID_City = ch.ID_City 
-//              			GROUP BY Ciudad ORDER BY ID_City ASC;";
+        public function getHomeStock($db, $ID_HomeDrop) {
+            $sql = "SELECT stock FROM viviendashomedrop WHERE ID_HomeDrop = $ID_HomeDrop";
+            $stmt = $db->ejecutar($sql);
+            $result = $db->listar($stmt);
+            return $result;
+        }
 
-//             $stmt = $db -> ejecutar($sql);
-//             return $db -> listar($stmt);
-//         }
+        public function updateCartItemQuantity($db, $ID_HomeDrop, $ID_User, $newQuantity) {
+            $sql = "UPDATE cart SET Quantity = $newQuantity WHERE ID_HomeDrop = $ID_HomeDrop AND ID_User = $ID_User";
+            $db->ejecutar($sql);
+        }
+
+        public function deleteCartItem($db, $ID_HomeDrop, $ID_User) {
+            $sql = "DELETE FROM `cart` WHERE ID_HomeDrop = $ID_HomeDrop AND ID_User = $ID_User";
+            $db->ejecutar($sql);
+        }
+
 // //##########################################################################//
 //         public function SelectOperation($db) {
 
