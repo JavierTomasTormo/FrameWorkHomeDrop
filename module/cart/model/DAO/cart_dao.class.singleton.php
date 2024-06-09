@@ -67,6 +67,44 @@
             $db->ejecutar($sql);
         }
 
+        
+
+
+
+        //##########################################################################//
+
+        public function insertOrder($db, $user_id, $total_amount) {
+            $sql = "INSERT INTO orders (ID_User, Total_Amount) VALUES ($user_id, $total_amount)";
+            $db->ejecutar($sql);
+            $sql = "SELECT LAST_INSERT_ID() AS order_id";
+            $stmt = $db->ejecutar($sql);
+            $result = $db->listar($stmt);
+            return $result[0]['order_id'];
+        }
+        
+        
+        
+        public function insertOrderItem($db, $order_id, $product_id, $quantity, $price) {
+            $sql = "INSERT INTO order_items (ID_Order, ID_HomeDrop, Quantity, Price) VALUES ($order_id, $product_id, $quantity, $price)";
+            $db->ejecutar($sql);
+        }
+        
+        
+        public function clearCart($db, $user_id) {
+            $sql = "DELETE FROM cart WHERE ID_User = $user_id";
+            $db->ejecutar($sql);
+        }
+
+        public function getProductPrice($db, $product_id) {
+            $sql = "SELECT Precio FROM viviendashomedrop WHERE ID_HomeDrop = $product_id";
+            $stmt = $db->ejecutar($sql);
+            $result = $db->listar($stmt);
+            return $result[0]['Precio'];
+        }
+        
+        
+        
+
 // //##########################################################################//
 //         public function SelectOperation($db) {
 

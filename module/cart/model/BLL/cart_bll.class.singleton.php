@@ -79,9 +79,10 @@
 			return array('success' => true, 'message' => '0, Eliminado');
         }
 // //,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+//
-//         public function get_MostVisited_BLL() {
-//             return $this -> dao -> MostVisited($this -> db);
-//         }
+		public function processOrder_BLL() {
+			$controller = controller_cart::getInstance();
+			return $controller->processOrder();
+		}
 // //,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+//
 //         public function get_showLastSelectedHouseInfo_BLL($lastSelectedHouses) {
 //             //return "Hello";

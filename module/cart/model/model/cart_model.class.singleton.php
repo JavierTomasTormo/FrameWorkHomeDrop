@@ -32,9 +32,9 @@
             return $this -> bll -> get_removefromcart_BLL($ID_HomeDrop);
         }
 // //:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+://
-//         public function get_MostVisited() {
-//             return $this -> bll -> get_MostVisited_BLL();
-//         }
+        public function processOrder() {
+            return $this->bll->processOrder_BLL();
+        }
 // //:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+://
 //         public function get_showLastSelectedHouseInfo() {
 //             //return "hola";

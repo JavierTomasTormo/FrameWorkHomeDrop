@@ -26,12 +26,32 @@
             <uri>removefromcart</uri>
         </function>
     <!---->   
+        <function>
+            <name>processOrder</name>
+            <uri>processOrder</uri>
+        </function>
+    <!---->   
         <!-- <function>
             <name></name>
             <uri></uri>
         </function> -->
-    <!---->   
-        <!-- <function>
+    <!---->  
+            <!-- <function>
+            <name></name>
+            <uri></uri>
+        </function> -->
+    <!---->  
+            <!-- <function>
+            <name></name>
+            <uri></uri>
+        </function> -->
+    <!---->  
+            <!-- <function>
+            <name></name>
+            <uri></uri>
+        </function> -->
+    <!---->  
+            <!-- <function>
             <name></name>
             <uri></uri>
         </function> -->

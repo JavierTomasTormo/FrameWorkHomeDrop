@@ -5,13 +5,10 @@ function ListCart() {
     ajaxPromise(friendlyURL('?module=cart&op=ListCart'), 'POST', 'JSON')
         .then(function (data) {
 
-            // console.log(data);
-
-
             if (data == "NoHay") {
                 $('.cart-items').empty();
 
-                console.log('No hay datos');
+                // console.log('No hay datos');
 
                 $('<div></div>')
                    .attr('class', 'NoHay')
@@ -131,8 +128,28 @@ function ListCart() {
 function Buttons() {
     /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
         $(document).on('click', '#ProcreedToPay', function () {
-            console.log("ProcreedToPay");
+            // console.log("ProcreedToPay");
+            $.ajax({
+                url: friendlyURL('?module=cart&op=processOrder'),
+                type: 'POST',
+                dataType: 'JSON',
+                success: function(response) {
 
+                    // console.log(response);
+
+                    if (response.success) {
+                        alert(response.message);
+                        location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                    console.error(xhr.responseText);
+                    console.error(status);
+                }
+            });
         });
     /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
         $(document).on('click', '.remove-item', function () {
