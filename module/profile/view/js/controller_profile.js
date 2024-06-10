@@ -76,22 +76,10 @@ function UserProfile() {
 
 function Buttons() {
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
-    $(document).on('click', '#generateInvoicePDF', function () {
-        var order_id = $(this).data('order-id');
-
-        ajaxPromise(friendlyURL('?module=profile&op=generateInvoicePDF'), 'POST', 'JSON', {'order_id': order_id})
-        .then(function(response) {
-            console.log(response);
-
-            window.open(response.url, '_blank');
-        })
-        .catch(function(error, status) {
-            console.error(error);
-            console.log(status);
-        });
-    });
-
-
+$(document).on('click', '#generateInvoicePDF', function() {
+    var orderId = $(this).data('order-id');
+    generateInvoicePDF(orderId);
+});
 
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 //         $(document).on('click', '.remove-item', function () {
@@ -173,6 +161,29 @@ function Buttons() {
 // /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 }
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
+function generateInvoicePDF(orderId) {
+    $.ajax({
+        url: friendlyURL('?module=profile&op=generateInvoicePDF'),
+        type: 'POST',
+        data: { order_id: orderId },
+        dataType: 'json',
+        success: function(response) {
+            console.log(response);
+
+            if (response.success) {
+                window.open(response.pdf_url, '_blank');
+            } else {
+                console.error('Error al generar la factura response:', response.error);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al generar la factura:', error);
+            console.error(xhr.responseText);
+        }
+    });
+}
+
+
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 $(document).ready(function () {
     UserProfile();

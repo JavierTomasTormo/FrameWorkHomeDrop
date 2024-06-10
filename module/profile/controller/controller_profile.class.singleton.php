@@ -32,31 +32,38 @@
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
 function generateInvoicePDF() {
-    $order_id = $_POST['order_id'];
-    $order = common::load_model('profile_model', 'getOrderDetails', $order_id);
-    $order_items = common::load_model('profile_model', 'getOrderItems', $order_id);
+    if (isset($_POST['order_id']) && !empty($_POST['order_id'])) {
+        $orderId = $_POST['order_id'];
+        $order = common::load_model('profile_model', 'getOrderDetails', $orderId);
+        $orderItems = common::load_model('profile_model', 'getOrderItems', $orderId);
 
-    $data = [
-        'order' => $order[0],
-        'order_items' => $order_items
-    ];
-    // echo json_encode($data);
+        if (!empty($order) && !empty($orderItems)) {
+            $data = [
+                'order' => $order[0],
+                'order_items' => $orderItems
+            ];
 
-    require_once(SITE_ROOT . 'utils/tcpdf.inc.php');
-    $pdf = new PDF();
-    $pdfContent = $pdf->generatePDF($data);
+            require_once(SITE_ROOT . 'utils/tcpdf.inc.php');
+            $pdf = new PDF();
+            $pdfFilePath = $pdf->generatePDF($data);
 
-    // echo json_encode($pdfContent);
-
-
-    header('Content-Type: application/pdf');
-    header('Content-Disposition: attachment; filename="factura_orden_' . $order[0]['ID_Order'] . '.pdf"');
-    header('Content-Length: ' . strlen($pdfContent));
-
-
-    echo json_encode($pdfContent);
-    // echo $pdfContent;
+            if ($pdfFilePath) {
+                $pdfUrl = SITE_PATH . str_replace(SITE_ROOT, '', $pdfFilePath);
+                echo json_encode(['success' => true, 'pdf_url' => $pdfUrl]);
+            } else {
+                echo json_encode(['error' => 'Error al generar el PDF']);
+            }
+        } else {
+            echo json_encode(['error' => 'No se encontraron datos de la orden']);
+        }
+    } else {
+        echo json_encode(['error' => 'ID de orden no proporcionado']);
+    }
 }
+
+
+
+
 
 
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//     
