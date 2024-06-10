@@ -372,7 +372,10 @@ body {
   }
   
   
-  
+  .activity-item-spacer {
+    height: 10px; /* Ajusta la altura según tus preferencias */
+}
+
   
   /* Estilo general del contenedor */
   #search_auto {
@@ -428,7 +431,7 @@ body {
     padding: 40px;
 }
 
-.profile-header, .profile-stats, .profile-activities, .profile-settings {
+.profile-header, .profile-stats, .profile-activities, .profile-settings,.profile-Invoices {
     background-color: #1e1e1e;
     padding: 30px;
     margin-bottom: 30px;
@@ -485,18 +488,18 @@ body {
     color: #ccc;
 }
 
-.profile-activities h3, .profile-settings h3 {
+.profile-activities h3, .profile-settings h3,.profile-Invoices h3 {
     font-size: 20px;
     color: #d5b568;
     margin-bottom: 15px;
 }
 
-.profile-activities ul {
+.profile-activities ul, .profile-Invoices ul {
     list-style: none;
     padding: 0;
 }
 
-.profile-activities ul li {
+.profile-activities ul li, .profile-Invoices ul li {
     background-color: #2c2c2c;
     padding: 15px;
     border-radius: 5px;

@@ -16,10 +16,10 @@
             <uri>generateInvoicePDF</uri>
         </function>
     <!---->   
-        <!-- <function>
-            <name></name>
-            <uri></uri>
-        </function> -->
+        <function>
+            <name>getUserOrders</name>
+            <uri>getUserOrders</uri>
+        </function>
     <!---->   
         <!-- <function>
             <name></name>

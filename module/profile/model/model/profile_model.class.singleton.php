@@ -28,9 +28,9 @@
             return $this->bll->getOrderItems($order_id);
         }
 //:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+://
-        // public function get_removefromprofile($ID_HomeDrop) {
-        //     return $this -> bll -> get_removefromprofile_BLL($ID_HomeDrop);
-        // }
+        public function get_user_orders($ID_User) {
+            return $this -> bll -> get_user_orders_BLL($ID_User);
+        }
 // //:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+://
         // public function processOrder() {
         //     return $this->bll->processOrder_BLL();

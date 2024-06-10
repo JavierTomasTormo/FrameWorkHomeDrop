@@ -31,47 +31,44 @@
 
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
-function generateInvoicePDF() {
-    if (isset($_POST['order_id']) && !empty($_POST['order_id'])) {
-        $orderId = $_POST['order_id'];
-        $order = common::load_model('profile_model', 'getOrderDetails', $orderId);
-        $orderItems = common::load_model('profile_model', 'getOrderItems', $orderId);
+        function generateInvoicePDF() {
+            if (isset($_POST['order_id']) && !empty($_POST['order_id'])) {
+                $orderId = $_POST['order_id'];
+                $order = common::load_model('profile_model', 'getOrderDetails', $orderId);
+                $orderItems = common::load_model('profile_model', 'getOrderItems', $orderId);
 
-        if (!empty($order) && !empty($orderItems)) {
-            $data = [
-                'order' => $order[0],
-                'order_items' => $orderItems
-            ];
+                if (!empty($order) && !empty($orderItems)) {
+                    $data = [
+                        'order' => $order[0],
+                        'order_items' => $orderItems
+                    ];
 
-            require_once(SITE_ROOT . 'utils/tcpdf.inc.php');
-            $pdf = new PDF();
-            $pdfFilePath = $pdf->generatePDF($data);
+                    require_once(SITE_ROOT . 'utils/tcpdf.inc.php');
+                    $pdf = new PDF();
+                    $pdfFilePath = $pdf->generatePDF($data);
 
-            if ($pdfFilePath) {
-                $pdfUrl = SITE_PATH . str_replace(SITE_ROOT, '', $pdfFilePath);
-                echo json_encode(['success' => true, 'pdf_url' => $pdfUrl]);
+                    if ($pdfFilePath) {
+                        $pdfUrl = SITE_PATH . str_replace(SITE_ROOT, '', $pdfFilePath);
+                        echo json_encode(['success' => true, 'pdf_url' => $pdfUrl]);
+                    } else {
+                        echo json_encode(['error' => 'Error al generar el PDF']);
+                    }
+                } else {
+                    echo json_encode(['error' => 'No se encontraron datos de la orden']);
+                }
             } else {
-                echo json_encode(['error' => 'Error al generar el PDF']);
+                echo json_encode(['error' => 'ID de orden no proporcionado']);
             }
-        } else {
-            echo json_encode(['error' => 'No se encontraron datos de la orden']);
         }
-    } else {
-        echo json_encode(['error' => 'ID de orden no proporcionado']);
-    }
-}
-
-
-
-
-
 
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//     
 
-        // function disminuircantidad() {
-        //     $ID_HomeDrop = $_POST['ID_HomeDrop'];
-        //     echo json_encode(common::load_model('profile_model', 'get_disminuircantidad', $ID_HomeDrop));
-        // }
+        function getUserOrders() {
+            $user_id = $_SESSION['ID_User'];
+            $orders = common::load_model('profile_model', 'get_user_orders', $user_id);
+            echo json_encode($orders);
+        }
+
 
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 

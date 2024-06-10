@@ -62,11 +62,10 @@
 
 		// }
 // //,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+//
-        // public function get_removefromprofile_BLL($ID_HomeDrop) {
-		// 	$this->dao->deleteprofileItem($this->db, $ID_HomeDrop, $_SESSION['ID_User']);
+        public function get_user_orders_BLL($ID_User) {
 
-		// 	return array('success' => true, 'message' => '0, Eliminado');
-        // }
+			return $this->dao->get_user_orders($this->db, $ID_User);
+        }
 //,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+//
 		public function getOrderDetails($order_id) {
 			return $this->dao->getOrderDetails($this->db, $order_id);

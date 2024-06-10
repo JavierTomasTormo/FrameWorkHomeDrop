@@ -26,8 +26,8 @@ function UserProfile() {
         followerStats.append($('<h3>Likes</h3>'), LikesCount);
 
         var followingStats = $('<div></div>');
-        var followingCount = $('<p></p>').text(userData.followingCount);
-        followingStats.append($('<h3>Proximamente...</h3>'), followingCount);
+        var followingCount = $('<p></p>').text(0);
+        followingStats.append($('<h3>Seguidores</h3>'), followingCount);
 
         profileStats.append(postStats, followerStats, followingStats);
 
@@ -35,16 +35,68 @@ function UserProfile() {
 
         // console.log(lastSelectedHouses);
 
+
+
         var recentActivities = $('<div class="profile-activities"></div>');
-        var activitiesHeading = $('<h3>Actividades Recientes</h3>');
-        var activitiesList = $('<ul></ul>');
-
-            lastSelectedHouses.forEach(function (house) {
-                var listItem = $('<li></li>').text(`Casa visitada: #${house.Calle}, ${house.Ciudad}, ${house.Precio}`);
-                activitiesList.append(listItem);
-            });
-
+        var activitiesHeading = $('<h3 class="recent-activities-heading">Actividades Recientes</h3>');
+        var activitiesList = $('<div class="recent-activities-list"></div>');
+        
+        lastSelectedHouses.forEach(function (house) {
+            var listItem = $('<div class="recent-activity-item"></div>');
+            var houseInfo = $('<span></span>').text(`  Casa visitada: #${house.Calle}, ${house.Ciudad}, ${house.Precio} €`);
+            var activityIcon = $('<i class="fa-solid fa-house-chimney"></i>');
+        
+            listItem.append(activityIcon, houseInfo);
+            activitiesList.append(listItem);
+            activitiesList.append($('<div class="activity-item-spacer"></div>'));
+        });
+        
         recentActivities.append(activitiesHeading, activitiesList);
+        
+
+
+
+        var InvoicesUser = $('<div class="profile-Invoices"></div>');
+        var InvoicesHeading = $('<h3>Facturas de ' + userData[0].Username + '</h3>');
+        var InvoicesList = $('<ul></ul>');
+        
+            ajaxPromise(friendlyURL('index.php?module=profile&op=getUserOrders'), 'GET', 'JSON')
+                .then(function (orders) {
+
+                    // console.log(orders);
+
+                    orders.forEach(function(order) {
+                        var listItem = $('<li></li>').text(`Orden #${order.ID_Order},      Total: ${order.Total_Amount} €`);
+                        
+                        var pdfButton = $('<button>', {
+                            'class': 'generate-pdf btn btn-primary',
+                            'data-order-id': order.ID_Order,
+                            'html': '<i class="fa-solid fa-file-pdf" style="color: #ff0000;"></i>'
+                        }).css({
+                            'float': 'right',
+                            'marginLeft': '10px'
+                        });
+
+                        var QRButton = $('<button>', {
+                            'class': 'generate-qr btn btn-primary',
+                            'data-order-id': order.ID_Order,
+                            'html': '<i class="fa-solid fa-qrcode" style="color: #000000;"></i>'
+                            //<i class="fa-solid fa-qrcode"></i>//<i class="fas fa-qrcode"></i>//<i class="fa fa-qrcode" aria-hidden="true"></i>
+                        }).css({
+                            'float': 'right',
+                            'marginLeft': '10px'
+                        });
+                    
+                        listItem.append(pdfButton,QRButton);
+                        InvoicesList.append(listItem);
+                    });
+            
+                    InvoicesUser.append(InvoicesHeading, InvoicesList);
+
+            }).catch(function (error) {
+                    console.error('Error al obtener las órdenes del usuario:', error);
+            });
+            
 
 
             var TitleSettings = $('<h3>Cambiar Contraseña</h3>');
@@ -62,7 +114,7 @@ function UserProfile() {
             profileSettingsContainer.append(passwordSettingsContainer, privacySettingsContainer, notificationsSettingsContainer);
 
 
-        $('.containerProfile').append(profileHeader, profileStats, profileSettingsContainer, recentActivities);//
+        $('.containerProfile').append(profileHeader, profileStats, InvoicesUser,profileSettingsContainer, recentActivities);//
 
 
     })
@@ -76,10 +128,11 @@ function UserProfile() {
 
 function Buttons() {
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
-$(document).on('click', '#generateInvoicePDF', function() {
-    var orderId = $(this).data('order-id');
-    generateInvoicePDF(orderId);
-});
+    $(document).on('click', '.generate-pdf', function() {
+        var orderId = $(this).data('order-id');
+        // console.log(orderId);
+        generateInvoicePDF(orderId);
+    });
 
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 //         $(document).on('click', '.remove-item', function () {
@@ -162,6 +215,9 @@ $(document).on('click', '#generateInvoicePDF', function() {
 }
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 function generateInvoicePDF(orderId) {
+
+    // console.log(orderId);
+
     $.ajax({
         url: friendlyURL('?module=profile&op=generateInvoicePDF'),
         type: 'POST',

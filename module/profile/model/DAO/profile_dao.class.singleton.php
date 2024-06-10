@@ -47,6 +47,14 @@
             return $db->listar($stmt);
         }
 
+        public function get_user_orders($db, $user_id) {
+            $sql = "SELECT * FROM orders WHERE ID_User = $user_id";
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+        
+
 // //##########################################################################//
         // public function getprofileItemQuantity($db, $ID_HomeDrop, $ID_User) {
         //     $sql = "SELECT Quantity FROM profile WHERE ID_HomeDrop = $ID_HomeDrop AND ID_User = $ID_User";
