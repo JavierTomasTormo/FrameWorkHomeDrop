@@ -21,10 +21,10 @@
             <uri>getUserOrders</uri>
         </function>
     <!---->   
-        <!-- <function>
-            <name></name>
-            <uri></uri>
-        </function> -->
+        <function>
+            <name>generateQR</name>
+            <uri>generateQR</uri>
+        </function>
     <!---->   
         <!-- <function>
             <name></name>

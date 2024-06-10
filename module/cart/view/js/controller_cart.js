@@ -139,6 +139,7 @@ function Buttons() {
 
                     if (response.success) {
                         alert(response.message);
+                        // generateInvoicePDF(orderId);
                         location.reload();
                     } else {
                         alert(response.message);

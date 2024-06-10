@@ -69,13 +69,43 @@
             echo json_encode($orders);
         }
 
-
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 
-        // function removefromprofile() {
-        //     $ID_HomeDrop = $_POST['ID_HomeDrop'];
-        //     echo json_encode(common::load_model('profile_model', 'get_removefromprofile', $ID_HomeDrop));
-        // }
+        function generateQR() {
+            $order_id = $_POST['order_id'];
+            $pdf_url = "http://localhost/FrameWorkHomeDrop/uploads/factura_orden_" . $order_id . ".pdf";
+
+            require_once UTILS . 'generate_qr.inc.php';
+            $qr_generator = new QRCodeGenerator();
+
+            $qr_file_path = RESOURCES . "qr_codes/qr_order_" . $order_id . ".png";
+
+            if (!is_writable(dirname($qr_file_path))) {
+                $response = array(
+                    'success' => false,
+                    'error' => 'El directorio de destino no tiene permisos de escritura.'
+                );
+                echo json_encode($response);
+                return;
+            }
+
+            $qr_file = $qr_generator->generate($pdf_url, $qr_file_path);
+
+            if ($qr_file === false) {
+                $response = array(
+                    'success' => false,
+                    'error' => 'Error al generar la imagen QR. Verifique los registros de errores para más detalles.'
+                );
+                echo json_encode($response);
+                return;
+            }
+
+            $response = array(
+                'success' => true,
+                'qr_url' => SITE_PATH . "resources/qr_codes/qr_order_" . $order_id . ".png"
+            );
+            echo json_encode($response);
+        }
 
 // //.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.+.//
 

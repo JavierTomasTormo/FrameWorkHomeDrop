@@ -66,7 +66,7 @@ function UserProfile() {
                     // console.log(orders);
 
                     orders.forEach(function(order) {
-                        var listItem = $('<li></li>').text(`Orden #${order.ID_Order},      Total: ${order.Total_Amount} €`);
+                        var listItem = $('<li></li>').text(`Orden #${order.ID_Order},    Total: ${order.Total_Amount} €,    Fecha: ${order.Order_Date}`);
                         
                         var pdfButton = $('<button>', {
                             'class': 'generate-pdf btn btn-primary',
@@ -133,91 +133,20 @@ function Buttons() {
         // console.log(orderId);
         generateInvoicePDF(orderId);
     });
+    //  comentario del sistemas (Alejandro)
+    $(document).on('click', '.generate-qr', function() {
+        var orderId = $(this).data('order-id');
+        // console.log('generate-qr  '+ orderId);
+        generateQR(orderId);
+    });
 
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
-//         $(document).on('click', '.remove-item', function () {
-//             var ID_HomeDrop = this.id.replace('remove-item-', '');
-
-//             console.log(ID_HomeDrop);
-
-//             $.ajax({
-//                 url: 'index.php?module=cart&op=removefromcart',
-//                 type: 'POST',
-//                 data: { ID_HomeDrop: ID_HomeDrop },
-//                 dataType: 'json',
-//                 success: function(response) {
-//                     // console.log(response);
-//                     // console.log(response['success']);
-
-//                     if (response['success'] == true) {
-//                         location.reload();
-//                     } else {
-//                         toastr.error("Error en el proceso");
-//                     }
-//                 },
-//                 error: function(xhr, status, error) {
-//                     console.error(error);
-//                 }
-//             });
-//         });
-//     /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
-//         $(document).on('click', '.Button-min', function () {
-//             var ID_HomeDrop = this.id.replace('Button-min-', '');
-
-//             console.log(ID_HomeDrop);
-
-//             $.ajax({
-//                 url: 'index.php?module=cart&op=disminuircantidad',
-//                 type: 'POST',
-//                 data: { ID_HomeDrop: ID_HomeDrop },
-//                 dataType: 'json',
-//                 success: function(response) {
-//                     // console.log(response);
-//                     // console.log(response['success']);
-
-//                     if (response['success'] == true) {
-//                         location.reload();
-//                     } else {
-//                         toastr.error("Error en el proceso");
-//                     }
-//                 },
-//                 error: function(xhr, status, error) {
-//                     console.error(error);
-//                 }
-//             });
-            
-//         });
-//     /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
-//         $(document).on('click', '.Button-max', function () {
-//             var ID_HomeDrop = this.id.replace('Button-max-', '');
-//             // console.log(ID_HomeDrop);
-//             // console.log("Mas");
-//             $.ajax({
-//                 url: 'index.php?module=cart&op=incrementarcantidad',
-//                 type: 'POST',
-//                 data: { ID_HomeDrop: ID_HomeDrop },
-//                 dataType: 'json',
-//                 success: function(response) {
-//                     // console.log(response);
-//                     // console.log(response['success']);
-//                     if (response['success'] == true) {
-//                         location.reload();
-//                     } else {
-//                         toastr.error("Error,No queda Stock");
-//                     }
-//                 },
-//                 error: function(xhr, status, error) {
-//                     console.error(error);
-//                 }
-//             });
-//         });
-// /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 }
+
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
+
 function generateInvoicePDF(orderId) {
-
     // console.log(orderId);
-
     $.ajax({
         url: friendlyURL('?module=profile&op=generateInvoicePDF'),
         type: 'POST',
@@ -239,6 +168,29 @@ function generateInvoicePDF(orderId) {
     });
 }
 
+//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
+
+function generateQR(orderId) {
+    $.ajax({
+        url: friendlyURL('?module=profile&op=generateQR'),
+        type: 'POST',
+        data: { order_id: orderId },
+        dataType: 'json',
+        success: function(response) {
+            console.log(response);
+
+            if (response.success) {
+                window.open(response.qr_url, '_blank');
+            } else {
+                console.error('Error al generar el código QR:', response.error);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al generar el código QR:', error);
+            console.error(xhr.responseText);
+        }
+    });
+}
 
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 $(document).ready(function () {
