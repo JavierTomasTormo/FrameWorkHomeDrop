@@ -55,26 +55,3 @@ class Whatsapp {
         return $whatsapp->sendMessage($to, $message);
     }
 }
-
-//         try {
-//             // Enviar el mensaje OTP
-//             $message = $client->messages->create(
-//                 'whatsapp:' . $whatsappNumber, // Destinatario
-//                 [
-//                     'from' => self::$twilioNumber, // Remitente
-//                     'body' => 'Tu código OTP es: ' . $otp // Contenido del mensaje
-//                 ]
-//             );
-
-//             return [
-//                 'success' => true,
-//                 'message' => 'OTP enviado al WhatsApp del usuario'
-//             ];
-//         } catch (\Exception $e) {
-//             return [
-//                 'success' => false,
-//                 'message' => 'Error al enviar el OTP: ' . $e->getMessage()
-//             ];
-//         }
-//     }
-// }

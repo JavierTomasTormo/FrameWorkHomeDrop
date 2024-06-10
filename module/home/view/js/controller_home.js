@@ -281,7 +281,8 @@ function showLastSelectedHouseInfo() {
     ajaxPromise(combinedUrl, 'GET', 'JSON')
     .then(function(data) {
 
-      //console.log(data);
+        // console.log(data);
+        localStorage.setItem("lastHousesInfo", JSON.stringify(Array.from(data)));
 
       for (let i = 0; i < data.length; i++) {
         $('<div></div>')

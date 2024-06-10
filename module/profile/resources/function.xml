@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <!---->
+        <function>
+            <name>view</name>
+            <uri>view</uri>
+        </function>
+    <!---->
+        <function>
+            <name>getUserData</name>
+            <uri>getUserData</uri>
+        </function>
+    <!---->    
+        <function>
+            <name>generateInvoicePDF</name>
+            <uri>generateInvoicePDF</uri>
+        </function>
+    <!---->   
+        <!-- <function>
+            <name></name>
+            <uri></uri>
+        </function> -->
+    <!---->   
+        <!-- <function>
+            <name></name>
+            <uri></uri>
+        </function> -->
+    <!---->   
+        <!-- <function>
+            <name></name>
+            <uri></uri>
+        </function> -->
+    <!---->   
+        <!-- <function>
+            <name></name>
+            <uri></uri>
+        </function> -->
+    <!---->  
+            <!-- <function>
+            <name></name>
+            <uri></uri>
+        </function> -->
+    <!---->  
+            <!-- <function>
+            <name></name>
+            <uri></uri>
+        </function> -->
+    <!---->  
+            <!-- <function>
+            <name></name>
+            <uri></uri>
+        </function> -->
+    <!---->  
+            <!-- <function>
+            <name></name>
+            <uri></uri>
+        </function> -->
+    <!---->  
+</functions>
