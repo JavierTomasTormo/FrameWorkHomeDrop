@@ -19,6 +19,7 @@
     let FiltrosAplicados = localStorage.getItem('FiltrosApplied');
     if (FiltrosAplicados !== null ) {
         console.log('¡Filtros Aplicados!', FiltrosAplicados);
+        applyClasses();
         //alert('Tienes Filtros Aplicados, Eliminalos para ver todas las opciones');
     }else{
         console.log('No se encontraron Filtros. Se Procederá a cargar toda la página: "Shop"'); 
@@ -658,20 +659,9 @@ function LoadSearch() {
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 function HighlightFilters() {
 
-    // var flitroSearch = (localStorage.getItem('Filters_Search') || undefined);
-
-    //     if (flitroSearch != undefined) {
-    //             localStorage.setItem('FiltersShop', flitroSearch)  
-    //     }
-
     TodoFiltroShop = JSON.parse(localStorage.getItem('FiltersShop')) || [];
 
-     //console.log(TodoFiltroShop);
-
-    // Control de Filtros Nulos
     if (TodoFiltroShop.length === 0) {
-        ///console.log('No hay datos de filtros disponibles.');
-        //BREAK
         return;
     }
 
@@ -682,6 +672,8 @@ function HighlightFilters() {
     var Operation = getValueByKey(TodoFiltroShop, 'oh.ID_Operation');
     var Precio = getValueByKey(TodoFiltroShop, 'vh.Precio');
     var OrderBy = getValueByKey(TodoFiltroShop, 'OrderBy');
+
+
     //Estos de abajo son para ----STRINGS----
     // var Category = TodoFiltroShop.find(filtro => filtro.hasOwnProperty('chd.ID_Category'))?.['chd.ID_Category'];
     // var City = TodoFiltroShop.find(filtro => filtro.hasOwnProperty('ch.ID_City'))?.['ch.ID_City'];
@@ -691,8 +683,8 @@ function HighlightFilters() {
 
     // Muestra los filtros aplicados
     
-    //console.log('Categoría:', document.getElementById('select_Category'));
-    // console.log('Ciudad:', Ciudad);
+    // console.log('Categoría:', document.getElementById('select_Category'));
+    // // console.log('Ciudad:', City);
     // console.log('Categoría:', Category);
     // console.log('Ciudad:', City);
     // console.log('Tipo:', Type);
@@ -704,6 +696,7 @@ function HighlightFilters() {
 
     // Aplicamos Si existe
     if (Category) {
+
         var selectElementCategory = document.getElementById('select_Category');
         if (selectElementCategory) {
             selectElementCategory.value = Category;
@@ -713,6 +706,9 @@ function HighlightFilters() {
         }
     }
     if (Precio) {
+
+        // console.log('Precio EXISTE:', Precio);
+
         var selectElementPrice = document.getElementById('select_Price');
         if (selectElementPrice) {
             selectElementPrice.value = Precio;
@@ -721,10 +717,13 @@ function HighlightFilters() {
             $(selectElementCategory).addClass('highlight');
         }
     }
-    var City = localStorage.getItem('FiltersShop_City');
+
+    // var City = localStorage.getItem('FiltersShop_City');
 
     if (City) {
         var selectElementCity = document.getElementById('select_City');
+
+        // console.log('City EXISTE:', City);
 
         if (selectElementCity) {
             selectElementCity.value = City;
@@ -739,6 +738,8 @@ function HighlightFilters() {
    
 
     if (Type) {
+
+        // console.log('Type EXISTE:', Type);
         var selectElementType = document.getElementById('select_Type');
         if (selectElementType) {
             selectElementType.value = Type;
@@ -747,7 +748,7 @@ function HighlightFilters() {
         }
     }
     if (OrderBy) {
-
+        // console.log('OrderBY EXISTE:', OrderBy);
         var selectElementOrderBy = document.getElementById('sortSelect');
         if (selectElementOrderBy) {
             selectElementOrderBy.value = OrderBy;
@@ -756,9 +757,10 @@ function HighlightFilters() {
         }
     }
 
-    var Operation = localStorage.getItem('FiltersShop_Operation');
+    // var Operation = localStorage.getItem('FiltersShop_Operation');
 
     if (Operation) {
+        // console.log('Operation EXISTE:', Operation);
         var selectElementOperation = document.getElementById('select_Operation');
 
         if (selectElementOperation) {
@@ -771,13 +773,52 @@ function HighlightFilters() {
     }
 
 
+    // console.log('Filtros Aplicados:', FiltrosApplied2);
+    // console.log('Filtros Actuales:', localStorage.getItem('FiltrosApplied'));
+
         if (FiltrosApplied2 > localStorage.getItem('FiltrosApplied')) {
             localStorage.setItem('FiltrosApplied', FiltrosApplied2);
-            location.reload();//???
+            window.location.reload(true);
         }
-        localStorage.setItem('FiltrosApplied', FiltrosApplied2);
+        // localStorage.setItem('FiltrosApplied', FiltrosApplied2);
 
 }
+
+    function applyClasses() {
+        // Aquí puedes agregar el código para aplicar las clases necesarias
+        // después del reload
+        var selectElementCategory = document.getElementById('select_Category');
+
+        
+        if (selectElementCategory) {
+            $(selectElementCategory).addClass('highlight');
+        }
+
+        // var selectElementPrice = document.getElementById('select_Price');
+        // if (selectElementPrice) {
+        //     $(selectElementPrice).addClass('highlight');
+        // }
+
+        var selectElementCity = document.getElementById('select_City');
+        if (selectElementCity) {
+            $(selectElementCity).addClass('highlight');
+        }
+
+        var selectElementType = document.getElementById('select_Type');
+        if (selectElementType) {
+            $(selectElementType).addClass('highlight');
+        }
+
+        var selectElementOrderBy = document.getElementById('sortSelect');
+        if (selectElementOrderBy) {
+            $(selectElementOrderBy).addClass('highlight');
+        }
+
+        var selectElementOperation = document.getElementById('select_Operation');
+        if (selectElementOperation) {
+            $(selectElementOperation).addClass('highlight');
+        }
+    }
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 function getValueByKey(array, key) {
     var item = array.find(item => item[0] === key);
@@ -1040,7 +1081,6 @@ function CountLikes(ID_HomeDropLike) {
         });
     
 }
-//#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 function clicks() {
     $(document).on("click", ".button.buy", function() {
