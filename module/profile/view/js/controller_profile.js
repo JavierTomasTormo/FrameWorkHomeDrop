@@ -179,91 +179,86 @@
             });
         });
     }
-  
-  
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 
-function Buttons() {
-/*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
-    $(document).on('click', '.generate-pdf', function() {
-        var orderId = $(this).data('order-id');
-        // console.log(orderId);
-        generateInvoicePDF(orderId);
-    });
-    //  comentario del sistemas (Alejandro)
-    $(document).on('click', '.generate-qr', function() {
-        var orderId = $(this).data('order-id');
-        // console.log('generate-qr  '+ orderId);
-        generateQR(orderId);
-    });
-/*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
+    function Buttons() {
+    /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
+        $(document).on('click', '.generate-pdf', function() {
+            var orderId = $(this).data('order-id');
+            // console.log(orderId);
+            generateInvoicePDF(orderId);
+        });
+        //  comentario del sistemas (Alejandro)
+        $(document).on('click', '.generate-qr', function() {
+            var orderId = $(this).data('order-id');
+            // console.log('generate-qr  '+ orderId);
+            generateQR(orderId);
+        });
+    /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
+        $(document).on('click', '#LikeListButton', function() {
+            var data = $(this).attr('class');
 
-$(document).on('click', '#LikeListButton', function() {
-    var data = $(this).attr('class');
+            $.ajax({
+                url: friendlyURL('?module=profile&op=LikedHouses'),
+                type: 'POST',
+                dataType: 'JSON',
+                data: { Username: data }
+            }).done(function(response) {
+                var modalContent = '';
 
-    $.ajax({
-        url: friendlyURL('?module=profile&op=LikedHouses'),
-        type: 'POST',
-        dataType: 'JSON',
-        data: { Username: data }
-    }).done(function(response) {
-        var modalContent = '';
+                if (response.length > 0) {
+                    $.each(response, function(index, vivienda) {
+                        modalContent += '<div class="modal-house">';
+                        modalContent += '<div class="modal-house-image">';
+                        modalContent += '<img src="' + vivienda.Img + '" alt="Imagen de la vivienda">';
+                        modalContent += '</div>';
+                        modalContent += '<div class="modal-house-info">';
+                        modalContent += '<div class="modal-house-details">';
+                        modalContent += '<h4 class="modal-house-title">' + vivienda.Calle + '</h4>';
+                        modalContent += '<p><span class="modal-house-label">Categoría:</span> ' + vivienda.Category + '</p>';
+                        modalContent += '<p><span class="modal-house-label">Ciudad:</span> ' + vivienda.Ciudad + '</p>';
+                        modalContent += '<p><span class="modal-house-label">Operación:</span> ' + vivienda.Operation + '</p>';
+                        modalContent += '</div>';
+                        modalContent += '<div class="modal-house-details">';
+                        modalContent += '<p><span class="modal-house-label">Precio:</span> ' + vivienda.Precio + '€</p>';
+                        modalContent += '<p><span class="modal-house-label">Superficie:</span> ' + vivienda.Superficie + ' m²</p>';
+                        modalContent += '<p><span class="modal-house-label">Tipo:</span> ' + vivienda.Type + '</p>';
+                        modalContent += '</div>';
+                        modalContent += '</div>';
+                        modalContent += '</div>';
+                    });
+                } else {
+                    modalContent = '<p class="modal-no-houses">Aún no tienes viviendas con Likes</p>';
+                }
 
-        if (response.length > 0) {
-            $.each(response, function(index, vivienda) {
-                modalContent += '<div class="modal-house">';
-                modalContent += '<div class="modal-house-image">';
-                modalContent += '<img src="' + vivienda.Img + '" alt="Imagen de la vivienda">';
-                modalContent += '</div>';
-                modalContent += '<div class="modal-house-info">';
-                modalContent += '<div class="modal-house-details">';
-                modalContent += '<h4 class="modal-house-title">' + vivienda.Calle + '</h4>';
-                modalContent += '<p><span class="modal-house-label">Categoría:</span> ' + vivienda.Category + '</p>';
-                modalContent += '<p><span class="modal-house-label">Ciudad:</span> ' + vivienda.Ciudad + '</p>';
-                modalContent += '<p><span class="modal-house-label">Operación:</span> ' + vivienda.Operation + '</p>';
-                modalContent += '</div>';
-                modalContent += '<div class="modal-house-details">';
-                modalContent += '<p><span class="modal-house-label">Precio:</span> ' + vivienda.Precio + '€</p>';
-                modalContent += '<p><span class="modal-house-label">Superficie:</span> ' + vivienda.Superficie + ' m²</p>';
-                modalContent += '<p><span class="modal-house-label">Tipo:</span> ' + vivienda.Type + '</p>';
-                modalContent += '</div>';
-                modalContent += '</div>';
-                modalContent += '</div>';
+                var modal = '<div class="modal fade" id="likedHousesModal" tabindex="-1" role="dialog" aria-labelledby="likedHousesModalLabel" aria-hidden="true">';
+                modal += '<div class="modal-dialog modal-lg" role="document">';
+                modal += '<div class="modal-content">';
+                modal += '<div class="modal-header">';
+                modal += '<h5 class="modal-title" id="likedHousesModalLabel">Viviendas con Like</h5>';
+                modal += '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+                modal += '<span aria-hidden="true">&times;</span>';
+                modal += '</button>';
+                modal += '</div>';
+                modal += '<div class="modal-body">' + modalContent + '</div>';
+                modal += '</div>';
+                modal += '</div>';
+                modal += '</div>';
+
+                $('#likedHousesModal').remove();
+                $('body').append(modal);
+                $('#likedHousesModal').modal('show');
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                console.error('Error al cargar la lista de viviendas:', errorThrown);
+                alert('Ha ocurrido un error al cargar la lista de viviendas. Por favor, inténtalo de nuevo más tarde.');
             });
-        } else {
-            modalContent = '<p class="modal-no-houses">Aún no tienes viviendas con Likes</p>';
-        }
-
-        var modal = '<div class="modal fade" id="likedHousesModal" tabindex="-1" role="dialog" aria-labelledby="likedHousesModalLabel" aria-hidden="true">';
-        modal += '<div class="modal-dialog modal-lg" role="document">';
-        modal += '<div class="modal-content">';
-        modal += '<div class="modal-header">';
-        modal += '<h5 class="modal-title" id="likedHousesModalLabel">Viviendas con Like</h5>';
-        modal += '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
-        modal += '<span aria-hidden="true">&times;</span>';
-        modal += '</button>';
-        modal += '</div>';
-        modal += '<div class="modal-body">' + modalContent + '</div>';
-        modal += '</div>';
-        modal += '</div>';
-        modal += '</div>';
-
-        $('#likedHousesModal').remove();
-        $('body').append(modal);
-        $('#likedHousesModal').modal('show');
-    }).fail(function(jqXHR, textStatus, errorThrown) {
-        console.error('Error al cargar la lista de viviendas:', errorThrown);
-        alert('Ha ocurrido un error al cargar la lista de viviendas. Por favor, inténtalo de nuevo más tarde.');
-    });
-});
-
-
-
-//------
-}
+        });
+    /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
+    //------
+    }
 
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 

@@ -169,10 +169,10 @@ function AutocompleteSearch() {
     
     });
 
-    $("#search-btn").on("click", function () {
-        let searchQuery = $("#autocom").val();
-        //console.log("Realizar búsqueda con:", searchQuery);
-    });
+    // $(document).on('click', '#search-btn', function () {
+    //     let searchQuery = $("#autocom").val();
+    //     console.log("Realizar búsqueda con:", searchQuery);
+    // });
 
     $(document).on('click', '.searchElement', function () {
         $('#autocom').val(this.getAttribute('id'));
@@ -188,57 +188,57 @@ function AutocompleteSearch() {
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 function ButtonSearch() {
-    $('#search-btn').on('click', function () {
-        var search = [];
+    $(document).on('click', '#search-btn', function () {
+            var search = [];
 
-        //console.log($('.search_selectOperation').val());
-        //console.log($('.search_selectCity').val());
+            //console.log($('.search_selectOperation').val());
+            //console.log($('.search_selectCity').val());
 
-        var selectedCity = $('.search_selectCity').val() || localStorage.getItem('Ciudad');
-        var selectedOperation = $('.search_selectOperation').val() || localStorage.getItem('Operacion');
+            var selectedCity = $('.search_selectCity').val() || localStorage.getItem('Ciudad');
+            var selectedOperation = $('.search_selectOperation').val() || localStorage.getItem('Operacion');
 
-        localStorage.removeItem('Ciudad');
-        localStorage.removeItem('Operacion');
-
-        //console.log(selectedOperation);
-
-        if (selectedCity !== null && selectedCity !== "0") {
-            search.push({ "Ciudad": [selectedCity] });
-            localStorage.setItem('Ciudad', selectedCity);
-        } else {
             localStorage.removeItem('Ciudad');
-        }
-
-        if (selectedOperation !== null && selectedOperation !== "0") {
-            search.push({ "Operacion": [selectedOperation] });
-            localStorage.setItem('Operacion', selectedOperation);
-        } else {
             localStorage.removeItem('Operacion');
-        }
 
-        var autocomValue = $('#autocom').val();
+            //console.log(selectedOperation);
 
-        //console.log(autocomValue);
+            if (selectedCity !== null && selectedCity !== "0") {
+                search.push({ "Ciudad": [selectedCity] });
+                localStorage.setItem('Ciudad', selectedCity);
+            } else {
+                localStorage.removeItem('Ciudad');
+            }
 
-        if (autocomValue !== null && autocomValue.trim() !== '') {
-                search.push({"complete" : [autocomValue]})
-        }
+            if (selectedOperation !== null && selectedOperation !== "0") {
+                search.push({ "Operacion": [selectedOperation] });
+                localStorage.setItem('Operacion', selectedOperation);
+            } else {
+                localStorage.removeItem('Operacion');
+            }
 
-        //console.log(search);
+            var autocomValue = $('#autocom').val();
 
-        if (search.length !== 0) {
-            //localStorage.removeItem('Filters_Search');
-            localStorage.setItem('Filters_Search', JSON.stringify(search));
-            ////
-            // console.log(localStorage.getItem('Filters_Search'));
-        }
+            //console.log(autocomValue);
 
-    //console.log(localStorage.getItem('Filters_Search'));      
+            if (autocomValue !== null && autocomValue.trim() !== '') {
+                    search.push({"complete" : [autocomValue]})
+            }
 
-    var FiltersSearch = JSON.parse(localStorage.getItem('Filters_Search') || '[]');
-    localStorage.setItem('Filters_Search', JSON.stringify(FiltersSearch));    
+            //console.log(search);
 
-    window.location.href = 'index.php?module=shop';
+            if (search.length !== 0) {
+                //localStorage.removeItem('Filters_Search');
+                localStorage.setItem('Filters_Search', JSON.stringify(search));
+                ////
+                // console.log(localStorage.getItem('Filters_Search'));
+            }
+
+        //console.log(localStorage.getItem('Filters_Search'));      
+
+        var FiltersSearch = JSON.parse(localStorage.getItem('Filters_Search') || '[]');
+        localStorage.setItem('Filters_Search', JSON.stringify(FiltersSearch));    
+
+        window.location.href = 'index.php?module=shop';
     });
 }
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//

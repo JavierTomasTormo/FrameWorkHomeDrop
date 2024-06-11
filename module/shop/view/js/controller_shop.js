@@ -192,7 +192,7 @@ function ButtonFilterShop() {
         }
     //---------------------------------------------------------------// 
         if (localStorage.getItem('FiltersShop_Type')) {
-            FiltersShop.push(['th.ID_Type', localStorage.getItem('FiltersShop_Type')])
+            FiltersShop.push(['th.ID_Type', localStorage.getItem('FiltersShop_Type')]);
            // localStorage.removeItem('FiltersShop_Type');
         }
     //---------------------------------------------------------------//
@@ -271,15 +271,14 @@ function updateResultsCount() {
                 FiltersShopCount: FiltersShopCount
             },
             success: function(response) {
-                // console.log(response[0]["total"]);
         
                 if (!response.error) {
                     $('#resultsCount').text(response[0]["total"] + " resultados encontrados");
 
-                    //console.log(response.count);
+                    // console.log(response[0]["total"]);
 
-                    if (response.count === '0') {
-                        //console.log(response.count);
+                    if (response[0]["total"] === '0') {
+                        // console.log(response[0]["total"]);
 
                         let text = '\n No se han encontrado viviendas relacionadas con tus filtros, en cambio tenemos todas estas: \n';
                         showToast(text);
@@ -564,12 +563,16 @@ function ShopAllHome() {
     //-----------------------------------------------------------------//
         var filtros = (localStorage.getItem('FiltersHome') || undefined);
     //-----------------------------------------------------------------//
-        var filtroShop = (localStorage.getItem('FiltersShop') || 0);
+        var filtroShop = JSON.parse(localStorage.getItem('FiltersShop') || 0);
     //-----------------------------------------------------------------//
         var filtroShopPrice = (localStorage.getItem('FiltersShop_Price') || 0);
     //-----------------------------------------------------------------//.
-        var flitroSearch = (localStorage.getItem('Filters_Search') || undefined);
+        var flitroSearch = JSON.parse(localStorage.getItem('Filters_Search') || 0);
     //-----------------------------------------------------------------//
+
+
+        console.log("filtros:  ",filtros,"      filtroShop:", filtroShop,"      filtroShopPrice:", filtroShopPrice,"      FiltroSearch:", flitroSearch);
+
         if (filtros != undefined ) {
             setTimeout(function() {
                 LoadJump();
@@ -577,7 +580,7 @@ function ShopAllHome() {
 
         } if (filtroShop != 0 || filtroShopPrice != 0) {
             // var filtroSho2 = JSON.parse(localStorage.getItem('FiltersShop') || 0 );
-            console.log(filtroShop);
+            // console.log(filtroShop);
             setTimeout(function() {
                 ajaxForSearch(friendlyURL('?module=shop&op=ajaxForSearch'), 'POST', 'JSON', {'FiltersShop': filtroShop, 'DAORed' : "FiltersShop"});
             }, 200); 
@@ -856,12 +859,12 @@ function ajaxForSearch(durl, type , dataType , sData = undefined, total_prod = 0
     }
     var token = localStorage.getItem('token');
 
-    // console.log(url2, type, dataType,  {filter: filter}, "JS");
+    console.log(url2, type, dataType,  {filter: filter}, "JS");
 
     ajaxPromise(url2, type, dataType,  {filter: filter})//start, limit,
     .then(function(data) {
 
-        // console.log(data);
+        console.log(data);
 
         $('#ListViviendasHomeDrop').empty();
 
@@ -882,7 +885,7 @@ function ajaxForSearch(durl, type , dataType , sData = undefined, total_prod = 0
                 document.getElementById(move_id).scrollIntoView();
             }
         }
-        AllMapBox(data);
+        // AllMapBox(data);
     });
         function buildProductHTML(productData) {
             var productHTML = '<div class="container">' +
@@ -1179,6 +1182,9 @@ function loadDetails(ID_HomeDrop) {
 
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 function AllMapBox(data) {
+    console.log(data);
+
+
     mapboxgl.accessToken = 'pk.eyJ1IjoiMjBqdWFuMTUiLCJhIjoiY2t6eWhubW90MDBnYTNlbzdhdTRtb3BkbyJ9.uR4BNyaxVosPVFt8ePxW1g';
     const map = new mapboxgl.Map({
         container: 'map',
@@ -1188,6 +1194,7 @@ function AllMapBox(data) {
     });
 
     for (let row in data) {
+
         const marker = new mapboxgl.Marker();
         const minPopup = new mapboxgl.Popup()
             .setHTML(

@@ -52,6 +52,8 @@
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
         public function get_ajaxForSearch_BLL($args) {
 			// return $args;
+
+
 			if (array_key_exists('DAORed', $args)) {
 				$DAORed = $args['DAORed'];
 				$start = $args['start'] ?? 0;
