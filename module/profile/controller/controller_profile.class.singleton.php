@@ -146,7 +146,7 @@
 
         function LikedHouses() {
             // echo json_encode($_POST['Username']);
-            echo json_encode(common::load_model('login_model', 'get_LikedHouses', $_POST['Username']));
+            echo json_encode(common::load_model('profile_model', 'get_LikedHouses', $_POST['Username']));
         }
 
 
@@ -157,6 +157,6 @@
 
 
 
-        
+
     }
 ?>

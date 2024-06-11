@@ -201,64 +201,64 @@ function Buttons() {
     });
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 
-    $(document).on('click', '#LikeListButton', function() {
-        var data = $(this).attr('class');
+$(document).on('click', '#LikeListButton', function() {
+    var data = $(this).attr('class');
 
-        $.ajax({
-            url: friendlyURL('?module=profile&op=LikedHouses'),
-            type: 'POST',
-            dataType: 'JSON',
-            data: { Username: data }
-        }).done(function(response) {
+    $.ajax({
+        url: friendlyURL('?module=profile&op=LikedHouses'),
+        type: 'POST',
+        dataType: 'JSON',
+        data: { Username: data }
+    }).done(function(response) {
+        var modalContent = '';
 
-            console.log(response);
+        if (response.length > 0) {
+            $.each(response, function(index, vivienda) {
+                modalContent += '<div class="modal-house">';
+                modalContent += '<div class="modal-house-image">';
+                modalContent += '<img src="' + vivienda.Img + '" alt="Imagen de la vivienda">';
+                modalContent += '</div>';
+                modalContent += '<div class="modal-house-info">';
+                modalContent += '<div class="modal-house-details">';
+                modalContent += '<h4 class="modal-house-title">' + vivienda.Calle + '</h4>';
+                modalContent += '<p><span class="modal-house-label">Categoría:</span> ' + vivienda.Category + '</p>';
+                modalContent += '<p><span class="modal-house-label">Ciudad:</span> ' + vivienda.Ciudad + '</p>';
+                modalContent += '<p><span class="modal-house-label">Operación:</span> ' + vivienda.Operation + '</p>';
+                modalContent += '</div>';
+                modalContent += '<div class="modal-house-details">';
+                modalContent += '<p><span class="modal-house-label">Precio:</span> ' + vivienda.Precio + '€</p>';
+                modalContent += '<p><span class="modal-house-label">Superficie:</span> ' + vivienda.Superficie + ' m²</p>';
+                modalContent += '<p><span class="modal-house-label">Tipo:</span> ' + vivienda.Type + '</p>';
+                modalContent += '</div>';
+                modalContent += '</div>';
+                modalContent += '</div>';
+            });
+        } else {
+            modalContent = '<p class="modal-no-houses">Aún no tienes viviendas con Likes</p>';
+        }
 
-            var modalContent = '';
+        var modal = '<div class="modal fade" id="likedHousesModal" tabindex="-1" role="dialog" aria-labelledby="likedHousesModalLabel" aria-hidden="true">';
+        modal += '<div class="modal-dialog modal-lg" role="document">';
+        modal += '<div class="modal-content">';
+        modal += '<div class="modal-header">';
+        modal += '<h5 class="modal-title" id="likedHousesModalLabel">Viviendas con Like</h5>';
+        modal += '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+        modal += '<span aria-hidden="true">&times;</span>';
+        modal += '</button>';
+        modal += '</div>';
+        modal += '<div class="modal-body">' + modalContent + '</div>';
+        modal += '</div>';
+        modal += '</div>';
+        modal += '</div>';
 
-            if (response.length > 0) {
-                $.each(response, function(index, vivienda) {
-                    modalContent += '<div class="modal-house">';
-                    modalContent += '<h4 class="modal-house-title">' + vivienda.Calle + '</h4>';
-                    modalContent += '<div class="modal-house-details">';
-                    modalContent += '<p><span class="modal-house-label">Category:</span> ' + vivienda.Category + '</p>';
-                    modalContent += '<p><span class="modal-house-label">Ciudad:</span> ' + vivienda.Ciudad + '</p>';
-                    modalContent += '<p><span class="modal-house-label">ID_HomeDrop:</span> ' + vivienda.ID_HomeDrop + '</p>';
-                    modalContent += '<p><span class="modal-house-label">ID_Imagen:</span> ' + vivienda.ID_Imagen + '</p>';
-                    modalContent += '<p><span class="modal-house-label">Operation:</span> ' + vivienda.Operation + '</p>';
-                    modalContent += '<p><span class="modal-house-label">Precio:</span> ' + vivienda.Precio + '€</p>';
-                    modalContent += '<p><span class="modal-house-label">Superficie:</span> ' + vivienda.Superficie + ' m²</p>';
-                    modalContent += '<p><span class="modal-house-label">Type:</span> ' + vivienda.Type + '</p>';
-                    modalContent += '</div>';
-                    modalContent += '</div>';
-                });
-            } else {
-                modalContent = '<p class="modal-no-houses">Aún no tienes viviendas con Likes</p>';
-            }
-
-            // Crear el modal
-            var modal = '<div class="modal fade" tabindex="-1" role="dialog">';
-            modal += '<div class="modal-dialog modal-lg" role="document">';
-            modal += '<div class="modal-content">';
-            modal += '<div class="modal-header">';
-            modal += '<h5 class="modal-title">Viviendas con Like</h5>';
-            modal += '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
-            modal += '<span aria-hidden="true">&times;</span>';
-            modal += '</button>';
-            modal += '</div>';
-            modal += '<div class="modal-body">' + modalContent + '</div>';
-            modal += '</div>';
-            modal += '</div>';
-            modal += '</div>';
-
-            // Agregar el modal al body
-            $('body').append(modal);
-
-            // Mostrar el modal
-            $('.modal').modal('show');
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            console.error('Error al cargar la lista de viviendas:', errorThrown);
-        });
+        $('#likedHousesModal').remove();
+        $('body').append(modal);
+        $('#likedHousesModal').modal('show');
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.error('Error al cargar la lista de viviendas:', errorThrown);
+        alert('Ha ocurrido un error al cargar la lista de viviendas. Por favor, inténtalo de nuevo más tarde.');
     });
+});
 
 
 
