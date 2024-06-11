@@ -26,20 +26,20 @@
             <uri>generateQR</uri>
         </function>
     <!---->   
-        <!-- <function>
-            <name></name>
-            <uri></uri>
-        </function> -->
+        <function>
+            <name>uploadBackgroundImage</name>
+            <uri>uploadBackgroundImage</uri>
+        </function>
     <!---->   
-        <!-- <function>
-            <name></name>
-            <uri></uri>
-        </function> -->
+        <function>
+            <name>uploadProfileImage</name>
+            <uri>uploadProfileImage</uri>
+        </function>
     <!---->  
-            <!-- <function>
-            <name></name>
-            <uri></uri>
-        </function> -->
+        <function>
+            <name>LikedHouses</name>
+            <uri>LikedHouses</uri>
+        </function>
     <!---->  
             <!-- <function>
             <name></name>

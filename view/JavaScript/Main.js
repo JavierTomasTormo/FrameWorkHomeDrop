@@ -94,7 +94,7 @@ function LoadMenu() {
                 var userData = JSON.parse(localStorage.getItem("loggedInUser"));
 
                 // console.log(userData);
-                // 
+                
 
                 if (userData) {
                     $('#loginBtn').hide();
@@ -102,9 +102,11 @@ function LoadMenu() {
                     var userAvatar = $("<img>")
                         .attr({
                             id: "userAvatar",
-                            src: userData.avatar,
+                            src: userData.Avatar,
                             alt: "Avatar",
-                            width: 60
+                            width: 60,
+                            height: 60,
+                            // maxWidth: 50
                         });
                 
                     var usernameSpan = $("<span></span>")
@@ -112,11 +114,11 @@ function LoadMenu() {
                         .text(userData.username);
                 
                     var userMenu = $('<div id="user_menu" style="display: none;">' +
+                                        '<button id="close_menu_button"><i class="fa-solid fa-xmark" style="color: #ffffff;"></i></button><br/>' +
                                         '<button id="cart_button"><svg xmlns="http://www.w3.org/2000/svg" height="20" width="22.5" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M253.3 35.1c6.1-11.8 1.5-26.3-10.2-32.4s-26.3-1.5-32.4 10.2L117.6 192H32c-17.7 0-32 14.3-32 32s14.3 32 32 32L83.9 463.5C91 492 116.6 512 146 512H430c29.4 0 55-20 62.1-48.5L544 256c17.7 0 32-14.3 32-32s-14.3-32-32-32H458.4L365.3 12.9C359.2 1.2 344.7-3.4 332.9 2.7s-16.3 20.6-10.2 32.4L404.3 192H171.7L253.3 35.1zM192 304v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V304c0-8.8 7.2-16 16-16s16 7.2 16 16zm96-16c8.8 0 16 7.2 16 16v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V304c0-8.8 7.2-16 16-16zm128 16v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V304c0-8.8 7.2-16 16-16s16 7.2 16 16z"/></svg></button>' +
-                                        '<button id="profile_button"><b> Liked </b></button>' +
+                                        
+                                        '<button id="logout_button">Logout</button>' +
                                         '<a href="' + friendlyURL('index.php?module=profile') + '"><button id="profile_button"><b> Profile </b></button></a>' +
-                                        '<br/><button id="logout_button">Logout</button>' +
-                                        '<button id="close_menu_button">Close</button>' +
                                     '</div>');
                 
                     var table = $('<table style="width: 100%;"></table>');
@@ -189,96 +191,6 @@ function LoadMenu() {
                         
                         menuOpen = 1;
                         // viviendasMenu.empty();
-                    });
-
-                    
-                    $('#profile_button').on('click', function() {
-                        //console.log(data);
-                        //console.log('profile');
-
-                        $.ajax({
-                            url: friendlyURL('?module=login&op=LikedHouses'),//'Module/RegisterLogIn/ControladorRegLog/ControladorRegLog.php?Option=LikedHouses',
-                            type: 'POST',
-                            dataType: 'JSON',
-                            data: { Username: data[0].Username }
-                        })
-                        .done(function(response) {
-                            
-                            // console.log(response);
-
-                            var viviendasMenu = $('#profile_button');
-                            viviendasMenu.empty(); 
-                            
-                            if (response){
-                                $.each(response, function(index, vivienda) {
-
-                                    // console.log(vivienda);
-                                
-                                    viviendasMenu.css({
-                                        "max-height": "500px",
-                                        "overflow-y": "auto"
-                                    }); 
-
-                                    var listItem = $('<li>').css({
-                                        "border": "2px solid #ccc",
-                                        "padding": "20px",
-                                        "margin-bottom": "20px",
-                                        "width": "950px",
-                                        "list-style-type": "none",
-                                        "border-radius": "10px",
-                                        "box-shadow": "0 4px 8px 0 rgba(0,0,0,0.2)"
-                                    });
-                                
-                                    var labelStyle = {
-                                        "font-weight": "bold",
-                                        "color": "#333",
-                                        "display": "inline-block",
-                                        "width": "200px",
-                                        "font-size": "1.2em"
-                                    };
-                                
-                                    var valueStyle = {
-                                        "color": "#fff",
-                                        "font-size": "1.1em"
-                                    };
-                                
-                                    listItem.append($('<span>').text('Calle:').css(labelStyle));
-                                    listItem.append($('<span>').text(vivienda.Calle).css(valueStyle)).append('<br>');
-                                
-                                    listItem.append($('<span>').text('Category:').css(labelStyle));
-                                    listItem.append($('<span>').text(vivienda.Category).css(valueStyle)).append('<br>');
-                                
-                                    listItem.append($('<span>').text('Ciudad:').css(labelStyle));
-                                    listItem.append($('<span>').text(vivienda.Ciudad).css(valueStyle)).append('<br>');
-                                
-                                    listItem.append($('<span>').text('ID_HomeDrop:').css(labelStyle));
-                                    listItem.append($('<span>').text(vivienda.ID_HomeDrop).css(valueStyle)).append('<br>');
-                                
-                                    listItem.append($('<span>').text('ID_Imagen:').css(labelStyle));
-                                    listItem.append($('<span>').text(vivienda.ID_Imagen).css(valueStyle)).append('<br>');
-                                
-                                    listItem.append($('<span>').text('Operation:').css(labelStyle));
-                                    listItem.append($('<span>').text(vivienda.Operation).css(valueStyle)).append('<br>');
-                                
-                                    listItem.append($('<span>').text('Precio:').css(labelStyle));
-                                    listItem.append($('<span>').text(vivienda.Precio).css(valueStyle)).append('<br>');
-                                
-                                    listItem.append($('<span>').text('Superficie:').css(labelStyle));
-                                    listItem.append($('<span>').text(vivienda.Superficie).css(valueStyle)).append('<br>');
-                                
-                                    listItem.append($('<span>').text('Type:').css(labelStyle));
-                                    listItem.append($('<span>').text(vivienda.Type).css(valueStyle));
-                                
-                                    viviendasMenu.append(listItem);
-                                });
-                            } else {
-                                viviendasMenu.append("Aún no tienes viviendas con Likes");
-                            } 
-                            viviendasMenu.show(); 
-
-                        }).fail(function(jqXHR, textStatus, errorThrown) {
-                            console.error('Error al cargar la lista de viviendas:', errorThrown);
-                        });
                     });
                     
                     

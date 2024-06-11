@@ -86,9 +86,8 @@ function LogIn() {
                         username: result.user[0]['Username']
                     }));
     
-                    setTimeout(function() {
-                        window.location.href = friendlyURL("?module=home");
-                    }, 1000);
+                    window.location.href = friendlyURL("?module=profile&op=view");
+
 
                 })
                 .catch(function(error) {
@@ -464,10 +463,7 @@ function social_login(param){
                     username: username[0]
                 }));
 
-                setTimeout(function() {
-                    // console.log('Redirecting to home');
-                    window.location.href = friendlyURL("?module=home");
-                }, 1500);
+                window.location.href = friendlyURL("?module=profile&op=view"); 
 
             })
             .catch(function(error) {

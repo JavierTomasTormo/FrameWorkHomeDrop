@@ -17,17 +17,14 @@ class QRCodeGenerator
             $writer = new PngWriter();
             $result = $writer->write($qrCode);
 
-            // Verifica si $result es un objeto válido antes de proceder
             if ($result === false) {
                 throw new Exception('No se pudo generar el código QR');
             }
 
-            // Guardar la imagen QR en el archivo especificado por $filepath
             file_put_contents($filepath, $result->getString());
 
             return $filepath;
         } catch (Exception $e) {
-            // Log de errores para depuración
             error_log('Error en QRCodeGenerator: ' . $e->getMessage());
             return false;
         }

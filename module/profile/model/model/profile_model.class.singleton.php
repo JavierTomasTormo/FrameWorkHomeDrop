@@ -32,27 +32,17 @@
             return $this -> bll -> get_user_orders_BLL($ID_User);
         }
 // //:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+://
-        // public function processOrder() {
-        //     return $this->bll->processOrder_BLL();
-        // }
-// //:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+://
-//         public function get_showLastSelectedHouseInfo() {
-//             //return "hola";
-//            //return $_GET['data'];
-
-//             if (isset($_GET['data'])) {
-//                 $lastSelectedHouses = json_decode($_GET['data'], true);
-
-//                 //return $lastSelectedHouses;
         
-//                 return $this -> bll -> get_showLastSelectedHouseInfo_BLL($lastSelectedHouses);
-
-//             } else {
-    
-//                 return(['error' => 'No se proporcionó el parámetro lastSelectedHouses']);
-//             }
-            
-//         }
+        public function updateUserProfileImage($args) {
+                // return($args);
+                return $this->bll->updateUserProfileImage($args[0], $args[1]);
+        }
+      
+      
+// //:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+://
+public function get_LikedHouses($Username) {
+        return $this -> bll -> get_LikedHouses_BLL($Username);
+    }
 // // //:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+:+://
 
     }

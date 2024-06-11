@@ -45,22 +45,13 @@
 		// }
 
 // //,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+//
-		// public function get_disminuircantidad_BLL($ID_HomeDrop) {
-		// 	$currentQuantity = $this->dao->getprofileItemQuantity($this->db, $ID_HomeDrop, $_SESSION['ID_User']);
-		// 	$newQuantity = $currentQuantity[0]['Quantity'] - 1;
-
-		// 	if ($newQuantity <= 0) {
-		// 		$this->dao->deleteprofileItem($this->db, $ID_HomeDrop, $_SESSION['ID_User']);
-
-		// 		return array('success' => true, 'message' => '0, Eliminado');
-		// 	} else {
-			
-		// 		$this->dao->updateprofileItemQuantity($this->db, $ID_HomeDrop, $_SESSION['ID_User'], $newQuantity);
-
-		// 		return array('success' => true, 'message' => 'Cantidad actualizada correctamente');
-		// 	}
-
-		// }
+		
+		public function updateUserProfileImage($userId, $imgPath) {
+			// return($userId.$fileName);
+			return $this->dao->updateUserProfileImage($this->db, $userId, $imgPath);
+		}
+  
+  
 // //,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+//
         public function get_user_orders_BLL($ID_User) {
 
@@ -76,6 +67,18 @@
             return $this->dao->getOrderItems($this->db, $order_id);
         }
 //,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+,+//
+
+	public function get_LikedHouses_BLL($Username) {
+		// return $Username;
+		$user = $this -> dao -> LikedHouses($this->db, $Username);
+
+		if ($user) {
+			return $user;
+		} else {
+			return 'El Usuario no tiene Likes';
+		}
+		// return $user;
+	}
 
 	}
 //----//

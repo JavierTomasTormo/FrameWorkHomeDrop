@@ -56,64 +56,60 @@
         
 
 // //##########################################################################//
-        // public function getprofileItemQuantity($db, $ID_HomeDrop, $ID_User) {
-        //     $sql = "SELECT Quantity FROM profile WHERE ID_HomeDrop = $ID_HomeDrop AND ID_User = $ID_User";
-        //     $stmt = $db->ejecutar($sql);
-        //     $result = $db->listar($stmt);
-        //     return $result;
-        // }
+                
+        public function updateUserProfileImage($db, $userId, $imgPath) {
 
-        // public function getHomeStock($db, $ID_HomeDrop) {
-        //     $sql = "SELECT stock FROM viviendashomedrop WHERE ID_HomeDrop = $ID_HomeDrop";
-        //     $stmt = $db->ejecutar($sql);
-        //     $result = $db->listar($stmt);
-        //     return $result;
-        // }
+            // return array('userid' => $userId,'filename' => $uploadPath);
 
-        // public function updateprofileItemQuantity($db, $ID_HomeDrop, $ID_User, $newQuantity) {
-        //     $sql = "UPDATE profile SET Quantity = $newQuantity WHERE ID_HomeDrop = $ID_HomeDrop AND ID_User = $ID_User";
-        //     $db->ejecutar($sql);
-        // }
+            $sql = "UPDATE users SET Avatar = '$imgPath' WHERE ID_User = $userId";
 
-        // public function deleteprofileItem($db, $ID_HomeDrop, $ID_User) {
-        //     $sql = "DELETE FROM `profile` WHERE ID_HomeDrop = $ID_HomeDrop AND ID_User = $ID_User";
-        //     $db->ejecutar($sql);
-        // }
+            // return $sql;
 
-        
-
-
-
+            return $db->ejecutar($sql);
+            // return "Success";
+        }
+  
+  
         //##########################################################################//
 
-        // public function insertOrder($db, $user_id, $total_amount) {
-        //     $sql = "INSERT INTO orders (ID_User, Total_Amount) VALUES ($user_id, $total_amount)";
-        //     $db->ejecutar($sql);
-        //     $sql = "SELECT LAST_INSERT_ID() AS order_id";
-        //     $stmt = $db->ejecutar($sql);
-        //     $result = $db->listar($stmt);
-        //     return $result[0]['order_id'];
-        // }
-        
-        
-        
-        // public function insertOrderItem($db, $order_id, $product_id, $quantity, $price) {
-        //     $sql = "INSERT INTO order_items (ID_Order, ID_HomeDrop, Quantity, Price) VALUES ($order_id, $product_id, $quantity, $price)";
-        //     $db->ejecutar($sql);
-        // }
-        
-        
-        // public function clearprofile($db, $user_id) {
-        //     $sql = "DELETE FROM profile WHERE ID_User = $user_id";
-        //     $db->ejecutar($sql);
-        // }
+        public function LikedHouses($db, $username) {
 
-        // public function getProductPrice($db, $product_id) {
-        //     $sql = "SELECT Precio FROM viviendashomedrop WHERE ID_HomeDrop = $product_id";
-        //     $stmt = $db->ejecutar($sql);
-        //     $result = $db->listar($stmt);
-        //     return $result[0]['Precio'];
-        // }
+            // return $username;
+
+            $sql = "SELECT 
+                        vh.ID_HomeDrop, 
+                        vh.Precio, 
+                        vh.Superficie, 
+                        ch.Ciudad, 
+                        vh.Calle, 
+                        th.Type, 
+                        oh.Operation, 
+                        ih.ID_Imagen, 
+                        ih.Img,
+                        chd.Category, 
+                        vh.lat, 
+                        vh.lon,
+                        ih.Img
+                    FROM 
+                        viviendashomedrop vh 
+                        LEFT JOIN cityhomedrop ch ON vh.ID_City = ch.ID_City 
+                        LEFT JOIN viviendastype vht ON vh.ID_HomeDrop = vht.ID_HomeDrop 
+                        LEFT JOIN typehomedrop th ON vht.ID_Type = th.ID_Type 
+                        LEFT JOIN viviendasoperation vho ON vh.ID_HomeDrop = vho.ID_HomeDrop 
+                        LEFT JOIN operationhomedrop oh ON vho.ID_Operation = oh.ID_Operation 
+                        LEFT JOIN imageneshomedrop ih ON ih.ID_HomeDrop = vh.ID_HomeDrop 
+                        LEFT JOIN viviendascategory vc ON vc.ID_HomeDrop = vh.ID_HomeDrop 
+                        LEFT JOIN categoryhomedrop chd ON chd.ID_Category = vc.ID_Category 
+                    WHERE 
+                        vh.ID_HomeDrop IN (SELECT ID_HomeDrop FROM likeshomedrop WHERE ID_User = (SELECT ID_User FROM users WHERE Username = '$username'))
+                    GROUP BY 
+                        vh.ID_HomeDrop";
+
+            // return $sql;
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+            // return;
+        }
         
         
         
