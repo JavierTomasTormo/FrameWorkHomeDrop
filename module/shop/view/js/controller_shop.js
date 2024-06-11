@@ -794,11 +794,6 @@ function HighlightFilters() {
             $(selectElementCategory).addClass('highlight');
         }
 
-        // var selectElementPrice = document.getElementById('select_Price');
-        // if (selectElementPrice) {
-        //     $(selectElementPrice).addClass('highlight');
-        // }
-
         var selectElementCity = document.getElementById('select_City');
         if (selectElementCity) {
             $(selectElementCity).addClass('highlight');

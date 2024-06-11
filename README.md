@@ -52,9 +52,14 @@ El código está escrito en una combinación de PHP, HTML, CSS y JavaScript, lo 
 
 ### 🔙 Backend
 - **PHP**: Nuestro motor principal que maneja toda la lógica y procesamiento del servidor. 🖥️💡
+- **Composer**: Manejador de dependencias para PHP.
 
 ### 🎨 Frontend
 - **HTML, CSS y JavaScript**: Las estrellas de nuestro espectáculo visual. Construyen la interfaz de usuario y agregan interactividad y efectos visuales a nuestra aplicación. 🌈✨
+- **jQuery**: Biblioteca de JavaScript que simplifica la manipulación del DOM, el manejo de eventos, las animaciones y las interacciones con AJAX.
+- **jQueryUI**: Biblioteca de componentes de interfaz de usuario para jQuery.
+- **Ionicons**: Conjunto de iconos vectoriales de código abierto.
+- **Toastr.js**: Biblioteca de notificaciones que utilizamos para mostrar mensajes y alertas de manera atractiva y personalizada. 🔔🎉
 
 ### 🗄️ Base de Datos
 - **MySQL**: Aquí es donde guardamos y recuperamos toda la información importante sobre propiedades, usuarios y mucho más. 📊💾
@@ -69,10 +74,15 @@ El código está escrito en una combinación de PHP, HTML, CSS y JavaScript, lo 
 - **Glider.js**: Biblioteca ligera y fácil de usar para mostrar las galerías de fotos de las propiedades. 📸✨
 - **Slick Carousel**: Carrusel altamente personalizable para mostrar las fotos de manera elegante y fluida. 🎠🎨
 
-### 🔔 Notificaciones
-- **Toastr.js**: Biblioteca de notificaciones que utilizamos para mostrar mensajes y alertas de manera atractiva y personalizada. 🔔🎉
+### 📮 Envío de Correos
+- **Resend**: Servicio de envío de correos electrónicos transaccionales.
 
-Cada una de estas tecnologías juega un papel crucial en la creación de una experiencia de usuario excepcional en HomeDrop. ¡Esperamos que disfrutes de la experiencia tanto como nosotros disfrutamos creándola para ti! 😊🏡
+### 🌐 Clientes HTTP
+- **Guzzle**: Cliente HTTP para PHP que facilita el envío de solicitudes y la integración con servicios web.
+- **PSR-7**: Implementación de la especificación PSR-7 para mensajes HTTP.
+
+### 🛡️ Seguridad
+- **ralouphie/getallheaders**: Polyfill para la función `getallheaders()` que recupera todos los encabezados HTTP.
 
 ---
 
