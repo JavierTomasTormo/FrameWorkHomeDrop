@@ -571,7 +571,7 @@ function ShopAllHome() {
     //-----------------------------------------------------------------//
 
 
-        console.log("filtros:  ",filtros,"      filtroShop:", filtroShop,"      filtroShopPrice:", filtroShopPrice,"      FiltroSearch:", flitroSearch);
+        // console.log("filtros:  ",filtros,"      filtroShop:", filtroShop,"      filtroShopPrice:", filtroShopPrice,"      FiltroSearch:", flitroSearch);
 
         if (filtros != undefined ) {
             setTimeout(function() {
@@ -859,12 +859,12 @@ function ajaxForSearch(durl, type , dataType , sData = undefined, total_prod = 0
     }
     var token = localStorage.getItem('token');
 
-    console.log(url2, type, dataType,  {filter: filter}, "JS");
+    // console.log(url2, type, dataType,  {filter: filter}, "JS");
 
     ajaxPromise(url2, type, dataType,  {filter: filter})//start, limit,
     .then(function(data) {
 
-        console.log(data);
+        // console.log(data);
 
         $('#ListViviendasHomeDrop').empty();
 
@@ -885,7 +885,7 @@ function ajaxForSearch(durl, type , dataType , sData = undefined, total_prod = 0
                 document.getElementById(move_id).scrollIntoView();
             }
         }
-        // AllMapBox(data);
+        AllMapBox(data);
     });
         function buildProductHTML(productData) {
             var productHTML = '<div class="container">' +
@@ -1179,11 +1179,9 @@ function loadDetails(ID_HomeDrop) {
         // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Load_Details SHOP";
     });
 }
-
 //#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·#·//
 function AllMapBox(data) {
-    console.log(data);
-
+    // console.log(data);
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiMjBqdWFuMTUiLCJhIjoiY2t6eWhubW90MDBnYTNlbzdhdTRtb3BkbyJ9.uR4BNyaxVosPVFt8ePxW1g';
     const map = new mapboxgl.Map({
