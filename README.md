@@ -101,3 +101,11 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más 
 ## ¡Explora, Descubre, y Encuentra tu Hogar Ideal con HomeDrop! 🏠✨
 
 ¡Gracias por usar HomeDrop! 🌟🏠🚀
+
+
+## Descubre un poco sobre HomeDrop con estas imágenes en exclusiva 📷 
+
+![Home](./uploads/CaptHome.png)
+![Shop](./uploads/CaptShop.png)
+![Cart](./uploads/CaptCart.png)
+![Profile](./uploads/CaptProfile.png)
